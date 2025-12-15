@@ -212,6 +212,8 @@ class Memory {
     std::vector<uint8_t> read_bytes(uintptr_t address, size_t size);
     bool read_raw(uintptr_t address, void* buffer, size_t size);
 
+    std::optional<std::pair<uintptr_t, size_t>> get_section_range(const char* section_name);
+
     std::string read_string(uintptr_t address, size_t max_length = 256);
     std::string read_roblox_string(uintptr_t address);
 

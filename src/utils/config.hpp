@@ -12,7 +12,6 @@ namespace config {
         uint64_t user_id;
         std::string display_name;
         bool using_published_game;
-        bool multithreaded_rtti_scan;
     };
 
     std::optional<Config> load_config(const std::string& filepath = "dumper-config.json");

@@ -192,6 +192,42 @@ std::string Memory::read_roblox_string(uintptr_t address) {
     return read_string(data_ptr, length);
 }
 
+std::optional<std::pair<uintptr_t, size_t>> Memory::get_section_range(const char* section_name) {
+    uintptr_t base = base_address();
+
+    IMAGE_DOS_HEADER dos{};
+    if (!read_raw(base, &dos, sizeof(dos)) || dos.e_magic != IMAGE_DOS_SIGNATURE)
+        return std::nullopt;
+
+    IMAGE_NT_HEADERS64 nt{};
+    if (!read_raw(base + dos.e_lfanew, &nt, sizeof(nt)) || nt.Signature != IMAGE_NT_SIGNATURE)
+        return std::nullopt;
+
+    WORD number_of_sections = nt.FileHeader.NumberOfSections;
+    WORD opt_header_size = nt.FileHeader.SizeOfOptionalHeader;
+
+    uintptr_t section_header_addr =
+        base + dos.e_lfanew + sizeof(DWORD) + sizeof(IMAGE_FILE_HEADER) + opt_header_size;
+
+    for (WORD i = 0; i < number_of_sections; ++i) {
+        IMAGE_SECTION_HEADER sec{};
+        if (!read_raw(section_header_addr + i * sizeof(IMAGE_SECTION_HEADER), &sec,
+                      sizeof(IMAGE_SECTION_HEADER)))
+            return std::nullopt;
+
+        char name[9]{};
+        std::memcpy(name, sec.Name, 8);
+
+        if (std::strncmp(name, section_name, 8) == 0) {
+            uintptr_t start = base + sec.VirtualAddress;
+            size_t size = sec.Misc.VirtualSize;
+            return std::make_pair(start, size);
+        }
+    }
+
+    return std::nullopt;
+}
+
 std::optional<size_t> Memory::find_verified_offset_float(const std::vector<uintptr_t>& addresses,
                                                          const std::vector<float>& expected_values,
                                                          size_t max_offset, size_t alignment,

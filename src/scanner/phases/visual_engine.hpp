@@ -17,7 +17,8 @@ namespace scanner::phases {
         ctx.visual_engine =
             memory->read<uintptr_t>(memory->base_address() + *visual_engine_pointer);
         if (!ctx.visual_engine) {
-            LOG_ERR("Failed to read VisualEngine pointer");
+            LOG_ERR("Failed to read VisualEngine pointer at module offset 0x{:X} (addr 0x{:X})",
+                    *visual_engine_pointer, memory->base_address() + *visual_engine_pointer);
             return false;
         }
 
