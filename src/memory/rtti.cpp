@@ -1,5 +1,6 @@
 #include "rtti.h"
 #include "memory.h"
+#include "utils/config.hpp"
 #include "utils/logger.hpp"
 #include <algorithm>
 #include <atomic>
@@ -7,7 +8,6 @@
 #include <mutex>
 #include <thread>
 #include <unordered_set>
-
 
 std::optional<RttiInfo> Memory::scan_rtti(uintptr_t address) {
     uintptr_t vtable = read<uintptr_t>(address);
@@ -145,44 +145,70 @@ std::optional<uintptr_t> Memory::find_pointer_by_rtti(const std::string& target_
                                                       size_t scan_size, size_t alignment) {
     uintptr_t base = base_address();
 
-    const unsigned int num_threads = std::thread::hardware_concurrency();
-    const size_t chunk_size = scan_size / num_threads;
+    MODULEENTRY32W mod = get_module_by_name(process_id, process_name);
+    if (mod.modBaseSize != 0) {
+        scan_size = (std::min)(scan_size, static_cast<size_t>(mod.modBaseSize));
+    }
 
-    std::vector<std::thread> threads;
-    std::atomic<bool> found{false};
-    std::atomic<uintptr_t> result_offset{0};
+    const bool use_mt = config::get().multithreaded_rtti_scan;
 
-    auto scan_chunk = [&](size_t start_offset, size_t end_offset) {
-        for (size_t offset = start_offset; offset < end_offset && !found.load();
-             offset += alignment) {
+    if (!use_mt) {
+        for (size_t offset = 0; offset < scan_size; offset += alignment) {
             uintptr_t potential_ptr = read<uintptr_t>(base + offset);
             if (potential_ptr < 0x10000 || potential_ptr > 0x7FFFFFFFFFFF)
                 continue;
 
             auto rtti = scan_rtti(potential_ptr);
             if (rtti && rtti->name == target_rtti) {
-                bool expected = false;
-                if (found.compare_exchange_strong(expected, true)) {
-                    result_offset.store(offset);
-                }
-                return;
+                return offset;
             }
         }
-    };
+    } else {
+        unsigned int hw_threads = std::thread::hardware_concurrency();
+        if (hw_threads == 0) {
+            hw_threads = 1;
+        }
 
-    for (unsigned int i = 0; i < num_threads; i++) {
-        size_t start = i * chunk_size;
-        size_t end = (i == num_threads - 1) ? scan_size : (i + 1) * chunk_size;
-        threads.emplace_back(scan_chunk, start, end);
+        const unsigned int num_threads = hw_threads;
+        const size_t chunk_size = scan_size / num_threads;
+
+        std::vector<std::thread> threads;
+        std::atomic<bool> found{false};
+        std::atomic<uintptr_t> result_offset{0};
+
+        auto scan_chunk = [&](size_t start_offset, size_t end_offset) {
+            for (size_t offset = start_offset; offset < end_offset && !found.load();
+                 offset += alignment) {
+                uintptr_t potential_ptr = read<uintptr_t>(base + offset);
+                if (potential_ptr < 0x10000 || potential_ptr > 0x7FFFFFFFFFFF)
+                    continue;
+
+                auto rtti = scan_rtti(potential_ptr);
+                if (rtti && rtti->name == target_rtti) {
+                    bool expected = false;
+                    if (found.compare_exchange_strong(expected, true)) {
+                        result_offset.store(offset);
+                    }
+                    return;
+                }
+            }
+        };
+
+        for (unsigned int i = 0; i < num_threads; i++) {
+            size_t start = i * chunk_size;
+            size_t end = (i == num_threads - 1) ? scan_size : (i + 1) * chunk_size;
+            threads.emplace_back(scan_chunk, start, end);
+        }
+
+        for (auto& thread : threads)
+            thread.join();
+
+        if (found.load())
+            return result_offset.load();
     }
 
-    for (auto& thread : threads)
-        thread.join();
-
-    if (found.load())
-        return result_offset.load();
-
-    LOG_ERR("Failed to find {} via RTTI", target_rtti);
+    LOG_ERR("Failed to find {} via RTTI ({} scan over 0x{:X} bytes)", target_rtti,
+            use_mt ? "multi-threaded" : "single-threaded", scan_size);
     return std::nullopt;
 }
 

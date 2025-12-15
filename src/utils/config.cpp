@@ -27,6 +27,7 @@ namespace config {
             cfg.user_id = j.value("user_id", 0ULL);
             cfg.display_name = j.value("display_name", "");
             cfg.using_published_game = j.value("using_published_game", false);
+            cfg.multithreaded_rtti_scan = j.value("multithreaded_rtti_scan", false);
 
             return cfg;
         } catch (const std::exception& e) {
@@ -44,6 +45,7 @@ namespace config {
             j["user_id"] = config.user_id;
             j["display_name"] = config.display_name;
             j["using_published_game"] = config.using_published_game;
+            j["multithreaded_rtti_scan"] = config.multithreaded_rtti_scan;
 
             std::ofstream file(filepath);
             if (!file.is_open()) {
@@ -126,6 +128,9 @@ namespace config {
         std::cout << "\nPlease enter your user information:\n";
         cfg.user_id = read_uint64("User ID");
         cfg.display_name = read_string("Display Name");
+
+        cfg.multithreaded_rtti_scan =
+            read_yes_no("Use multi-threaded RTTI/pointer scanning? (no = safer, yes = faster)");
 
         std::cout << "\nConfiguration saved!\n";
         std::cout << "If you need to use a different configuration, delete 'dumper-config.json' "
