@@ -25,6 +25,15 @@ The root of the Roblox game hierarchy. See [Roblox DataModel documentation](http
 - Workspace reference
 - RunService, UserInputService, ClientReplicator
 
+### MouseService
+
+Mouse input handling service. See [Roblox MouseService documentation](https://create.roblox.com/docs/reference/engine/classes/MouseService).
+
+- InputObject reference
+- Position (Vector2) - Current mouse position in client coordinates (stored inside InputObject)
+
+**Note:** During the MouseService phase, the dumper will automatically move the mouse cursor to different positions to scan for the Position offset. Please do not move your mouse during this phase or it will fail.
+
 ### Workspace
 
 The main game world container. See [Roblox Workspace documentation](https://create.roblox.com/docs/reference/engine/classes/Workspace).
