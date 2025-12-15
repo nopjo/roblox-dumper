@@ -107,7 +107,6 @@ std::optional<uintptr_t> Memory::find_pointer_by_rtti(const std::string& target_
 
     auto data_sec = get_section_range(".data");
     if (data_sec) {
-        LOG_DEBUG("using data section range");
         start_offset = data_sec->first - module_base;
         scan_size = data_sec->second;
     } else {
