@@ -127,16 +127,12 @@ class Memory {
                                                     size_t max_offset = 0x1000,
                                                     size_t alignment = 0x8, int sleep_ms = 500) {
         std::vector<size_t> candidates;
-        LOG_INFO("Initial scan: looking for value {} at base 0x{:X}", known_values[0],
-                 base_address);
-
         for (size_t offset = 0; offset < max_offset; offset += alignment) {
             T value = read<T>(base_address + offset);
             if (value == known_values[0])
                 candidates.push_back(offset);
         }
 
-        LOG_INFO("Found {} candidates for initial value {}", candidates.size(), known_values[0]);
         if (candidates.empty())
             return {};
 
@@ -151,8 +147,6 @@ class Memory {
                     new_candidates.push_back(offset);
             }
 
-            LOG_INFO("After snapshot {}: {} candidates remaining (expected value: {})", i,
-                     new_candidates.size(), known_values[i]);
             candidates = std::move(new_candidates);
             if (candidates.empty()) {
                 LOG_ERR("No candidates remaining after snapshot {}", i);
@@ -167,7 +161,6 @@ class Memory {
                 verified.push_back(offset);
         }
 
-        LOG_INFO("Final verification: {} offsets found", verified.size());
         return verified;
     }
 
