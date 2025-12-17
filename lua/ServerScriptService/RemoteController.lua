@@ -6,6 +6,7 @@ local Teams = game:GetService("Teams")
 local Players = game:GetService("Players")
 
 local API_URL = nil
+
 local startEvent = Instance.new("RemoteEvent")
 startEvent.Name = "StartPolling"
 startEvent.Parent = ReplicatedStorage
@@ -48,6 +49,26 @@ local function submitResult(commandId, status, result)
 	end)
 end
 
+local function setColor3(object, property, data)
+	object[property] = Color3.fromRGB(data.r, data.g, data.b)
+end
+
+local function setUDim2(object, property, data)
+	object[property] = UDim2.new(data.x_scale, data.x_offset, data.y_scale, data.y_offset)
+end
+
+local function getScreenGuiFrame()
+	local screenGui = ReplicatedStorage:FindFirstChildOfClass("ScreenGui")
+	if not screenGui then
+		return nil, "ScreenGui missing"
+	end
+	local frame = screenGui:FindFirstChildOfClass("Frame")
+	if not frame then
+		return nil, "Frame missing"
+	end
+	return frame
+end
+
 local function handleCommand(cmd)
 	local action = cmd.action
 	local data = cmd.data
@@ -55,12 +76,12 @@ local function handleCommand(cmd)
 
 	local function run(f)
 		local s, e = pcall(f)
-		if s then 
+		if s then
 			print("[Controller] Command", commandId, "completed:", action)
-			submitResult(commandId,"completed",{}) 
-		else 
+			submitResult(commandId, "completed", {})
+		else
 			print("[Controller] Command", commandId, "failed:", action, tostring(e))
-			submitResult(commandId,"failed",{error=tostring(e)}) 
+			submitResult(commandId, "failed", {error = tostring(e)})
 		end
 	end
 
@@ -85,87 +106,111 @@ local function handleCommand(cmd)
 	end
 
 	if action == "set_gravity" then
-		run(function() Workspace.Gravity = data.value end)
+		run(function()
+			Workspace.Gravity = data.value
+		end)
+
 	elseif action == "set_ambient" then
-		run(function() Lighting.Ambient = Color3.fromRGB(data.r,data.g,data.b) end)
+		run(function() setColor3(Lighting, "Ambient", data) end)
 	elseif action == "set_outdoor_ambient" then
-		run(function() Lighting.OutdoorAmbient = Color3.fromRGB(data.r,data.g,data.b) end)
+		run(function() setColor3(Lighting, "OutdoorAmbient", data) end)
 	elseif action == "set_color_shift_top" then
-		run(function() Lighting.ColorShift_Top = Color3.fromRGB(data.r,data.g,data.b) end)
+		run(function() setColor3(Lighting, "ColorShift_Top", data) end)
 	elseif action == "set_color_shift_bottom" then
-		run(function() Lighting.ColorShift_Bottom = Color3.fromRGB(data.r,data.g,data.b) end)
+		run(function() setColor3(Lighting, "ColorShift_Bottom", data) end)
+
 	elseif action == "set_skybox_orientation" then
 		local sky = Lighting:FindFirstChildOfClass("Sky")
-		if sky then run(function()
+		if sky then
+			run(function()
 				sky.CelestialBodiesShown = true
-				sky.SkyboxOrientation = Vector3.new(data.x,data.y,data.z)
-			end) else submitResult(commandId,"failed",{error="No Sky"}) end
+				sky.SkyboxOrientation = Vector3.new(data.x, data.y, data.z)
+			end)
+		else
+			submitResult(commandId, "failed", {error = "No Sky"})
+		end
+
 	elseif action == "set_npc_move_to" then
 		local npc = Workspace:FindFirstChild("npc")
 		local moveto = Workspace:FindFirstChild("moveto")
 		if npc and moveto then
 			local hum = npc:FindFirstChild("Humanoid")
-			if hum then run(function()
-					if data.enabled then hum:MoveTo(moveto.Position) else hum:MoveTo(npc.HumanoidRootPart.Position) end
-				end) else submitResult(commandId,"failed",{error="Humanoid missing"}) end
+			if hum then
+				run(function()
+					if data.enabled then
+						hum:MoveTo(moveto.Position)
+					else
+						hum:MoveTo(npc.HumanoidRootPart.Position)
+					end
+				end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
 		else
-			submitResult(commandId,"failed",{error="NPC or moveto missing"})
+			submitResult(commandId, "failed", {error = "NPC or moveto missing"})
 		end
-		
+
 	elseif action == "set_atmosphere_color" then
 		local atmosphere = Lighting:FindFirstChildOfClass("Atmosphere")
-		if atmosphere then run(function()
-				atmosphere.Color = Color3.fromRGB(data.r,data.g,data.b)
-			end) else submitResult(commandId,"failed",{error="Atmosphere missing"}) end
-		
+		if atmosphere then
+			run(function() setColor3(atmosphere, "Color", data) end)
+		else
+			submitResult(commandId, "failed", {error = "Atmosphere missing"})
+		end
 	elseif action == "set_atmosphere_decay" then
 		local atmosphere = Lighting:FindFirstChildOfClass("Atmosphere")
-		if atmosphere then run(function()
-				atmosphere.Decay = Color3.fromRGB(data.r,data.g,data.b)
-			end) else submitResult(commandId,"failed",{error="Atmosphere missing"}) end
-		
+		if atmosphere then
+			run(function() setColor3(atmosphere, "Decay", data) end)
+		else
+			submitResult(commandId, "failed", {error = "Atmosphere missing"})
+		end
+
 	elseif action == "set_color_correction_tint" then
 		local cc = Lighting:FindFirstChildOfClass("ColorCorrectionEffect")
-		if cc then run(function()
-				cc.TintColor = Color3.fromRGB(data.r,data.g,data.b)
-			end) else submitResult(commandId,"failed",{error="ColorCorrectionEffect missing"}) end
+		if cc then
+			run(function() setColor3(cc, "TintColor", data) end)
+		else
+			submitResult(commandId, "failed", {error = "ColorCorrectionEffect missing"})
+		end
+
 	elseif action == "set_ui_gradient_color" then
 		local gradient = ReplicatedStorage:FindFirstChildOfClass("UIGradient")
-		if gradient then run(function()
-				gradient.Color = ColorSequence.new(Color3.fromRGB(data.r,data.g,data.b))
-			end) else submitResult(commandId,"failed",{error="UIGradient missing"}) end
+		if gradient then
+			run(function()
+				gradient.Color = ColorSequence.new(Color3.fromRGB(data.r, data.g, data.b))
+			end)
+		else
+			submitResult(commandId, "failed", {error = "UIGradient missing"})
+		end
+
 	elseif action == "set_frame_background_color" then
-		local screen_gui = ReplicatedStorage:FindFirstChildOfClass("ScreenGui")
-		if screen_gui then
-			local frame = screen_gui:FindFirstChildOfClass("Frame")
-			if frame then run(function()
-					frame.BackgroundColor3 = Color3.fromRGB(data.r,data.g,data.b)
-				end) else submitResult(commandId,"failed",{error="Frame missing"}) end
-		else submitResult(commandId,"failed",{error="ScreenGui missing"}) end
+		local frame, err = getScreenGuiFrame()
+		if frame then
+			run(function() setColor3(frame, "BackgroundColor3", data) end)
+		else
+			submitResult(commandId, "failed", {error = err})
+		end
 	elseif action == "set_frame_border_color" then
-		local screen_gui = ReplicatedStorage:FindFirstChildOfClass("ScreenGui")
-		if screen_gui then
-			local frame = screen_gui:FindFirstChildOfClass("Frame")
-			if frame then run(function()
-					frame.BorderColor3 = Color3.fromRGB(data.r,data.g,data.b)
-				end) else submitResult(commandId,"failed",{error="Frame missing"}) end
-		else submitResult(commandId,"failed",{error="ScreenGui missing"}) end
+		local frame, err = getScreenGuiFrame()
+		if frame then
+			run(function() setColor3(frame, "BorderColor3", data) end)
+		else
+			submitResult(commandId, "failed", {error = err})
+		end
 	elseif action == "set_frame_position" then
-		local screen_gui = ReplicatedStorage:FindFirstChildOfClass("ScreenGui")
-		if screen_gui then
-			local frame = screen_gui:FindFirstChildOfClass("Frame")
-			if frame then run(function()
-					frame.Position = UDim2.new(data.x_scale,data.x_offset,data.y_scale,data.y_offset)
-				end) else submitResult(commandId,"failed",{error="Frame missing"}) end
-		else submitResult(commandId,"failed",{error="ScreenGui missing"}) end
+		local frame, err = getScreenGuiFrame()
+		if frame then
+			run(function() setUDim2(frame, "Position", data) end)
+		else
+			submitResult(commandId, "failed", {error = err})
+		end
 	elseif action == "set_frame_size" then
-		local screen_gui = ReplicatedStorage:FindFirstChildOfClass("ScreenGui")
-		if screen_gui then
-			local frame = screen_gui:FindFirstChildOfClass("Frame")
-			if frame then run(function()
-					frame.Size = UDim2.new(data.x_scale,data.x_offset,data.y_scale,data.y_offset)
-				end) else submitResult(commandId,"failed",{error="Frame missing"}) end
-		else submitResult(commandId,"failed",{error="ScreenGui missing"}) end
+		local frame, err = getScreenGuiFrame()
+		if frame then
+			run(function() setUDim2(frame, "Size", data) end)
+		else
+			submitResult(commandId, "failed", {error = err})
+		end
 	end
 end
 
@@ -176,7 +221,9 @@ local function pollCommands()
 	if s then
 		local data = HttpService:JSONDecode(response)
 		for _, cmd in ipairs(data.commands) do
-			task.spawn(function() handleCommand(cmd) end)
+			task.spawn(function()
+				handleCommand(cmd)
+			end)
 		end
 	end
 end
