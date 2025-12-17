@@ -1,9 +1,9 @@
 //================================================================
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
-// Dumped at: 2025-12-17 19:43:23
+// Dumped at: 2025-12-17 23:34:57
 // Roblox Version: version-eaebe135b3ec446b
-// Total offsets dumped: 112
+// Total offsets dumped: 122
 //================================================================
 
 #pragma once
@@ -186,6 +186,19 @@ namespace offsets {
         inline constexpr uintptr_t Offset = 0x158;
         inline constexpr uintptr_t Rotation = 0x160;
         inline constexpr uintptr_t Transparency = 0xF4;
+    }
+
+    namespace GuiObject {
+        inline constexpr uintptr_t AnchorPoint = 0x568;
+        inline constexpr uintptr_t BackgroundColor3 = 0x550;
+        inline constexpr uintptr_t BackgroundTransparency = 0x574;
+        inline constexpr uintptr_t BorderColor3 = 0x55C;
+        inline constexpr uintptr_t BorderSizePixel = 0x57C;
+        inline constexpr uintptr_t LayoutOrder = 0x58C;
+        inline constexpr uintptr_t Position = 0x520;
+        inline constexpr uintptr_t Rotation = 0x188;
+        inline constexpr uintptr_t Size = 0x540;
+        inline constexpr uintptr_t ZIndex = 0x5B0;
     }
 
     namespace Camera {

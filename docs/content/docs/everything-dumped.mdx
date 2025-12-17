@@ -194,6 +194,33 @@ Depth of field blur effect. See [Roblox DepthOfFieldEffect documentation](https:
 
 ## UI Classes
 
+### GuiObject
+
+Base class for 2D GUI elements like Frames, TextLabels, etc. See [Roblox GuiObject documentation](https://create.roblox.com/docs/reference/engine/classes/GuiObject).
+
+- AnchorPoint (Vector2) - Two floats (x, y)
+- BackgroundTransparency (float)
+- BackgroundColor3 (Color3/RGB) - Three floats (r, g, b) in 0.0-1.0 range
+- BorderSizePixel (uint32_t/int)
+- BorderColor3 (Color3/RGB) - Three floats (r, g, b) in 0.0-1.0 range
+- LayoutOrder (uint32_t/int)
+- Position (UDim2) - Complex structure (see below)
+- Rotation (float)
+- Size (UDim2) - Complex structure (see below)
+- ZIndex (uint32_t/int)
+
+**UDim2 Structure:**
+UDim2 is a two-dimensional value where each dimension has both a relative scale and absolute offset:
+
+- **X.Scale** (float) - Relative X position/size (0.0 = left/0%, 1.0 = right/100%)
+- **X.Offset** (int) - Absolute X position/size in pixels
+- **Y.Scale** (float) - Relative Y position/size (0.0 = top/0%, 1.0 = bottom/100%)
+- **Y.Offset** (int) - Absolute Y position/size in pixels
+
+Memory layout: `[X.Scale (float), X.Offset (int), Y.Scale (float), Y.Offset (int)]` - 16 bytes total
+
+For more information on UDim2, see [Roblox UDim2 documentation](https://create.roblox.com/docs/reference/engine/datatypes/UDim2).
+
 ### UIGradient
 
 UI gradient effect for GUI elements. See [Roblox UIGradient documentation](https://create.roblox.com/docs/reference/engine/classes/UIGradient).
