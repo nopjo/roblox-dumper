@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iomanip>
 #include <map>
+#include <regex>
 #include <sstream>
 #include <string>
 
@@ -15,6 +16,7 @@ class OffsetRegistry {
     std::map<std::string, std::map<std::string, uintptr_t>> namespaces;
     std::vector<std::string> namespace_order;
     std::chrono::time_point<std::chrono::high_resolution_clock> start_time;
+    std::string roblox_version;
 
     OffsetRegistry() { start_time = std::chrono::high_resolution_clock::now(); }
 
@@ -48,6 +50,8 @@ class OffsetRegistry {
         LOG_SUCCESS("{}: 0x{:X}", offset_name, value);
     }
 
+    void set_roblox_version(const std::string& version) { roblox_version = version; }
+
     void write_to_file(const std::string& filename = "offsets.hpp") {
         auto end_time = std::chrono::high_resolution_clock::now();
         double duration = std::chrono::duration<double>(end_time - start_time).count();
@@ -77,6 +81,9 @@ class OffsetRegistry {
         file << "// Dumped By Jonah's Roblox Dumper | Discord: jonahw\n";
         file << "// Github Link: https://github.com/nopjo/roblox-dumper\n";
         file << "// Dumped at: " << timestamp.str() << "\n";
+        if (!roblox_version.empty()) {
+            file << "// Roblox Version: " << roblox_version << "\n";
+        }
         file << "// Total offsets dumped: " << total_offsets << "\n";
         file << "//================================================================\n\n";
         file << "#pragma once\n";

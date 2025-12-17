@@ -129,6 +129,15 @@ MODULEENTRY32W Memory::get_module_by_name(DWORD pid, std::string name) {
     return {};
 }
 
+std::string Memory::get_executable_path() {
+    MODULEENTRY32W mod = get_module_by_name(process_id, process_name);
+    if (mod.szExePath[0] == 0)
+        return "";
+
+    std::wstring wide_path(mod.szExePath);
+    return std::string(wide_path.begin(), wide_path.end());
+}
+
 std::vector<uint8_t> Memory::read_bytes(uintptr_t address, size_t size) {
     using tNtReadVirtualMemory = NTSTATUS(NTAPI*)(HANDLE, PVOID, PVOID, SIZE_T, PSIZE_T);
     static tNtReadVirtualMemory fn =

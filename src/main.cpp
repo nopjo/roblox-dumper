@@ -5,6 +5,7 @@
 #include "utils/file_utils.hpp"
 #include "utils/logger.hpp"
 #include "utils/offset_registry.hpp"
+#include <regex>
 
 int main() {
     if (!config::init()) {
@@ -39,6 +40,16 @@ int main() {
     }
 
     LOG_INFO("Dumping complete");
+
+    std::string exe_path = memory->get_executable_path();
+    if (!exe_path.empty()) {
+        std::regex version_regex(R"(version-([a-f0-9]+))");
+        std::smatch match;
+        if (std::regex_search(exe_path, match, version_regex)) {
+            std::string version = "version-" + match[1].str();
+            offset_registry.set_roblox_version(version);
+        }
+    }
 
     std::string output_path = file_utils::get_exe_directory() + "\\offsets.hpp";
     offset_registry.write_to_file(output_path);

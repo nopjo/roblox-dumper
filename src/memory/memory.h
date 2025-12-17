@@ -241,6 +241,7 @@ class Memory {
     static DWORD find_process_id(std::string process_name);
     static HANDLE nt_open_process(DWORD process_id);
     static MODULEENTRY32W get_module_by_name(DWORD process_id, std::string module_name);
+    std::string get_executable_path();
 };
 
 inline std::unique_ptr<Memory> memory;
