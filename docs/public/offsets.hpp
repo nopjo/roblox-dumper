@@ -1,9 +1,9 @@
 //================================================================
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
-// Dumped at: 2025-12-18 01:20:42
+// Dumped at: 2025-12-18 10:31:56
 // Roblox Version: version-eaebe135b3ec446b
-// Total offsets dumped: 130
+// Total offsets dumped: 132
 //================================================================
 
 #pragma once
@@ -121,7 +121,7 @@ namespace offsets {
         inline constexpr uintptr_t ClockTime = 0x1B8;
         inline constexpr uintptr_t ColorShift_Bottom = 0xE4;
         inline constexpr uintptr_t ColorShift_Top = 0xF0;
-        inline constexpr uintptr_t EnvironmentDiffuseScale = 0x124;
+        inline constexpr uintptr_t EnvironmentDiffuseScale = 0x10C;
         inline constexpr uintptr_t EnvironmentSpecularScale = 0x128;
         inline constexpr uintptr_t OutdoorAmbient = 0x108;
         inline constexpr uintptr_t Sky = 0x1D8;
@@ -202,8 +202,10 @@ namespace offsets {
     }
 
     namespace TextLabel {
+        inline constexpr uintptr_t ContentText = 0xAE0;
         inline constexpr uintptr_t LineHeight = 0xB54;
         inline constexpr uintptr_t MaxVisibleGraphemes = 0xF14;
+        inline constexpr uintptr_t Text = 0xE40;
         inline constexpr uintptr_t TextBounds = 0xD18;
         inline constexpr uintptr_t TextColor3 = 0xEF0;
         inline constexpr uintptr_t TextSize = 0xD1C;
