@@ -41,7 +41,7 @@ namespace scanner::phases {
         offset_registry.add("GuiObject", "AnchorPoint", *anchor_point_offset);
 
         const auto bg_transparency_offset =
-            memory->find_verified_offset_float({frame.address}, {0.429f}, 0x800, 0x2);
+            memory->find_verified_offset_float({frame.address}, {0.139f}, 0x800, 0x2);
 
         if (!bg_transparency_offset) {
             LOG_ERR("Failed to find BackgroundTransparency offset for GuiObject");
@@ -90,53 +90,45 @@ namespace scanner::phases {
 
         offset_registry.add("GuiObject", "ZIndex", *zindex_offset);
 
+        constexpr float BG_COLOR_R = 231.0f / 255.0f;
+        constexpr float BG_COLOR_G = 76.0f / 255.0f;
+        constexpr float BG_COLOR_B = 60.0f / 255.0f;
+
+        auto bg_color_offset =
+            memory->find_verified_offset_float({frame.address}, {BG_COLOR_R}, 0x800, 0x4);
+
+        if (bg_color_offset) {
+            float g = memory->read<float>(frame.address + *bg_color_offset + 4);
+            float b = memory->read<float>(frame.address + *bg_color_offset + 8);
+            if (std::abs(g - BG_COLOR_G) < 0.01f && std::abs(b - BG_COLOR_B) < 0.01f) {
+                offset_registry.add("GuiObject", "BackgroundColor3", *bg_color_offset);
+            } else {
+                LOG_ERR("Failed to verify BackgroundColor3 G/B channels for GuiObject");
+            }
+        } else {
+            LOG_ERR("Failed to find BackgroundColor3 offset for GuiObject");
+        }
+
+        constexpr float BORDER_COLOR_R = 52.0f / 255.0f;
+        constexpr float BORDER_COLOR_G = 152.0f / 255.0f;
+        constexpr float BORDER_COLOR_B = 219.0f / 255.0f;
+
+        auto border_color_offset =
+            memory->find_verified_offset_float({frame.address}, {BORDER_COLOR_R}, 0x800, 0x4);
+
+        if (border_color_offset) {
+            float g = memory->read<float>(frame.address + *border_color_offset + 4);
+            float b = memory->read<float>(frame.address + *border_color_offset + 8);
+            if (std::abs(g - BORDER_COLOR_G) < 0.01f && std::abs(b - BORDER_COLOR_B) < 0.01f) {
+                offset_registry.add("GuiObject", "BorderColor3", *border_color_offset);
+            } else {
+                LOG_ERR("Failed to verify BorderColor3 G/B channels for GuiObject");
+            }
+        } else {
+            LOG_ERR("Failed to find BorderColor3 offset for GuiObject");
+        }
+
         control::Controller controller("http://localhost:8000");
-
-        {
-            controller.set_frame_background_color(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                frame.address, colors,
-                [&](size_t i) {
-                    controller.set_frame_background_color(
-                        colors[i].r * 255.0f, colors[i].g * 255.0f, colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x800, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("GuiObject", "BackgroundColor3", offset[0]);
-                controller.set_frame_background_color(0, 0, 0);
-            } else {
-                LOG_ERR("Failed to find BackgroundColor3 offset for GuiObject");
-            }
-        }
-
-        {
-            controller.set_frame_border_color(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 1.0f, 1.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                frame.address, colors,
-                [&](size_t i) {
-                    controller.set_frame_border_color(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                      colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x800, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("GuiObject", "BorderColor3", offset[0]);
-                controller.set_frame_border_color(0, 0, 0);
-            } else {
-                LOG_ERR("Failed to find BorderColor3 offset for GuiObject");
-            }
-        }
 
         {
             std::vector<UDim2> positions = {

@@ -1,5 +1,4 @@
 #pragma once
-#include "control/control.hpp"
 #include "memory/memory.h"
 #include "scanner.hpp"
 #include "sdk/instance.hpp"
@@ -74,7 +73,7 @@ namespace scanner::phases {
         }
 
         const auto text_stroke_transparency_offset =
-            memory->find_verified_offset_float({text_label.address}, {0.952f}, 0x1000, 0x4);
+            memory->find_verified_offset_float({text_label.address}, {0.864f}, 0x1000, 0x4);
 
         if (!text_stroke_transparency_offset) {
             LOG_ERR("Failed to find TextStrokeTransparency offset for TextLabel");
@@ -94,52 +93,42 @@ namespace scanner::phases {
 
         offset_registry.add("TextLabel", "TextTransparency", *text_transparency_offset);
 
-        control::Controller controller("http://localhost:8000");
+        constexpr float TEXT_COLOR_R = 155.0f / 255.0f;
+        constexpr float TEXT_COLOR_G = 89.0f / 255.0f;
+        constexpr float TEXT_COLOR_B = 182.0f / 255.0f;
 
-        {
-            controller.set_text_label_color(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        auto text_color_offset =
+            memory->find_verified_offset_float({text_label.address}, {TEXT_COLOR_R}, 0x1000, 0x4);
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                text_label.address, colors,
-                [&](size_t i) {
-                    controller.set_text_label_color(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                    colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x1000, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("TextLabel", "TextColor3", offset[0]);
-                controller.set_text_label_color(0, 0, 0);
+        if (text_color_offset) {
+            float g = memory->read<float>(text_label.address + *text_color_offset + 4);
+            float b = memory->read<float>(text_label.address + *text_color_offset + 8);
+            if (std::abs(g - TEXT_COLOR_G) < 0.01f && std::abs(b - TEXT_COLOR_B) < 0.01f) {
+                offset_registry.add("TextLabel", "TextColor3", *text_color_offset);
             } else {
-                LOG_ERR("Failed to find TextColor3 offset for TextLabel");
+                LOG_ERR("Failed to verify TextColor3 G/B channels for TextLabel");
             }
+        } else {
+            LOG_ERR("Failed to find TextColor3 offset for TextLabel");
         }
 
-        {
-            controller.set_text_label_stroke_color(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        constexpr float STROKE_COLOR_R = 243.0f / 255.0f;
+        constexpr float STROKE_COLOR_G = 156.0f / 255.0f;
+        constexpr float STROKE_COLOR_B = 18.0f / 255.0f;
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 1.0f, 1.0f}};
+        auto stroke_color_offset =
+            memory->find_verified_offset_float({text_label.address}, {STROKE_COLOR_R}, 0x1000, 0x4);
 
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                text_label.address, colors,
-                [&](size_t i) {
-                    controller.set_text_label_stroke_color(
-                        colors[i].r * 255.0f, colors[i].g * 255.0f, colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x1000, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("TextLabel", "TextStrokeColor3", offset[0]);
-                controller.set_text_label_stroke_color(0, 0, 0);
+        if (stroke_color_offset) {
+            float g = memory->read<float>(text_label.address + *stroke_color_offset + 4);
+            float b = memory->read<float>(text_label.address + *stroke_color_offset + 8);
+            if (std::abs(g - STROKE_COLOR_G) < 0.01f && std::abs(b - STROKE_COLOR_B) < 0.01f) {
+                offset_registry.add("TextLabel", "TextStrokeColor3", *stroke_color_offset);
             } else {
-                LOG_ERR("Failed to find TextStrokeColor3 offset for TextLabel");
+                LOG_ERR("Failed to verify TextStrokeColor3 G/B channels for TextLabel");
             }
+        } else {
+            LOG_ERR("Failed to find TextStrokeColor3 offset for TextLabel");
         }
 
         {
@@ -159,6 +148,24 @@ namespace scanner::phases {
             } else {
                 LOG_ERR("Failed to find TextSize offset for TextLabel");
             }
+        }
+
+        std::vector<size_t> text_offsets;
+        for (size_t offset = 0; offset < 0x1000; offset += 0x8) {
+            std::string read_str = memory->read_string(text_label.address + offset, 32);
+            if (read_str == "jonah dumper") {
+                text_offsets.push_back(offset);
+            }
+        }
+
+        if (text_offsets.size() >= 2) {
+            offset_registry.add("TextLabel", "ContentText", text_offsets[0]);
+            offset_registry.add("TextLabel", "Text", text_offsets[1]);
+        } else if (text_offsets.size() == 1) {
+            offset_registry.add("TextLabel", "ContentText", text_offsets[0]);
+            LOG_ERR("Found only one string offset, expected Text and ContentText");
+        } else {
+            LOG_ERR("Failed to find Text/ContentText string offsets for TextLabel");
         }
 
         return true;

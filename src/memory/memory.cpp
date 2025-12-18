@@ -73,6 +73,19 @@ uintptr_t Memory::base_address() {
     return base;
 }
 
+std::pair<int, int> Memory::get_window_dimensions() {
+    if (!window_handle)
+        return {0, 0};
+
+    RECT rect;
+    if (GetClientRect(window_handle, &rect)) {
+        int width = rect.right - rect.left;
+        int height = rect.bottom - rect.top;
+        return {width, height};
+    }
+    return {0, 0};
+}
+
 DWORD Memory::find_process_id(std::string process_name) {
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (snapshot == INVALID_HANDLE_VALUE)
@@ -264,48 +277,6 @@ std::optional<size_t> Memory::find_verified_offset_float(const std::vector<uintp
             return offset;
     }
     return std::nullopt;
-}
-
-std::vector<size_t> Memory::find_rgb_offsets_with_snapshots(
-    uintptr_t base_address, const std::vector<::RGB>& known_values,
-    std::function<void(size_t)> value_changer, size_t max_offset, size_t alignment) {
-    std::vector<size_t> candidates;
-    auto matches = [](float a, float b) { return std::abs(a - b) < 0.001f; };
-
-    for (size_t offset = 0; offset < max_offset; offset += alignment) {
-        float r = read<float>(base_address + offset);
-        float g = read<float>(base_address + offset + 4);
-        float b = read<float>(base_address + offset + 8);
-
-        if (matches(r, known_values[0].r) && matches(g, known_values[0].g) &&
-            matches(b, known_values[0].b))
-            candidates.push_back(offset);
-    }
-
-    if (candidates.empty())
-        return {};
-
-    for (size_t i = 1; i < known_values.size(); i++) {
-        value_changer(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-        std::vector<size_t> new_candidates;
-        for (size_t offset : candidates) {
-            float r = read<float>(base_address + offset);
-            float g = read<float>(base_address + offset + 4);
-            float b = read<float>(base_address + offset + 8);
-
-            if (matches(r, known_values[i].r) && matches(g, known_values[i].g) &&
-                matches(b, known_values[i].b))
-                new_candidates.push_back(offset);
-        }
-
-        candidates = std::move(new_candidates);
-        if (candidates.empty())
-            return {};
-    }
-
-    return candidates;
 }
 
 std::optional<RobloxStringInfo> Memory::scan_roblox_string(uintptr_t instance_address,

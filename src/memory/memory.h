@@ -59,6 +59,7 @@ class Memory {
     bool attach_window(std::string window_name);
     HWND get_window_handle();
     uintptr_t base_address();
+    std::pair<int, int> get_window_dimensions();
 
     template <typename T = uintptr_t> T read(uintptr_t address) {
         using tNtReadVirtualMemory = NTSTATUS(NTAPI*)(HANDLE, PVOID, PVOID, SIZE_T, PSIZE_T);
@@ -237,12 +238,6 @@ class Memory {
                                              const std::string& expected_string,
                                              size_t max_offset = 0x1000, size_t alignment = 0x8,
                                              size_t max_string_length = 256);
-
-    std::vector<size_t> find_rgb_offsets_with_snapshots(uintptr_t base_address,
-                                                        const std::vector<::RGB>& known_values,
-                                                        std::function<void(size_t)> value_changer,
-                                                        size_t max_offset = 0x1000,
-                                                        size_t alignment = 0x8);
 
     static DWORD find_process_id(std::string process_name);
     static HANDLE nt_open_process(DWORD process_id);

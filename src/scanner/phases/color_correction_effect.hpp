@@ -1,5 +1,4 @@
 #pragma once
-#include "control/control.hpp"
 #include "memory/memory.h"
 #include "scanner.hpp"
 #include "sdk/instance.hpp"
@@ -56,28 +55,23 @@ namespace scanner::phases {
 
         offset_registry.add("ColorCorrectionEffect", "Saturation", *saturation_offset);
 
-        // tint color
-        {
-            controller.set_color_correction_tint(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        constexpr float TINT_R = 255.0f / 255.0f;
+        constexpr float TINT_G = 118.0f / 255.0f;
+        constexpr float TINT_B = 117.0f / 255.0f;
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
+        auto tint_offset = memory->find_verified_offset_float({color_correct_inst.address},
+                                                              {TINT_R}, 0x600, 0x4);
 
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                color_correct_inst.address, colors,
-                [&](size_t i) {
-                    controller.set_color_correction_tint(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                         colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("ColorCorrectionEffect", "TintColor", offset[0]);
-                controller.set_atmosphere_decay(0, 0, 0);
+        if (tint_offset) {
+            float g = memory->read<float>(color_correct_inst.address + *tint_offset + 4);
+            float b = memory->read<float>(color_correct_inst.address + *tint_offset + 8);
+            if (std::abs(g - TINT_G) < 0.01f && std::abs(b - TINT_B) < 0.01f) {
+                offset_registry.add("ColorCorrectionEffect", "TintColor", *tint_offset);
             } else {
-                LOG_ERR("Failed to find TintColor offset for ColorCorrectionEffect");
+                LOG_ERR("Failed to verify TintColor G/B channels for ColorCorrectionEffect");
             }
+        } else {
+            LOG_ERR("Failed to find TintColor offset for ColorCorrectionEffect");
         }
 
         return true;

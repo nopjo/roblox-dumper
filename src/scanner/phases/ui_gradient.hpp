@@ -1,5 +1,4 @@
 #pragma once
-#include "control/control.hpp"
 #include "memory/memory.h"
 #include "scanner.hpp"
 #include "sdk/instance.hpp"
@@ -24,29 +23,23 @@ namespace scanner::phases {
             return false;
         }
 
-        control::Controller controller("http://localhost:8000");
+        constexpr float COLOR_R = 156.0f / 255.0f;
+        constexpr float COLOR_G = 89.0f / 255.0f;
+        constexpr float COLOR_B = 182.0f / 255.0f;
 
-        {
-            controller.set_ui_gradient_color(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        auto color_offset =
+            memory->find_verified_offset_float({ui_gradient.address}, {COLOR_R}, 0x600, 0x4);
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                ui_gradient.address, colors,
-                [&](size_t i) {
-                    controller.set_ui_gradient_color(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                     colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("UIGradient", "Color", offset[0]);
-                controller.set_ui_gradient_color(0, 0, 0);
+        if (color_offset) {
+            float g = memory->read<float>(ui_gradient.address + *color_offset + 4);
+            float b = memory->read<float>(ui_gradient.address + *color_offset + 8);
+            if (std::abs(g - COLOR_G) < 0.01f && std::abs(b - COLOR_B) < 0.01f) {
+                offset_registry.add("UIGradient", "Color", *color_offset);
             } else {
-                LOG_ERR("Failed to find Color offset for UIGradient");
+                LOG_ERR("Failed to verify Color G/B channels for UIGradient");
             }
+        } else {
+            LOG_ERR("Failed to find Color offset for UIGradient");
         }
 
         const auto offset_offset =

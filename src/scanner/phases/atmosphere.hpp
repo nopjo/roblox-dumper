@@ -1,5 +1,4 @@
 #pragma once
-#include "control/control.hpp"
 #include "memory/memory.h"
 #include "scanner.hpp"
 #include "sdk/instance.hpp"
@@ -7,7 +6,6 @@
 #include "utils/structs.h"
 #include <chrono>
 #include <thread>
-
 
 namespace scanner::phases {
 
@@ -23,8 +21,6 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Atmosphere in 'Lighting'");
             return false;
         }
-
-        control::Controller controller("http://localhost:8000");
 
         const auto density_offset =
             memory->find_verified_offset_float({atmosphere_inst.address}, {0.677f}, 0x1000, 0x2);
@@ -67,52 +63,49 @@ namespace scanner::phases {
 
         offset_registry.add("Atmosphere", "Haze", *haze_offset);
 
-        // atmosphere color
-        {
-            controller.set_atmosphere_color(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        constexpr float ATM_COLOR_R = 108.0f / 255.0f;
+        constexpr float ATM_COLOR_G = 92.0f / 255.0f;
+        constexpr float ATM_COLOR_B = 231.0f / 255.0f;
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
+        auto atm_color_offset = memory->find_verified_offset_float({atmosphere_inst.address},
+                                                                   {ATM_COLOR_R}, 0x600, 0x4);
 
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                atmosphere_inst.address, colors,
-                [&](size_t i) {
-                    controller.set_atmosphere_color(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                    colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("Atmosphere", "Color", offset[0]);
-                controller.set_atmosphere_decay(0, 0, 0);
+        if (atm_color_offset) {
+            float g = memory->read<float>(atmosphere_inst.address + *atm_color_offset + 4);
+            float b = memory->read<float>(atmosphere_inst.address + *atm_color_offset + 8);
+            if (std::abs(g - ATM_COLOR_G) < 0.01f && std::abs(b - ATM_COLOR_B) < 0.01f) {
+                offset_registry.add("Atmosphere", "Color", *atm_color_offset);
             } else {
-                LOG_ERR("Failed to find Atmosphere Color offset");
+                LOG_ERR("Failed to verify Atmosphere Color G/B channels");
+            }
+        } else {
+            LOG_ERR("Failed to find Atmosphere Color offset");
+        }
+
+        constexpr float DECAY_R = 106.0f / 255.0f;
+        constexpr float DECAY_G = 176.0f / 255.0f;
+        constexpr float DECAY_B = 76.0f / 255.0f;
+
+        std::optional<size_t> decay_offset_final;
+        for (size_t offset = 0; offset < 0x600; offset += 0x4) {
+            if (atm_color_offset && offset == *atm_color_offset)
+                continue;
+
+            float r = memory->read<float>(atmosphere_inst.address + offset);
+            if (std::abs(r - DECAY_R) < 0.01f) {
+                float g = memory->read<float>(atmosphere_inst.address + offset + 4);
+                float b = memory->read<float>(atmosphere_inst.address + offset + 8);
+                if (std::abs(g - DECAY_G) < 0.01f && std::abs(b - DECAY_B) < 0.01f) {
+                    decay_offset_final = offset;
+                    break;
+                }
             }
         }
 
-        // decay color
-        {
-            controller.set_atmosphere_decay(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                atmosphere_inst.address, colors,
-                [&](size_t i) {
-                    controller.set_atmosphere_decay(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                    colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("Atmosphere", "Decay", offset[0]);
-                controller.set_atmosphere_decay(0, 0, 0);
-            } else {
-                LOG_ERR("Failed to find Atmosphere Decay offset");
-            }
+        if (decay_offset_final) {
+            offset_registry.add("Atmosphere", "Decay", *decay_offset_final);
+        } else {
+            LOG_ERR("Failed to find Atmosphere Decay offset");
         }
 
         return true;

@@ -1,5 +1,4 @@
 #pragma once
-#include "control/control.hpp"
 #include "memory/memory.h"
 #include "scanner.hpp"
 #include "sdk/instance.hpp"
@@ -7,7 +6,6 @@
 #include "utils/structs.h"
 #include <chrono>
 #include <thread>
-
 
 namespace scanner::phases {
 
@@ -59,7 +57,7 @@ namespace scanner::phases {
         offset_registry.add("Lighting", "ClockTime", *clock_time);
 
         const auto environment_diffuse_scale_offset =
-            memory->find_verified_offset_float({lighting.address}, {0.632f}, 0x400, 0x4);
+            memory->find_verified_offset_float({lighting.address}, {0.817f}, 0x400, 0x4);
 
         if (!environment_diffuse_scale_offset) {
             LOG_ERR("Failed to find EnvironmentDiffuseScale offset");
@@ -80,106 +78,80 @@ namespace scanner::phases {
         offset_registry.add("Lighting", "EnvironmentSpecularScale",
                             *environment_specular_scale_offset);
 
-        // Ambient
-        {
-            controller.set_ambient(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        constexpr float AMBIENT_R = 142.0f / 255.0f;
+        constexpr float AMBIENT_G = 68.0f / 255.0f;
+        constexpr float AMBIENT_B = 173.0f / 255.0f;
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
+        auto ambient_offset =
+            memory->find_verified_offset_float({lighting.address}, {AMBIENT_R}, 0x600, 0x4);
 
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                lighting.address, colors,
-                [&](size_t i) {
-                    controller.set_ambient(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                           colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("Lighting", "Ambient", offset[0]);
-                controller.set_ambient(0, 0, 0);
+        if (ambient_offset) {
+            float g = memory->read<float>(lighting.address + *ambient_offset + 4);
+            float b = memory->read<float>(lighting.address + *ambient_offset + 8);
+            if (std::abs(g - AMBIENT_G) < 0.01f && std::abs(b - AMBIENT_B) < 0.01f) {
+                offset_registry.add("Lighting", "Ambient", *ambient_offset);
             } else {
-                LOG_ERR("Failed to find Ambient offset");
+                LOG_ERR("Failed to verify Ambient G/B channels");
             }
+        } else {
+            LOG_ERR("Failed to find Ambient offset");
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        constexpr float OUTDOOR_R = 125.0f / 255.0f;
+        constexpr float OUTDOOR_G = 206.0f / 255.0f;
+        constexpr float OUTDOOR_B = 160.0f / 255.0f;
 
-        // OutdoorAmbient
-        {
-            controller.set_outdoor_ambient(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        auto outdoor_offset =
+            memory->find_verified_offset_float({lighting.address}, {OUTDOOR_R}, 0x600, 0x4);
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                lighting.address, colors,
-                [&](size_t i) {
-                    controller.set_outdoor_ambient(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                   colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("Lighting", "OutdoorAmbient", offset[0]);
-                controller.set_outdoor_ambient(0, 0, 0);
+        if (outdoor_offset) {
+            float g = memory->read<float>(lighting.address + *outdoor_offset + 4);
+            float b = memory->read<float>(lighting.address + *outdoor_offset + 8);
+            if (std::abs(g - OUTDOOR_G) < 0.01f && std::abs(b - OUTDOOR_B) < 0.01f) {
+                offset_registry.add("Lighting", "OutdoorAmbient", *outdoor_offset);
             } else {
-                LOG_ERR("Failed to find OutdoorAmbient offset");
+                LOG_ERR("Failed to verify OutdoorAmbient G/B channels");
             }
+        } else {
+            LOG_ERR("Failed to find OutdoorAmbient offset");
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        constexpr float SHIFT_TOP_R = 99.0f / 255.0f;
+        constexpr float SHIFT_TOP_G = 110.0f / 255.0f;
+        constexpr float SHIFT_TOP_B = 250.0f / 255.0f;
 
-        // ColorShift_Top
-        {
-            controller.set_color_shift_top(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        auto shift_top_offset =
+            memory->find_verified_offset_float({lighting.address}, {SHIFT_TOP_R}, 0x600, 0x4);
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                lighting.address, colors,
-                [&](size_t i) {
-                    controller.set_color_shift_top(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                   colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("Lighting", "ColorShift_Top", offset[0]);
-                controller.set_color_shift_top(0, 0, 0);
+        if (shift_top_offset) {
+            float g = memory->read<float>(lighting.address + *shift_top_offset + 4);
+            float b = memory->read<float>(lighting.address + *shift_top_offset + 8);
+            if (std::abs(g - SHIFT_TOP_G) < 0.01f && std::abs(b - SHIFT_TOP_B) < 0.01f) {
+                offset_registry.add("Lighting", "ColorShift_Top", *shift_top_offset);
             } else {
-                LOG_ERR("Failed to find ColorShift_Top offset");
+                LOG_ERR("Failed to verify ColorShift_Top G/B channels");
             }
+        } else {
+            LOG_ERR("Failed to find ColorShift_Top offset");
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        constexpr float SHIFT_BOTTOM_R = 85.0f / 255.0f;
+        constexpr float SHIFT_BOTTOM_G = 239.0f / 255.0f;
+        constexpr float SHIFT_BOTTOM_B = 196.0f / 255.0f;
 
-        // ColorShift_Bottom
-        {
-            controller.set_color_shift_bottom(0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
+        auto shift_bottom_offset =
+            memory->find_verified_offset_float({lighting.address}, {SHIFT_BOTTOM_R}, 0x600, 0x4);
 
-            std::vector<RGB> colors = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
-
-            auto offset = memory->find_rgb_offsets_with_snapshots(
-                lighting.address, colors,
-                [&](size_t i) {
-                    controller.set_color_shift_bottom(colors[i].r * 255.0f, colors[i].g * 255.0f,
-                                                      colors[i].b * 255.0f);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
-                },
-                0x600, 0x4);
-
-            if (!offset.empty()) {
-                offset_registry.add("Lighting", "ColorShift_Bottom", offset[0]);
-                controller.set_color_shift_bottom(0, 0, 0);
+        if (shift_bottom_offset) {
+            float g = memory->read<float>(lighting.address + *shift_bottom_offset + 4);
+            float b = memory->read<float>(lighting.address + *shift_bottom_offset + 8);
+            if (std::abs(g - SHIFT_BOTTOM_G) < 0.01f && std::abs(b - SHIFT_BOTTOM_B) < 0.01f) {
+                offset_registry.add("Lighting", "ColorShift_Bottom", *shift_bottom_offset);
             } else {
-                LOG_ERR("Failed to find ColorShift_Bottom offset");
+                LOG_ERR("Failed to verify ColorShift_Bottom G/B channels");
             }
+        } else {
+            LOG_ERR("Failed to find ColorShift_Bottom offset");
         }
 
         return true;

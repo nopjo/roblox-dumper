@@ -46,17 +46,24 @@ namespace scanner::phases {
         }
         offset_registry.add("RenderView", "InvalidateLighting", *invalidate_lighting);
 
-        auto dimensions_x_offset =
-            memory->find_value_offset<float>(ctx.visual_engine, 800.0f, 0x1000, 0x4);
-        if (dimensions_x_offset) {
-            float y_value = memory->read<float>(ctx.visual_engine + *dimensions_x_offset + 0x4);
-            if (std::abs(y_value - 599.0f) < 1.0f) {
-                offset_registry.add("VisualEngine", "WindowDimensions", *dimensions_x_offset);
+        auto [window_width, window_height] = memory->get_window_dimensions();
+        if (window_width > 0 && window_height > 0) {
+            auto dimensions_x_offset = memory->find_value_offset<float>(
+                ctx.visual_engine, static_cast<float>(window_width), 0x1000, 0x4);
+            if (dimensions_x_offset) {
+                float y_value =
+                    memory->read<float>(ctx.visual_engine + *dimensions_x_offset + 0x4);
+                if (std::abs(y_value - static_cast<float>(window_height)) < 5.0f) {
+                    offset_registry.add("VisualEngine", "WindowDimensions", *dimensions_x_offset);
+                } else {
+                    LOG_ERR("Failed to verify WindowDimensions Y value (got {}, expected {})",
+                            y_value, window_height);
+                }
             } else {
-                LOG_ERR("Failed to verify WindowDimensions Y value (got {})", y_value);
+                LOG_ERR("Failed to find WindowDimensions offset");
             }
         } else {
-            LOG_ERR("Failed to find WindowDimensions offset");
+            LOG_ERR("Failed to get window dimensions");
         }
 
         return true;

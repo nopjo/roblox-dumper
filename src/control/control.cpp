@@ -77,22 +77,6 @@ namespace control {
         return execute_command("set_gravity", {{"value", value}});
     }
 
-    bool Controller::set_ambient(float r, float g, float b) {
-        return execute_command("set_ambient", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_outdoor_ambient(float r, float g, float b) {
-        return execute_command("set_outdoor_ambient", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_color_shift_top(float r, float g, float b) {
-        return execute_command("set_color_shift_top", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_color_shift_bottom(float r, float g, float b) {
-        return execute_command("set_color_shift_bottom", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
     bool Controller::set_skybox_orientation(float x, float y, float z) {
         return execute_command("set_skybox_orientation", {{"x", x}, {"y", y}, {"z", z}});
     }
@@ -117,30 +101,6 @@ namespace control {
         return execute_command("set_team", {{"team", team}});
     }
 
-    bool Controller::set_atmosphere_color(float r, float g, float b) {
-        return execute_command("set_atmosphere_color", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_atmosphere_decay(float r, float g, float b) {
-        return execute_command("set_atmosphere_decay", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_color_correction_tint(float r, float g, float b) {
-        return execute_command("set_color_correction_tint", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_ui_gradient_color(float r, float g, float b) {
-        return execute_command("set_ui_gradient_color", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_frame_background_color(float r, float g, float b) {
-        return execute_command("set_frame_background_color", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_frame_border_color(float r, float g, float b) {
-        return execute_command("set_frame_border_color", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
     bool Controller::set_frame_position(float x_scale, int x_offset, float y_scale, int y_offset) {
         return execute_command("set_frame_position", {{"x_scale", x_scale},
                                                       {"x_offset", x_offset},
@@ -153,18 +113,6 @@ namespace control {
                                                   {"x_offset", x_offset},
                                                   {"y_scale", y_scale},
                                                   {"y_offset", y_offset}});
-    }
-
-    bool Controller::set_text_label_color(float r, float g, float b) {
-        return execute_command("set_text_label_color", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_text_label_stroke_color(float r, float g, float b) {
-        return execute_command("set_text_label_stroke_color", {{"r", r}, {"g", g}, {"b", b}});
-    }
-
-    bool Controller::set_text_label_size(float size) {
-        return execute_command("set_text_label_size", {{"size", size}});
     }
 
     void Controller::set_api_url(const std::string& url) { this->api_url = url; }

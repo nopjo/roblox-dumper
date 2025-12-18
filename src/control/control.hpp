@@ -22,27 +22,14 @@ namespace control {
                                                          int poll_interval_ms = 50);
 
         bool set_gravity(float value);
-        bool set_ambient(float r, float g, float b);
-        bool set_outdoor_ambient(float r, float g, float b);
-        bool set_color_shift_top(float r, float g, float b);
-        bool set_color_shift_bottom(float r, float g, float b);
         bool set_skybox_orientation(float x, float y, float z);
         bool set_npc_move_to(bool enabled);
         bool set_camera_fov(float value);
         bool set_camera_position(float x, float y, float z);
         bool set_camera_rotation(float x, float y, float z);
         bool set_team(const std::string& team);
-        bool set_atmosphere_color(float r, float g, float b);
-        bool set_atmosphere_decay(float r, float g, float b);
-        bool set_color_correction_tint(float r, float g, float b);
-        bool set_ui_gradient_color(float r, float g, float b);
-        bool set_frame_background_color(float r, float g, float b);
-        bool set_frame_border_color(float r, float g, float b);
         bool set_frame_position(float x_scale, int x_offset, float y_scale, int y_offset);
         bool set_frame_size(float x_scale, int x_offset, float y_scale, int y_offset);
-        bool set_text_label_color(float r, float g, float b);
-        bool set_text_label_stroke_color(float r, float g, float b);
-        bool set_text_label_size(float size);
 
         void set_api_url(const std::string& url);
         bool clear_queue();

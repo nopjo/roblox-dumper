@@ -49,10 +49,6 @@ local function submitResult(commandId, status, result)
 	end)
 end
 
-local function setColor3(object, property, data)
-	object[property] = Color3.fromRGB(data.r, data.g, data.b)
-end
-
 local function setUDim2(object, property, data)
 	object[property] = UDim2.new(data.x_scale, data.x_offset, data.y_scale, data.y_offset)
 end
@@ -110,15 +106,6 @@ local function handleCommand(cmd)
 			Workspace.Gravity = data.value
 		end)
 
-	elseif action == "set_ambient" then
-		run(function() setColor3(Lighting, "Ambient", data) end)
-	elseif action == "set_outdoor_ambient" then
-		run(function() setColor3(Lighting, "OutdoorAmbient", data) end)
-	elseif action == "set_color_shift_top" then
-		run(function() setColor3(Lighting, "ColorShift_Top", data) end)
-	elseif action == "set_color_shift_bottom" then
-		run(function() setColor3(Lighting, "ColorShift_Bottom", data) end)
-
 	elseif action == "set_skybox_orientation" then
 		local sky = Lighting:FindFirstChildOfClass("Sky")
 		if sky then
@@ -150,53 +137,6 @@ local function handleCommand(cmd)
 			submitResult(commandId, "failed", {error = "NPC or moveto missing"})
 		end
 
-	elseif action == "set_atmosphere_color" then
-		local atmosphere = Lighting:FindFirstChildOfClass("Atmosphere")
-		if atmosphere then
-			run(function() setColor3(atmosphere, "Color", data) end)
-		else
-			submitResult(commandId, "failed", {error = "Atmosphere missing"})
-		end
-	elseif action == "set_atmosphere_decay" then
-		local atmosphere = Lighting:FindFirstChildOfClass("Atmosphere")
-		if atmosphere then
-			run(function() setColor3(atmosphere, "Decay", data) end)
-		else
-			submitResult(commandId, "failed", {error = "Atmosphere missing"})
-		end
-
-	elseif action == "set_color_correction_tint" then
-		local cc = Lighting:FindFirstChildOfClass("ColorCorrectionEffect")
-		if cc then
-			run(function() setColor3(cc, "TintColor", data) end)
-		else
-			submitResult(commandId, "failed", {error = "ColorCorrectionEffect missing"})
-		end
-
-	elseif action == "set_ui_gradient_color" then
-		local gradient = ReplicatedStorage:FindFirstChildOfClass("UIGradient")
-		if gradient then
-			run(function()
-				gradient.Color = ColorSequence.new(Color3.fromRGB(data.r, data.g, data.b))
-			end)
-		else
-			submitResult(commandId, "failed", {error = "UIGradient missing"})
-		end
-
-	elseif action == "set_frame_background_color" then
-		local frame, err = getScreenGuiFrame()
-		if frame then
-			run(function() setColor3(frame, "BackgroundColor3", data) end)
-		else
-			submitResult(commandId, "failed", {error = err})
-		end
-	elseif action == "set_frame_border_color" then
-		local frame, err = getScreenGuiFrame()
-		if frame then
-			run(function() setColor3(frame, "BorderColor3", data) end)
-		else
-			submitResult(commandId, "failed", {error = err})
-		end
 	elseif action == "set_frame_position" then
 		local frame, err = getScreenGuiFrame()
 		if frame then
@@ -208,42 +148,6 @@ local function handleCommand(cmd)
 		local frame, err = getScreenGuiFrame()
 		if frame then
 			run(function() setUDim2(frame, "Size", data) end)
-		else
-			submitResult(commandId, "failed", {error = err})
-		end
-	elseif action == "set_text_label_color" then
-		local frame, err = getScreenGuiFrame()
-		if frame then
-			local text_label = frame:FindFirstChild("TextLabel")
-			if text_label then
-				run(function() setColor3(text_label, "TextColor3", data) end)
-			else
-				submitResult(commandId, "failed", {error = "TextLabel missing"})
-			end
-		else
-			submitResult(commandId, "failed", {error = err})
-		end
-	elseif action == "set_text_label_stroke_color" then
-		local frame, err = getScreenGuiFrame()
-		if frame then
-			local text_label = frame:FindFirstChild("TextLabel")
-			if text_label then
-				run(function() setColor3(text_label, "TextStrokeColor3", data) end)
-			else
-				submitResult(commandId, "failed", {error = "TextLabel missing"})
-			end
-		else
-			submitResult(commandId, "failed", {error = err})
-		end
-	elseif action == "set_text_label_size" then
-		local frame, err = getScreenGuiFrame()
-		if frame then
-			local text_label = frame:FindFirstChild("TextLabel")
-			if text_label then
-				run(function() text_label.TextSize = data.size end)
-			else
-				submitResult(commandId, "failed", {error = "TextLabel missing"})
-			end
 		else
 			submitResult(commandId, "failed", {error = err})
 		end
