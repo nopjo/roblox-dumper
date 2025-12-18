@@ -94,6 +94,7 @@ Physical parts in the game. See [Roblox Part documentation](https://create.roblo
 - Material
 - Primitive flags (Anchored, CanCollide, CanTouch)
 - AssemblyLinearVelocity
+- AssemblyAngularVelocity (Vector3)
 
 ### Mesh
 
@@ -244,6 +245,23 @@ Text rendering GUI element. See [Roblox TextLabel documentation](https://create.
 - TextColor3 (Color3/RGB) - Three floats (r, g, b) in 0.0-1.0 range
 - TextStrokeColor3 (Color3/RGB) - Text outline color, three floats (r, g, b) in 0.0-1.0 range
 - TextSize (int32_t) - Font size in pixels
+
+### Tool
+
+Player-equippable tool objects. See [Roblox Tool documentation](https://create.roblox.com/docs/reference/engine/classes/Tool).
+
+- CanBeDropped (bool/uint8_t) - Whether the tool can be dropped
+- Enabled (bool/uint8_t) - Whether the tool is enabled
+- ManualActivationOnly (bool/uint8_t) - Whether tool requires manual activation
+- RequiresHandle (bool/uint8_t) - Whether tool requires a handle part
+- Grip (CFrame) - The grip CFrame (base offset)
+- GripPos (Vector3) - The position component of the grip
+- GripRight (Vector3) - The right vector of the grip orientation
+- GripUp (Vector3) - The up vector of the grip orientation
+- GripForward (Vector3) - The forward vector of the grip orientation
+- ToolTip (string) - The tooltip text displayed when hovering over the tool
+
+**Note:** The Grip CFrame contains the position and orientation components. GripPos, GripRight, GripUp, and GripForward are all derived from the Grip CFrame for easier access to individual components.
 
 ## Values
 

@@ -1,9 +1,9 @@
 //================================================================
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
-// Dumped at: 2025-12-18 10:31:56
+// Dumped at: 2025-12-18 12:57:18
 // Roblox Version: version-eaebe135b3ec446b
-// Total offsets dumped: 132
+// Total offsets dumped: 143
 //================================================================
 
 #pragma once
@@ -67,6 +67,7 @@ namespace offsets {
     }
 
     namespace Part {
+        inline constexpr uintptr_t AssemblyAngularVelocity = 0xFC;
         inline constexpr uintptr_t AssemblyLinearVelocity = 0xF0;
         inline constexpr uintptr_t Color3 = 0x194;
         inline constexpr uintptr_t Material = 0x226;
@@ -212,6 +213,19 @@ namespace offsets {
         inline constexpr uintptr_t TextStrokeColor3 = 0xEFC;
         inline constexpr uintptr_t TextStrokeTransparency = 0xF20;
         inline constexpr uintptr_t TextTransparency = 0xF24;
+    }
+
+    namespace Tool {
+        inline constexpr uintptr_t CanBeDropped = 0x490;
+        inline constexpr uintptr_t Enabled = 0x491;
+        inline constexpr uintptr_t Grip = 0x460;
+        inline constexpr uintptr_t GripForward = 0x478;
+        inline constexpr uintptr_t GripPos = 0x484;
+        inline constexpr uintptr_t GripRight = 0x460;
+        inline constexpr uintptr_t GripUp = 0x46C;
+        inline constexpr uintptr_t ManualActivationOnly = 0x492;
+        inline constexpr uintptr_t RequiresHandle = 0x493;
+        inline constexpr uintptr_t ToolTip = 0x440;
     }
 
     namespace Camera {
