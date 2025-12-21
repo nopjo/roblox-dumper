@@ -25,7 +25,7 @@ prompt.Name = "TestPrompt"
 prompt.ActionText = "TestAction123"
 prompt.ObjectText = "TestObject456"
 prompt.MaxActivationDistance = 12.5
-prompt.HoldDuration = 2.5
+prompt.HoldDuration = 2.56
 prompt.Enabled = true
 prompt.RequiresLineOfSight = false
 prompt.KeyboardKeyCode = Enum.KeyCode.E
@@ -221,7 +221,6 @@ local function handleCommand(cmd)
 			submitResult(commandId, "failed", {error = "Highlight missing"})
 		end
 
-		-- ProximityPrompt Commands
 	elseif action == "set_proximity_prompt_enabled" then
 		local promptPart = ReplicatedStorage:FindFirstChild("ProximityPromptTest")
 		if promptPart then
@@ -235,32 +234,6 @@ local function handleCommand(cmd)
 			submitResult(commandId, "failed", {error = "ProximityPromptTest missing"})
 		end
 		
-	elseif action == "set_proximity_prompt_keyboard_keycode" then
-		local promptPart = ReplicatedStorage:FindFirstChild("ProximityPromptTest")
-		if promptPart then
-			local prompt = promptPart:FindFirstChild("TestPrompt")
-			if prompt then
-				run(function() 
-					local keyMap = {
-						[101] = Enum.KeyCode.E,
-						[70] = Enum.KeyCode.F,
-						[81] = Enum.KeyCode.Q  -- Add Q
-					}
-					local newKey = keyMap[data.value]
-					if newKey then
-						prompt.KeyboardKeyCode = newKey
-						print("[DEBUG] KeyboardKeyCode:", data.value, newKey.Name)
-					else
-						print("[DEBUG] Unknown keycode:", data.value)
-					end
-					task.wait(0.2)  
-				end)
-			else
-				submitResult(commandId, "failed", {error = "TestPrompt missing"})
-			end
-		else
-			submitResult(commandId, "failed", {error = "ProximityPromptTest missing"})
-		end
 		
 	elseif action == "set_proximity_prompt_requires_line_of_sight" then
 		local promptPart = ReplicatedStorage:FindFirstChild("ProximityPromptTest")
@@ -274,23 +247,7 @@ local function handleCommand(cmd)
 		else
 			submitResult(commandId, "failed", {error = "ProximityPromptTest missing"})
 		end
-
-
-	elseif action == "set_proximity_prompt_max_distance" then
-		local promptPart = ReplicatedStorage:FindFirstChild("ProximityPromptTest")
-		if promptPart then
-			local prompt = promptPart:FindFirstChild("TestPrompt")
-			if prompt then
-				run(function() prompt.MaxActivationDistance = data.value end)
-			else
-				submitResult(commandId, "failed", {error = "TestPrompt missing"})
-			end
-		else
-			submitResult(commandId, "failed", {error = "ProximityPromptTest missing"})
-		end
-
 	end
-
 end
 
 local function pollCommands()
