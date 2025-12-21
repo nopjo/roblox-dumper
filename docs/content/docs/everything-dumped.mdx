@@ -22,6 +22,9 @@ The base class for all Roblox objects. See [Roblox Instance documentation](https
 The root of the Roblox game hierarchy. See [Roblox DataModel documentation](https://create.roblox.com/docs/reference/engine/classes/DataModel).
 
 - Game ID, Place ID, Creator ID
+- JobId (string) - UUID v4 format server instance identifier (e.g., `b601201e-4867-45eb-b477-284a80d227a0`)
+- ServerIP (string) - Server IP address and port in format `IP|PORT` (e.g., `127.0.0.1|50752`)
+- GameLoaded (uint32_t) - Game loading state indicator
 - Workspace reference
 - RunService, UserInputService, ClientReplicator
 
@@ -119,6 +122,16 @@ View and rendering information. See [Roblox Camera documentation](https://create
 - Field of View (FOV)
 - Position (Vector3)
 - Rotation/CFrame (Vector3)
+
+### Highlight
+
+Highlight effect for 3D objects. See [Roblox Highlight documentation](https://create.roblox.com/docs/reference/engine/classes/Highlight).
+
+- FillTransparency (float)
+- OutlineTransparency (float)
+- FillColor (Color3/RGB) - Three floats (r, g, b) in 0.0-1.0 range
+- OutlineColor (Color3/RGB) - Three floats (r, g, b) in 0.0-1.0 range
+- DepthMode (int32_t) - Enum value: `AlwaysOnTop` (0) or `Occluded` (1)
 
 ## Visual Effects
 

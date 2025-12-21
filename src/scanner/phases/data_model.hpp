@@ -62,12 +62,38 @@ namespace scanner::phases {
         }
         offset_registry.add("DataModel", "PlaceId", *place_id);
 
-        auto creator_id = memory->find_value_offset<uint64_t>(ctx.data_model, settings::creator_id());
+        auto creator_id =
+            memory->find_value_offset<uint64_t>(ctx.data_model, settings::creator_id());
         if (!creator_id) {
             LOG_ERR("Failed to find CreatorId offset");
             return false;
         }
         offset_registry.add("DataModel", "CreatorId", *creator_id);
+
+        const auto job_id = memory->find_string_by_regex(
+            ctx.data_model, R"([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})",
+            0x200, 0x8, 64);
+        if (!job_id) {
+            LOG_ERR("Failed to find JobId offset");
+            return false;
+        }
+        offset_registry.add("DataModel", "JobId", *job_id);
+
+        const auto ip_address = memory->find_string_by_regex(
+            ctx.data_model, R"(\d+\.\d+\.\d+\.\d+\|\d+)", 0x600, 0x8, 32);
+        if (!ip_address) {
+            LOG_ERR("Failed to find Server IP offset");
+            return false;
+        }
+        offset_registry.add("DataModel", "ServerIP", *ip_address);
+
+        const auto game_loaded_offset =
+            memory->find_value_offset<uint32_t>(ctx.data_model, 31, 0x1000, 0x4);
+        if (!game_loaded_offset) {
+            LOG_ERR("Failed to find GameLoaded offset.");
+        }
+
+        offset_registry.add("DataModel", "GameLoaded", *game_loaded_offset);
 
         auto run_service = memory->find_rtti_offset(ctx.data_model, "RunService@RBX");
         if (!run_service) {

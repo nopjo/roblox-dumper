@@ -187,6 +187,19 @@ local function handleCommand(cmd)
 		else
 			submitResult(commandId, "failed", {error = "Tool1 missing"})
 		end
+	elseif action == "set_highlight_depth_mode" then
+		local highlight = ReplicatedStorage:FindFirstChildOfClass("Highlight")
+		if highlight then
+			run(function()
+				if data.value == 0 then
+					highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+				elseif data.value == 1 then
+					highlight.DepthMode = Enum.HighlightDepthMode.Occluded
+				end
+			end)
+		else
+			submitResult(commandId, "failed", {error = "Highlight missing"})
+		end
 	end
 end
 

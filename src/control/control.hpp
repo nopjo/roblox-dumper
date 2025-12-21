@@ -35,6 +35,7 @@ namespace control {
         bool set_tool_manual_activation(bool value);
         bool set_tool_requires_handle(bool value);
         bool set_tool_grip_pos(float x, float y, float z);
+        bool set_highlight_depth_mode(int value);
 
         void set_api_url(const std::string& url);
         bool clear_queue();

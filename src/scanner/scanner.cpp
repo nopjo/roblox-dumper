@@ -6,6 +6,7 @@
 #include "phases/data_model.hpp"
 #include "phases/depth_of_field_effect.hpp"
 #include "phases/gui_object.hpp"
+#include "phases/highlight.hpp"
 #include "phases/humanoid.hpp"
 #include "phases/instance.hpp"
 #include "phases/lighting.hpp"
@@ -53,6 +54,7 @@ namespace scanner {
         registry.register_phase("GuiObject", phases::gui_object);
         registry.register_phase("TextLabel", phases::text_label);
         registry.register_phase("Tool", phases::tool);
+        registry.register_phase("Highlight", phases::highlight);
 
         // this phase also gets view matrix for VisualEngine
         registry.register_phase("Camera", phases::camera);

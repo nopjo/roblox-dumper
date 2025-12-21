@@ -1,9 +1,9 @@
 //================================================================
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
-// Dumped at: 2025-12-18 19:02:53
+// Dumped at: 2025-12-21 03:11:36
 // Roblox Version: version-5b077c09380f4fe6
-// Total offsets dumped: 143
+// Total offsets dumped: 151
 //================================================================
 
 #pragma once
@@ -27,8 +27,11 @@ namespace offsets {
         inline constexpr uintptr_t ClientReplicator = 0x3E0;
         inline constexpr uintptr_t CreatorId = 0x188;
         inline constexpr uintptr_t GameId = 0x190;
+        inline constexpr uintptr_t GameLoaded = 0x600;
+        inline constexpr uintptr_t JobId = 0x138;
         inline constexpr uintptr_t PlaceId = 0x198;
         inline constexpr uintptr_t RunService = 0x398;
+        inline constexpr uintptr_t ServerIP = 0x5E8;
         inline constexpr uintptr_t UserInputService = 0x3A8;
         inline constexpr uintptr_t Workspace = 0x178;
     }
@@ -226,6 +229,14 @@ namespace offsets {
         inline constexpr uintptr_t ManualActivationOnly = 0x492;
         inline constexpr uintptr_t RequiresHandle = 0x493;
         inline constexpr uintptr_t ToolTip = 0x440;
+    }
+
+    namespace Highlight {
+        inline constexpr uintptr_t DepthMode = 0xF8;
+        inline constexpr uintptr_t FillColor = 0xE0;
+        inline constexpr uintptr_t FillTransparency = 0xFC;
+        inline constexpr uintptr_t OutlineColor = 0xEC;
+        inline constexpr uintptr_t OutlineTransparency = 0xF0;
     }
 
     namespace Camera {

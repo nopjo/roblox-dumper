@@ -135,6 +135,10 @@ namespace control {
         return execute_command("set_tool_grip_pos", {{"x", x}, {"y", y}, {"z", z}});
     }
 
+    bool Controller::set_highlight_depth_mode(int value) {
+        return execute_command("set_highlight_depth_mode", {{"value", value}});
+    }
+
     void Controller::set_api_url(const std::string& url) { this->api_url = url; }
 
     bool Controller::clear_queue() {

@@ -324,3 +324,20 @@ std::optional<size_t> Memory::find_string_direct(uintptr_t base_address,
     }
     return std::nullopt;
 }
+
+std::optional<size_t> Memory::find_string_by_regex(uintptr_t base_address,
+                                                   const std::string& regex_pattern,
+                                                   size_t max_offset, size_t alignment,
+                                                   size_t max_string_length) {
+    std::regex pattern(regex_pattern, std::regex_constants::icase);
+    for (size_t offset = 0; offset < max_offset; offset += alignment) {
+        uintptr_t string_ptr = read<uintptr_t>(base_address + offset);
+        if (!string_ptr || string_ptr < 0x10000)
+            continue;
+
+        std::string read_str = read_string(string_ptr, max_string_length);
+        if (!read_str.empty() && std::regex_match(read_str, pattern))
+            return offset;
+    }
+    return std::nullopt;
+}

@@ -14,6 +14,7 @@
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <regex>
 #include <string>
 #include <thread>
 #include <type_traits>
@@ -238,6 +239,10 @@ class Memory {
                                              const std::string& expected_string,
                                              size_t max_offset = 0x1000, size_t alignment = 0x8,
                                              size_t max_string_length = 256);
+    std::optional<size_t> find_string_by_regex(uintptr_t base_address,
+                                               const std::string& regex_pattern,
+                                               size_t max_offset = 0x1000, size_t alignment = 0x8,
+                                               size_t max_string_length = 256);
 
     static DWORD find_process_id(std::string process_name);
     static HANDLE nt_open_process(DWORD process_id);
