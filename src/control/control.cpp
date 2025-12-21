@@ -139,6 +139,23 @@ namespace control {
         return execute_command("set_highlight_depth_mode", {{"value", value}});
     }
 
+    bool Controller::set_proximity_prompt_enabled(bool value) {
+        return execute_command("set_proximity_prompt_enabled", {{"value", value}});
+    }
+
+    bool Controller::set_proximity_prompt_max_distance(float value) {
+        return execute_command("set_proximity_prompt_max_distance", {{"value", value}});
+    }
+
+    bool Controller::set_proximity_prompt_requires_line_of_sight(bool value) {
+        return execute_command("set_proximity_prompt_requires_line_of_sight", {{"value", value}});
+    }
+
+    bool Controller::set_proximity_prompt_keyboard_keycode(int32_t value) {
+        return execute_command("set_proximity_prompt_keyboard_keycode", {{"value", value}});
+    }
+
+
     void Controller::set_api_url(const std::string& url) { this->api_url = url; }
 
     bool Controller::clear_queue() {
