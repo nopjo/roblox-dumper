@@ -36,6 +36,11 @@ namespace control {
         bool set_tool_requires_handle(bool value);
         bool set_tool_grip_pos(float x, float y, float z);
         bool set_highlight_depth_mode(int value);
+        bool set_proximity_prompt_enabled(bool value);
+        bool set_proximity_prompt_max_distance(float value);
+        bool set_proximity_prompt_requires_line_of_sight(bool value);
+        bool set_proximity_prompt_keyboard_keycode(int32_t value);
+
 
         void set_api_url(const std::string& url);
         bool clear_queue();
