@@ -301,6 +301,19 @@ Rendering view information.
 
 - InvalidateLighting
 
+### ProximityPrompt
+
+Proximity prompt interaction objects. See [Roblox ProximityPrompt documentation](https://create.roblox.com/docs/reference/engine/classes/ProximityPrompt).
+
+- **ActionText** (RobloxString) - Text shown for the action (e.g., "TestAction123")
+- **ObjectText** (RobloxString) - Object label text (e.g., "TestObject456") 
+- **HoldDuration** (float) - Time to hold interaction (unique value: 2.56)
+- **KeyboardKeyCode** (int32_t) - Keyboard key enum value (E = 101)
+- **MaxActivationDistance** (float) - Maximum interaction distance (12.5)
+- **Enabled** (bool/uint8_t) - Whether prompt is enabled
+- **RequiresLineOfSight** (bool/uint8_t) - Requires line of sight to activate
+
+
 ## Output
 
 All dumped offsets are saved to `offsets.hpp` in a structured format:
