@@ -24,6 +24,7 @@
 #include "phases/value.hpp"
 #include "phases/visual_engine.hpp"
 #include "phases/workspace.hpp"
+#include "phases/ProximityPrompt.hpp"
 
 namespace scanner {
 
@@ -55,6 +56,7 @@ namespace scanner {
         registry.register_phase("TextLabel", phases::text_label);
         registry.register_phase("Tool", phases::tool);
         registry.register_phase("Highlight", phases::highlight);
+        registry.register_phase("ProximityPrompt", phases::proximity_prompt);
 
         // this phase also gets view matrix for VisualEngine
         registry.register_phase("Camera", phases::camera);
