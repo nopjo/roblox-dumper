@@ -24,7 +24,7 @@
 #include "phases/value.hpp"
 #include "phases/visual_engine.hpp"
 #include "phases/workspace.hpp"
-#include "phases/ProximityPrompt.hpp"
+#include "phases/proximity_prompt.hpp"
 
 namespace scanner {
 
