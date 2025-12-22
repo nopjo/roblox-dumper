@@ -15,7 +15,6 @@ local cameraEvent = Instance.new("RemoteEvent")
 cameraEvent.Name = "CameraCommand"
 cameraEvent.Parent = ReplicatedStorage
 
--- Create ProximityPrompt test in ReplicatedStorage
 local promptPart = Instance.new("Part")
 promptPart.Name = "ProximityPromptTest"
 promptPart.Anchored = true
