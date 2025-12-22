@@ -1,9 +1,9 @@
 //================================================================
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
-// Dumped at: 2025-12-21 03:11:36
+// Dumped at: 2025-12-22 17:41:12
 // Roblox Version: version-5b077c09380f4fe6
-// Total offsets dumped: 151
+// Total offsets dumped: 158
 //================================================================
 
 #pragma once
@@ -237,6 +237,16 @@ namespace offsets {
         inline constexpr uintptr_t FillTransparency = 0xFC;
         inline constexpr uintptr_t OutlineColor = 0xEC;
         inline constexpr uintptr_t OutlineTransparency = 0xF0;
+    }
+
+    namespace ProximityPrompt {
+        inline constexpr uintptr_t ActionText = 0xD0;
+        inline constexpr uintptr_t Enabled = 0x156;
+        inline constexpr uintptr_t HoldDuration = 0x140;
+        inline constexpr uintptr_t KeyboardKeyCode = 0x144;
+        inline constexpr uintptr_t MaxActivationDistance = 0x148;
+        inline constexpr uintptr_t ObjectText = 0xF0;
+        inline constexpr uintptr_t RequiresLineOfSight = 0x157;
     }
 
     namespace Camera {
