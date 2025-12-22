@@ -29,7 +29,6 @@ namespace scanner::phases {
             return false;
         }
 
-        // ActionText (static Roblox string)
         const auto action_text_offset =
             memory->find_roblox_string_direct(prompt.address, "TestAction123", 0x400, 0x8);
         if (!action_text_offset) {
@@ -38,7 +37,6 @@ namespace scanner::phases {
         }
         offset_registry.add("ProximityPrompt", "ActionText", *action_text_offset);
 
-        // ObjectText (static Roblox string)
         const auto object_text_offset =
             memory->find_roblox_string_direct(prompt.address, "TestObject456", 0x400, 0x8);
         if (!object_text_offset) {
@@ -47,7 +45,6 @@ namespace scanner::phases {
         }
         offset_registry.add("ProximityPrompt", "ObjectText", *object_text_offset);
 
-        // HoldDuration (static float - UNIQUE 2.56)
         const auto hold_duration_offset =
             memory->find_verified_offset_float({prompt.address}, {2.56f}, 0x400, 0x4);
         if (!hold_duration_offset) {
@@ -56,7 +53,6 @@ namespace scanner::phases {
         }
         offset_registry.add("ProximityPrompt", "HoldDuration", *hold_duration_offset);
 
-        // KeyboardKeyCode (static int32 - E=101)
         const auto keyboard_keycode_offset =
             memory->find_value_offset<int32_t>(prompt.address, 101, 0x400, 0x4);
         if (!keyboard_keycode_offset) {
@@ -76,7 +72,6 @@ namespace scanner::phases {
         }
         offset_registry.add("ProximityPrompt", "MaxActivationDistance", *max_distance_offset);
 
-        // Enabled (dynamic bool)
         std::vector<uint8_t> enabled_values = {1, 0, 1};
         controller.set_proximity_prompt_enabled(true);
         std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
@@ -96,7 +91,6 @@ namespace scanner::phases {
             return false;
         }
 
-        // RequiresLineOfSight (dynamic bool)
         std::vector<uint8_t> requires_los_values = {0, 1, 0};
         controller.set_proximity_prompt_requires_line_of_sight(false);
         std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_MS));
