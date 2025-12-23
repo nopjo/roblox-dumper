@@ -1,9 +1,10 @@
 //================================================================
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
-// Dumped at: 2025-12-22 17:41:12
+// Contributors: @4hd8, @fulore 
+// Dumped at: 2025-12-23 15:07:51
 // Roblox Version: version-5b077c09380f4fe6
-// Total offsets dumped: 158
+// Total offsets dumped: 164
 //================================================================
 
 #pragma once
@@ -247,6 +248,21 @@ namespace offsets {
         inline constexpr uintptr_t MaxActivationDistance = 0x148;
         inline constexpr uintptr_t ObjectText = 0xF0;
         inline constexpr uintptr_t RequiresLineOfSight = 0x157;
+    }
+
+    namespace ByteCode {
+        inline constexpr uintptr_t Pointer = 0x10;
+        inline constexpr uintptr_t Size = 0x20;
+    }
+
+    namespace ModuleScript {
+        inline constexpr uintptr_t Bytecode = 0x150;
+        inline constexpr uintptr_t Hash = 0x160;
+    }
+
+    namespace LocalScript {
+        inline constexpr uintptr_t Bytecode = 0x1A8;
+        inline constexpr uintptr_t Hash = 0x1B8;
     }
 
     namespace Camera {

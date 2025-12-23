@@ -276,6 +276,29 @@ Player-equippable tool objects. See [Roblox Tool documentation](https://create.r
 
 **Note:** The Grip CFrame contains the position and orientation components. GripPos, GripRight, GripUp, and GripForward are all derived from the Grip CFrame for easier access to individual components.
 
+## Scripts
+
+### ModuleScript
+
+Module scripts that can be required by other scripts. See [Roblox ModuleScript documentation](https://create.roblox.com/docs/reference/engine/classes/ModuleScript).
+
+- Bytecode (uintptr_t) - Pointer to embedded bytecode
+- Hash (int32_t) - Script hash identifier
+
+### LocalScript
+
+Client-side scripts that run on the local client. See [Roblox LocalScript documentation](https://create.roblox.com/docs/reference/engine/classes/LocalScript).
+
+- Bytecode (uintptr_t) - Pointer to embedded bytecode
+- Hash (int32_t)
+
+### ByteCode
+
+Bytecode data structure used by both ModuleScript and LocalScript.
+
+- Pointer (uintptr_t) - Offset to bytecode pointer
+- Size (int32_t) - Size of the bytecode in bytes
+
 ## Values
 
 ### Value
@@ -306,13 +329,12 @@ Rendering view information.
 Proximity prompt interaction objects. See [Roblox ProximityPrompt documentation](https://create.roblox.com/docs/reference/engine/classes/ProximityPrompt).
 
 - **ActionText** (RobloxString) - Text shown for the action (e.g., "TestAction123")
-- **ObjectText** (RobloxString) - Object label text (e.g., "TestObject456") 
+- **ObjectText** (RobloxString) - Object label text (e.g., "TestObject456")
 - **HoldDuration** (float) - Time to hold interaction (unique value: 2.56)
 - **KeyboardKeyCode** (int32_t) - Keyboard key enum value (E = 101)
 - **MaxActivationDistance** (float) - Maximum interaction distance (12.5)
 - **Enabled** (bool/uint8_t) - Whether prompt is enabled
 - **RequiresLineOfSight** (bool/uint8_t) - Requires line of sight to activate
-
 
 ## Output
 
