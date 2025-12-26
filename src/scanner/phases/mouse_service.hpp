@@ -68,10 +68,11 @@ namespace scanner::phases {
             return false;
         }
 
+        // use second occurrence not first.
         auto input_object_offset =
-            memory->find_rtti_offset(mouse_service.address, "InputObject@RBX");
+            memory->find_rtti_offset_nth(mouse_service.address, "InputObject@RBX", 1);
         if (!input_object_offset) {
-            LOG_ERR("Failed to find InputObject offset");
+            LOG_ERR("Failed to find InputObject offset (second occurrence)");
             return false;
         }
 

@@ -100,6 +100,28 @@ std::optional<size_t> Memory::find_rtti_offset(uintptr_t base_address,
     return std::nullopt;
 }
 
+std::optional<size_t> Memory::find_rtti_offset_nth(uintptr_t base_address,
+                                                    const std::string& target_class, size_t nth_index,
+                                                    size_t max_offset, size_t alignment) {
+    size_t match_count = 0;
+    for (size_t offset = 0; offset < max_offset; offset += alignment) {
+        uintptr_t current_address = base_address + offset;
+        uintptr_t pointer_value = read<uintptr_t>(current_address);
+
+        if (!pointer_value || pointer_value < 0x10000)
+            continue;
+
+        auto rtti = scan_rtti(pointer_value);
+        if (rtti && rtti->name == target_class) {
+            if (match_count == nth_index) {
+                return offset;
+            }
+            match_count++;
+        }
+    }
+    return std::nullopt;
+}
+
 std::optional<uintptr_t> Memory::find_pointer_by_rtti(const std::string& target_rtti,
                                                       size_t scan_size, size_t alignment) {
     uintptr_t module_base = base_address();

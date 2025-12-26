@@ -52,7 +52,7 @@ Player-specific information. See [Roblox Player documentation](https://create.ro
 
 - Display name
 - User ID
-- Model instance (character)
+- Character
 - Team assignment
 
 ### Players
@@ -112,6 +112,47 @@ Special mesh types. See [Roblox SpecialMesh documentation](https://create.roblox
 
 - MeshId
 - Scale (Vector3)
+
+### Terrain
+
+Terrain properties. See [Roblox Terrain documentation](https://create.roblox.com/docs/reference/engine/classes/Terrain).
+
+- GrassLength (float) - Length of grass on terrain
+- MaterialColors (uintptr_t) - Pointer to the MaterialColors vector data pointer
+- WaterColor (Color3) - Three floats (r, g, b) in 0.0-1.0 range
+- WaterReflectance (float) - Water reflection intensity
+- WaterTransparency (float) - Water transparency (0.0-1.0)
+- WaterWaveSize (float) - Size of water waves
+- WaterWaveSpeed (float) - Speed of water waves
+
+**MaterialColors:**
+
+MaterialColors are stored as a `std::vector<RBX::Color3uint8>` and contain individual material color indices. Each material color is stored as `uint8_t` RGB values (0-255 range).
+
+**How to read/write MaterialColors:**
+
+MaterialColors are accessed through the vector pointer offset. Each material has an index stored in the `MaterialColors` namespace (e.g., `MaterialColors::Asphalt`, `MaterialColors::Grass`). To read or write a material color:
+
+1. Read the vector pointer: `uintptr_t data_ptr = memory->read<uintptr_t>(terrain_address + Terrain::MaterialColors);`
+2. Calculate the byte offset: `size_t color_offset = MaterialColors::Asphalt * 3;` (each color is 3 bytes: R, G, B)
+3. Read/write using a `Color3uint8` struct:
+
+   ```cpp
+   struct Color3uint8 {
+       uint8_t r;
+       uint8_t g;
+       uint8_t b;
+   };
+
+   // read color
+   Color3uint8 color = memory->read<Color3uint8>(data_ptr + color_offset);
+
+   // write color
+   Color3uint8 new_color = {255, 0, 0}; // red for example
+   memory->write<Color3uint8>(data_ptr + color_offset, new_color);
+   ```
+
+**Available MaterialColors:** Asphalt, Basalt, Brick, Cobblestone, Concrete, CrackedLava, Glacier, Grass, Ground, Ice, LeafyGrass, Limestone, Mud, Pavement, Rock, Salt, Sand, Sandstone, Slate, Snow, WoodPlanks
 
 ## Camera
 

@@ -32,12 +32,12 @@ namespace scanner::phases {
             return false;
         }
 
-        auto model = memory->find_rtti_offset(local_player, "ModelInstance@RBX");
+        const auto model = memory->find_rtti_offset(local_player, "ModelInstance@RBX");
         if (!model) {
             LOG_ERR("Failed to find ModelInstance offset");
             return false;
         }
-        offset_registry.add("Player", "ModelInstance", *model);
+        offset_registry.add("Player", "Character", *model);
 
         auto display_name =
             memory->find_roblox_string_direct(local_player, settings::display_name());

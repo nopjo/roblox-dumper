@@ -20,6 +20,7 @@
 #include "phases/special_mesh.hpp"
 #include "phases/sun_rays_effect.hpp"
 #include "phases/team.hpp"
+#include "phases/terrain.hpp"
 #include "phases/text_label.hpp"
 #include "phases/tool.hpp"
 #include "phases/ui_gradient.hpp"
@@ -59,6 +60,7 @@ namespace scanner {
         registry.register_phase("Highlight", phases::highlight);
         registry.register_phase("ProximityPrompt", phases::proximity_prompt);
         registry.register_phase("Script", phases::script);
+        registry.register_phase("Terrain", phases::terrain);
 
         // this phase also gets view matrix for VisualEngine
         registry.register_phase("Camera", phases::camera);

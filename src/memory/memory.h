@@ -1,6 +1,6 @@
 #pragma once
 #define NOMINMAX
-#include "future"
+#include <future>
 #include "memory/rtti.h"
 #include "utils/logger.hpp"
 #include "utils/structs.h"
@@ -221,6 +221,9 @@ class Memory {
     std::optional<RttiInfo> scan_rtti(uintptr_t address);
     std::optional<size_t> find_rtti_offset(uintptr_t base_address, const std::string& target_class,
                                            size_t max_offset = 0x1000, size_t alignment = 0x8);
+    std::optional<size_t> find_rtti_offset_nth(uintptr_t base_address, const std::string& target_class,
+                                                size_t nth_index, size_t max_offset = 0x1000,
+                                                size_t alignment = 0x8);
     std::optional<uintptr_t> find_pointer_by_rtti(const std::string& target_rtti,
                                                   size_t scan_size = 0x10000000,
                                                   size_t alignment = 0x8);
