@@ -60,7 +60,7 @@ namespace scanner::phases {
                 continue;
 
             const auto embedded2 = memory->read(module_script2.address + off);
-            if (!embedded)
+            if (!embedded2)
                 continue;
 
             const auto size = memory->find_verified_offset<int>({embedded, embedded2}, {61, 86});
