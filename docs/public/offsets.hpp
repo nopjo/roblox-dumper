@@ -2,9 +2,9 @@
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
 // Contributors: @4hd8, @fulore 
-// Dumped at: 2025-12-23 15:07:51
+// Dumped at: 2025-12-26 19:52:48
 // Roblox Version: version-5b077c09380f4fe6
-// Total offsets dumped: 164
+// Total offsets dumped: 188
 //================================================================
 
 #pragma once
@@ -16,7 +16,6 @@ namespace offsets {
         inline constexpr uintptr_t Pointer = 0x7A69470;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ToFakeDataModel = 0x700;
-        inline constexpr uintptr_t ViewMatrix = 0x180;
         inline constexpr uintptr_t WindowDimensions = 0x720;
     }
 
@@ -60,8 +59,8 @@ namespace offsets {
     }
 
     namespace Player {
+        inline constexpr uintptr_t Character = 0x360;
         inline constexpr uintptr_t DisplayName = 0x130;
-        inline constexpr uintptr_t ModelInstance = 0x360;
         inline constexpr uintptr_t Team = 0x270;
         inline constexpr uintptr_t UserId = 0x298;
     }
@@ -182,7 +181,7 @@ namespace offsets {
     }
 
     namespace MouseService {
-        inline constexpr uintptr_t InputObject = 0x100;
+        inline constexpr uintptr_t InputObject = 0x110;
         inline constexpr uintptr_t Position = 0xEC;
     }
 
@@ -265,9 +264,37 @@ namespace offsets {
         inline constexpr uintptr_t Hash = 0x1B8;
     }
 
-    namespace Camera {
-        inline constexpr uintptr_t FieldOfView = 0x160;
-        inline constexpr uintptr_t Position = 0x11C;
-        inline constexpr uintptr_t Rotation = 0xF8;
+    namespace Terrain {
+        inline constexpr uintptr_t GrassLength = 0x1F0;
+        inline constexpr uintptr_t MaterialColors = 0x278;
+        inline constexpr uintptr_t WaterColor = 0x1E0;
+        inline constexpr uintptr_t WaterReflectance = 0x1F8;
+        inline constexpr uintptr_t WaterTransparency = 0x1FC;
+        inline constexpr uintptr_t WaterWaveSize = 0x200;
+        inline constexpr uintptr_t WaterWaveSpeed = 0x204;
+    }
+
+    namespace MaterialColors {
+        inline constexpr uintptr_t Asphalt = 0x10;
+        inline constexpr uintptr_t Basalt = 0xD;
+        inline constexpr uintptr_t Brick = 0x5;
+        inline constexpr uintptr_t Cobblestone = 0x11;
+        inline constexpr uintptr_t Concrete = 0x4;
+        inline constexpr uintptr_t CrackedLava = 0xF;
+        inline constexpr uintptr_t Glacier = 0x9;
+        inline constexpr uintptr_t Grass = 0x2;
+        inline constexpr uintptr_t Ground = 0xE;
+        inline constexpr uintptr_t Ice = 0x12;
+        inline constexpr uintptr_t LeafyGrass = 0x13;
+        inline constexpr uintptr_t Limestone = 0x15;
+        inline constexpr uintptr_t Mud = 0xC;
+        inline constexpr uintptr_t Pavement = 0x16;
+        inline constexpr uintptr_t Rock = 0x8;
+        inline constexpr uintptr_t Salt = 0x14;
+        inline constexpr uintptr_t Sand = 0x6;
+        inline constexpr uintptr_t Sandstone = 0xB;
+        inline constexpr uintptr_t Slate = 0x3;
+        inline constexpr uintptr_t Snow = 0xA;
+        inline constexpr uintptr_t WoodPlanks = 0x7;
     }
 }
