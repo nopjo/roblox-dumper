@@ -22,6 +22,8 @@
 #include "phases/team.hpp"
 #include "phases/terrain.hpp"
 #include "phases/text_label.hpp"
+#include "phases/text_button.hpp"
+#include "phases/text_box.hpp"
 #include "phases/tool.hpp"
 #include "phases/ui_gradient.hpp"
 #include "phases/value.hpp"
@@ -56,6 +58,8 @@ namespace scanner {
         registry.register_phase("UIGradient", phases::ui_gradient);
         registry.register_phase("GuiObject", phases::gui_object);
         registry.register_phase("TextLabel", phases::text_label);
+        registry.register_phase("TextButton", phases::text_button);
+        registry.register_phase("TextBox", phases::text_box);
         registry.register_phase("Tool", phases::tool);
         registry.register_phase("Highlight", phases::highlight);
         registry.register_phase("ProximityPrompt", phases::proximity_prompt);
