@@ -240,19 +240,27 @@ local function handleCommand(cmd)
 			submitResult(commandId, "failed", {error = "NPC missing"})
 		end
 
-	elseif action == "set_npc_jump" then
+	elseif action == "set_npc_continuous_jump" then
 		local npc = Workspace:FindFirstChild("npc")
 		if npc then
 			local hum = npc:FindFirstChild("Humanoid")
 			if hum then
-				run(function() hum.Jump = data.value end)
+				run(function()
+					if data.enabled then
+						local endTime = tick() + (data.duration or 3)
+						while tick() < endTime do
+							hum.Jump = true
+							task.wait(0.05)
+						end
+					end
+				end)
 			else
 				submitResult(commandId, "failed", {error = "Humanoid missing"})
 			end
 		else
 			submitResult(commandId, "failed", {error = "NPC missing"})
 		end
-
+		
 	elseif action == "set_npc_move_direction" then
 		local npc = Workspace:FindFirstChild("npc")
 		if npc then
