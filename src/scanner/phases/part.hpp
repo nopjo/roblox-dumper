@@ -9,6 +9,9 @@
 namespace scanner::phases {
 
     inline bool part(Context& ctx) {
+        control::Controller controller("http://localhost:8000");
+        constexpr int PROP_SLEEP_MS = 150;
+
         if (!ctx.workspace.is_valid()) {
             LOG_ERR("Workspace not valid");
             return false;
@@ -39,6 +42,7 @@ namespace scanner::phases {
         constexpr float PART1_SIZE_Y = 2.0f;
         constexpr float PART1_SIZE_Z = 8.0f;
         constexpr float PART1_TRANSPARENCY = 0.0f;
+        constexpr float PART1_REFLECTANCE = 0.253f;
         constexpr uint8_t PART1_SHAPE = 0;
         constexpr uint16_t PART1_MATERIAL = 256;
 
@@ -49,6 +53,7 @@ namespace scanner::phases {
         constexpr float PART2_SIZE_Y = 5.0f;
         constexpr float PART2_SIZE_Z = 3.0f;
         constexpr float PART2_TRANSPARENCY = 0.5f;
+        constexpr float PART2_REFLECTANCE = 0.234f;
         constexpr uint8_t PART2_SHAPE = 1;
         constexpr uint16_t PART2_MATERIAL = 512;
 
@@ -59,6 +64,7 @@ namespace scanner::phases {
         constexpr float PART3_SIZE_Y = 8.0f;
         constexpr float PART3_SIZE_Z = 12.0f;
         constexpr float PART3_TRANSPARENCY = 1.0f;
+        constexpr float PART3_REFLECTANCE = 0.523f;
         constexpr uint8_t PART3_SHAPE = 2;
         constexpr uint16_t PART3_MATERIAL = 1088;
 
@@ -204,6 +210,77 @@ namespace scanner::phases {
             return false;
         }
         offset_registry.add("Part", "Material", *material_offset);
+
+        auto reflectance_offset = memory->find_verified_offset_float(
+            {part1.address, part2.address, part3.address},
+            {PART1_REFLECTANCE, PART2_REFLECTANCE, PART3_REFLECTANCE}, PART_SCAN_RANGE, ALIGNMENT);
+
+        if (!reflectance_offset) {
+            LOG_ERR("Failed to find Reflectance offset");
+            return false;
+        }
+        offset_registry.add("Part", "Reflectance", *reflectance_offset);
+
+        LOG_INFO("Scanning for CastShadow...");
+
+        controller.set_part_cast_shadow("Part1", true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+
+        std::vector<uint8_t> cast_shadow_values = {1, 0, 1, 0};
+        auto cast_shadow_offsets = memory->find_offsets_with_snapshots<uint8_t>(
+            part1.address, cast_shadow_values,
+            [&](size_t i) {
+                controller.set_part_cast_shadow("Part1", cast_shadow_values[i] == 1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+            },
+            PART_SCAN_RANGE, 0x1);
+
+        if (cast_shadow_offsets.empty()) {
+            LOG_ERR("Failed to find CastShadow offset");
+            return false;
+        }
+        offset_registry.add("Part", "CastShadow", cast_shadow_offsets[0]);
+
+        LOG_INFO("Scanning for Locked...");
+
+        controller.set_part_locked("Part1", false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+
+        std::vector<uint8_t> locked_values = {0, 1, 0, 1};
+        auto locked_offsets = memory->find_offsets_with_snapshots<uint8_t>(
+            part1.address, locked_values,
+            [&](size_t i) {
+                controller.set_part_locked("Part1", locked_values[i] == 1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+            },
+            PART_SCAN_RANGE, 0x1);
+
+        if (locked_offsets.empty()) {
+            LOG_ERR("Failed to find Locked offset");
+            return false;
+        }
+        offset_registry.add("Part", "Locked", locked_offsets[0]);
+
+        LOG_INFO("Scanning for Massless...");
+
+        controller.set_part_massless("Part1", false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+
+        std::vector<uint8_t> massless_values = {0, 1, 0, 1};
+        auto massless_offsets = memory->find_offsets_with_snapshots<uint8_t>(
+            part1.address, massless_values,
+            [&](size_t i) {
+                controller.set_part_massless("Part1", massless_values[i] == 1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+            },
+            PART_SCAN_RANGE, 0x1);
+
+        if (massless_offsets.empty()) {
+            LOG_ERR("Failed to find Massless offset");
+            return false;
+        }
+        offset_registry.add("Part", "Massless", massless_offsets[0]);
+
 
         LOG_INFO("Part offset scan complete!");
         return true;
