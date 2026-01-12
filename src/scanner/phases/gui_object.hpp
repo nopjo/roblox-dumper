@@ -184,7 +184,113 @@ namespace scanner::phases {
             }
         }
 
+
+        LOG_INFO("Scanning for Visible...");
+
+        constexpr int PROP_SLEEP_MS = 200;
+
+        controller.set_frame_visible(true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+
+        std::vector<uint8_t> visible_values = {1, 0, 1, 0};
+        auto visible_offsets = memory->find_offsets_with_snapshots<uint8_t>(
+            frame.address, visible_values,
+            [&](size_t i) {
+                controller.set_frame_visible(visible_values[i] == 1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
+            },
+            0x800, 0x1);
+
+        if (visible_offsets.empty()) {
+            LOG_ERR("Failed to find Visible offset for GuiObject");
+            return false;
+        }
+        offset_registry.add("GuiObject", "Visible", visible_offsets[0]);
+
+
+        LOG_INFO("Scanning for AbsolutePosition/AbsoluteSize...");
+
+        const auto starter_gui = sdk::instance_t(ctx.data_model).find_first_child("StarterGui");
+        if (!starter_gui.is_valid()) {
+            LOG_ERR("Failed to find StarterGui");
+            return false;
+        }
+
+        const auto gui_screen_gui = starter_gui.find_first_child("ScreenGui");
+        if (!gui_screen_gui.is_valid()) {
+            LOG_ERR("Failed to find ScreenGui in StarterGui");
+            return false;
+        }
+
+        const auto hello_frame = gui_screen_gui.find_first_child("hello");
+        if (!hello_frame.is_valid()) {
+            LOG_ERR("Failed to find 'hello' frame in ScreenGui");
+            return false;
+        }
+
+        LOG_INFO("Found 'hello' frame at address: 0x{:X}", hello_frame.address);
+
+        constexpr float HELLO_ABS_POS_X = 17280.0f;
+        constexpr float HELLO_ABS_SIZE_X = 23040.0f;
+
+        constexpr size_t GUI_SCAN_RANGE = 0x4000;
+        constexpr float TOLERANCE = 1.0f;
+
+        std::optional<size_t> abs_pos_x_offset;
+        for (size_t offset = 0; offset < GUI_SCAN_RANGE; offset += 4) {
+            float value = memory->read<float>(hello_frame.address + offset);
+            if (std::abs(value - HELLO_ABS_POS_X) < TOLERANCE) {
+                abs_pos_x_offset = offset;
+                float y_value = memory->read<float>(hello_frame.address + offset + 4);
+                LOG_INFO("Found AbsolutePosition at 0x{:X} (X={}, Y={})", offset, value, y_value);
+                break;
+            }
+        }
+
+        std::optional<size_t> abs_size_x_offset;
+        for (size_t offset = 0; offset < GUI_SCAN_RANGE; offset += 4) {
+            float value = memory->read<float>(hello_frame.address + offset);
+            if (std::abs(value - HELLO_ABS_SIZE_X) < TOLERANCE) {
+                abs_size_x_offset = offset;
+                float y_value = memory->read<float>(hello_frame.address + offset + 4);
+                LOG_INFO("Found AbsoluteSize at 0x{:X} (X={}, Y={})", offset, value, y_value);
+                break;
+            }
+        }
+
+        if (!abs_pos_x_offset || !abs_size_x_offset) {
+            LOG_INFO("=== DEBUG: Searching for values near {} and {} ===", HELLO_ABS_POS_X,
+                     HELLO_ABS_SIZE_X);
+
+            for (size_t offset = 0; offset < GUI_SCAN_RANGE; offset += 4) {
+                float value = memory->read<float>(hello_frame.address + offset);
+
+                if (value > 15000.0f && value < 25000.0f) {
+                    float next = memory->read<float>(hello_frame.address + offset + 4);
+                    LOG_INFO("  0x{:04X}: {:.2f} (next: {:.2f})", offset, value, next);
+                }
+            }
+        }
+
+        if (!abs_pos_x_offset) {
+            LOG_ERR("Failed to find AbsolutePositionX offset");
+            return false;
+        }
+        offset_registry.add("GuiObject", "AbsolutePositionX", *abs_pos_x_offset);
+        offset_registry.add("GuiObject", "AbsolutePositionY", *abs_pos_x_offset + 4);
+
+        if (!abs_size_x_offset) {
+            LOG_ERR("Failed to find AbsoluteSizeX offset");
+            return false;
+        }
+        offset_registry.add("GuiObject", "AbsoluteSizeX", *abs_size_x_offset);
+        offset_registry.add("GuiObject", "AbsoluteSizeY", *abs_size_x_offset + 4);
+
+        LOG_INFO("AbsolutePosition offset: 0x{:X}", *abs_pos_x_offset);
+        LOG_INFO("AbsoluteSize offset: 0x{:X}", *abs_size_x_offset);
+
         return true;
     }
+
 
 } // namespace scanner::phases
