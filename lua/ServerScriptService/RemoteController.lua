@@ -1,3 +1,4 @@
+--!optimize 2
 local HttpService = game:GetService("HttpService")
 local Lighting = game:GetService("Lighting")
 local Workspace = game:GetService("Workspace")
@@ -32,7 +33,25 @@ prompt.Parent = promptPart
 
 promptPart.Parent = ReplicatedStorage
 
-print("[ProximityPrompt] Test setup complete!")
+local plasticFloor = Instance.new("Part")
+plasticFloor.Name = "PlasticFloor"
+plasticFloor.Material = Enum.Material.Plastic
+plasticFloor.Size = Vector3.new(30, 3, 30)
+plasticFloor.Position = Vector3.new(0, -1.5, 0)
+plasticFloor.Anchored = true
+plasticFloor.CanCollide = true
+plasticFloor.Parent = Workspace
+
+local woodFloor = Instance.new("Part")
+woodFloor.Name = "WoodFloor"
+woodFloor.Material = Enum.Material.Wood
+woodFloor.Size = Vector3.new(30, 3, 30)
+woodFloor.Position = Vector3.new(60, -1.5, 0) 
+woodFloor.Anchored = true
+woodFloor.CanCollide = true
+woodFloor.Parent = Workspace
+
+print("[Floors] PlasticFloor and WoodFloor created!")
 
 local redTeam = Teams:FindFirstChild("Red Team")
 if not redTeam then
@@ -155,6 +174,116 @@ local function handleCommand(cmd)
 		else
 			submitResult(commandId, "failed", {error = "NPC or moveto missing"})
 		end
+		
+	elseif action == "set_npc_auto_rotate" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function() hum.AutoRotate = data.value end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "set_npc_auto_jump_enabled" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function() hum.AutoJumpEnabled = data.value end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "set_npc_break_joints_on_death" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function() hum.BreakJointsOnDeath = data.value end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "set_npc_requires_neck" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function() hum.RequiresNeck = data.value end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "set_npc_use_jump_power" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function() hum.UseJumpPower = data.value end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "set_npc_jump" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function() hum.Jump = data.value end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "set_npc_move_direction" then
+		local npc = Workspace:FindFirstChild("npc")
+		if npc then
+			local hum = npc:FindFirstChild("Humanoid")
+			if hum then
+				run(function()
+					hum:Move(Vector3.new(data.x, data.y, data.z))
+				end)
+			else
+				submitResult(commandId, "failed", {error = "Humanoid missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC missing"})
+		end
+
+	elseif action == "move_npc_to_floor" then
+		local npc = Workspace:FindFirstChild("npc")
+		local floor = Workspace:FindFirstChild(data.floor_name)
+		if npc and floor then
+			local hrp = npc:FindFirstChild("HumanoidRootPart")
+			if hrp then
+				run(function()
+					hrp.CFrame = CFrame.new(floor.Position + Vector3.new(0, 5, 0))
+					task.wait(0.3)
+				end)
+			else
+				submitResult(commandId, "failed", {error = "HumanoidRootPart missing"})
+			end
+		else
+			submitResult(commandId, "failed", {error = "NPC or floor '" .. tostring(data.floor_name) .. "' missing"})
+		end
 
 	elseif action == "set_frame_position" then
 		local frame, err = getScreenGuiFrame()
@@ -169,6 +298,38 @@ local function handleCommand(cmd)
 			run(function() setUDim2(frame, "Size", data) end)
 		else
 			submitResult(commandId, "failed", {error = err})
+		end
+		
+	elseif action == "set_frame_visible" then
+		local frame, err = getScreenGuiFrame()
+		if frame then
+			run(function() frame.Visible = data.value end)
+		else
+			submitResult(commandId, "failed", {error = err})
+		end
+		
+	elseif action == "set_part_cast_shadow" then
+		local part = Workspace:FindFirstChild(data.part_name)
+		if part then
+			run(function() part.CastShadow = data.value end)
+		else
+			submitResult(commandId, "failed", {error = "Part not found"})
+		end
+
+	elseif action == "set_part_locked" then
+		local part = Workspace:FindFirstChild(data.part_name)
+		if part then
+			run(function() part.Locked = data.value end)
+		else
+			submitResult(commandId, "failed", {error = "Part not found"})
+		end
+
+	elseif action == "set_part_massless" then
+		local part = Workspace:FindFirstChild(data.part_name)
+		if part then
+			run(function() part.Massless = data.value end)
+		else
+			submitResult(commandId, "failed", {error = "Part not found"})
 		end
 
 	elseif action == "set_tool_can_be_dropped" then
@@ -232,8 +393,8 @@ local function handleCommand(cmd)
 		else
 			submitResult(commandId, "failed", {error = "ProximityPromptTest missing"})
 		end
-		
-		
+
+
 	elseif action == "set_proximity_prompt_requires_line_of_sight" then
 		local promptPart = ReplicatedStorage:FindFirstChild("ProximityPromptTest")
 		if promptPart then
