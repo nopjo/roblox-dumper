@@ -208,7 +208,7 @@ namespace scanner::phases {
         offset_registry.add("GuiObject", "Visible", visible_offsets[0]);
 
 
-        LOG_INFO("Scanning for AbsolutePosition/AbsoluteSize...");
+       LOG_INFO("Scanning for AbsolutePosition/AbsoluteSize...");
 
         const auto starter_gui = sdk::instance_t(ctx.data_model).find_first_child("StarterGui");
         if (!starter_gui.is_valid()) {
@@ -230,8 +230,17 @@ namespace scanner::phases {
 
         LOG_INFO("Found 'hello' frame at address: 0x{:X}", hello_frame.address);
 
-        constexpr float HELLO_ABS_POS_X = 17280.0f;
-        constexpr float HELLO_ABS_SIZE_X = 23040.0f;
+        controller.request_client_gui_info("hello");
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+        auto abs_info = controller.get_client_gui_info();
+        if (!abs_info) {
+            LOG_ERR("Failed to get AbsolutePosition/Size from client");
+            return false;
+        }
+
+        LOG_INFO("Client reported: AbsPosX={}, AbsSizeX={}", abs_info->abs_pos_x,
+                 abs_info->abs_size_x);
 
         constexpr size_t GUI_SCAN_RANGE = 0x4000;
         constexpr float TOLERANCE = 1.0f;
@@ -239,7 +248,7 @@ namespace scanner::phases {
         std::optional<size_t> abs_pos_x_offset;
         for (size_t offset = 0; offset < GUI_SCAN_RANGE; offset += 4) {
             float value = memory->read<float>(hello_frame.address + offset);
-            if (std::abs(value - HELLO_ABS_POS_X) < TOLERANCE) {
+            if (std::abs(value - abs_info->abs_pos_x) < TOLERANCE) {
                 abs_pos_x_offset = offset;
                 float y_value = memory->read<float>(hello_frame.address + offset + 4);
                 LOG_INFO("Found AbsolutePosition at 0x{:X} (X={}, Y={})", offset, value, y_value);
@@ -250,25 +259,11 @@ namespace scanner::phases {
         std::optional<size_t> abs_size_x_offset;
         for (size_t offset = 0; offset < GUI_SCAN_RANGE; offset += 4) {
             float value = memory->read<float>(hello_frame.address + offset);
-            if (std::abs(value - HELLO_ABS_SIZE_X) < TOLERANCE) {
+            if (std::abs(value - abs_info->abs_size_x) < TOLERANCE) {
                 abs_size_x_offset = offset;
                 float y_value = memory->read<float>(hello_frame.address + offset + 4);
                 LOG_INFO("Found AbsoluteSize at 0x{:X} (X={}, Y={})", offset, value, y_value);
                 break;
-            }
-        }
-
-        if (!abs_pos_x_offset || !abs_size_x_offset) {
-            LOG_INFO("=== DEBUG: Searching for values near {} and {} ===", HELLO_ABS_POS_X,
-                     HELLO_ABS_SIZE_X);
-
-            for (size_t offset = 0; offset < GUI_SCAN_RANGE; offset += 4) {
-                float value = memory->read<float>(hello_frame.address + offset);
-
-                if (value > 15000.0f && value < 25000.0f) {
-                    float next = memory->read<float>(hello_frame.address + offset + 4);
-                    LOG_INFO("  0x{:04X}: {:.2f} (next: {:.2f})", offset, value, next);
-                }
             }
         }
 
