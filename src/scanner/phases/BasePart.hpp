@@ -8,7 +8,7 @@
 
 namespace scanner::phases {
 
-    inline bool part(Context& ctx) {
+    inline bool BasePart(Context& ctx) {
         control::Controller controller("http://localhost:8000");
         constexpr int PROP_SLEEP_MS = 150;
 
