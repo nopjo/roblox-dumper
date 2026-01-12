@@ -115,6 +115,10 @@ namespace control {
                                                   {"y_offset", y_offset}});
     }
 
+    bool Controller::set_frame_visible(bool value) {
+        return execute_command("set_frame_visible", {{"value", value}});
+    }
+
     bool Controller::set_tool_can_be_dropped(bool value) {
         return execute_command("set_tool_can_be_dropped", {{"value", value}});
     }
@@ -147,6 +151,50 @@ namespace control {
         return execute_command("set_proximity_prompt_requires_line_of_sight", {{"value", value}});
     }
 
+    bool Controller::set_npc_auto_rotate(bool value) {
+        return execute_command("set_npc_auto_rotate", {{"value", value}});
+    }
+
+    bool Controller::set_npc_auto_jump_enabled(bool value) {
+        return execute_command("set_npc_auto_jump_enabled", {{"value", value}});
+    }
+
+    bool Controller::set_npc_break_joints_on_death(bool value) {
+        return execute_command("set_npc_break_joints_on_death", {{"value", value}});
+    }
+
+    bool Controller::set_npc_requires_neck(bool value) {
+        return execute_command("set_npc_requires_neck", {{"value", value}});
+    }
+
+    bool Controller::set_npc_use_jump_power(bool value) {
+        return execute_command("set_npc_use_jump_power", {{"value", value}});
+    }
+
+    bool Controller::set_npc_jump(bool value) {
+        return execute_command("set_npc_jump", {{"value", value}});
+    }
+
+    bool Controller::set_npc_move_direction(float x, float y, float z) {
+        return execute_command("set_npc_move_direction", {{"x", x}, {"y", y}, {"z", z}});
+    }
+
+    bool Controller::move_npc_to_floor(const std::string& floor_name) {
+        return execute_command("move_npc_to_floor", {{"floor_name", floor_name}});
+    }
+
+    bool Controller::set_part_cast_shadow(const std::string& part_name, bool value) {
+        return execute_command("set_part_cast_shadow",
+                               {{"part_name", part_name}, {"value", value}});
+    }
+
+    bool Controller::set_part_locked(const std::string& part_name, bool value) {
+        return execute_command("set_part_locked", {{"part_name", part_name}, {"value", value}});
+    }
+
+    bool Controller::set_part_massless(const std::string& part_name, bool value) {
+        return execute_command("set_part_massless", {{"part_name", part_name}, {"value", value}});
+    }
 
     void Controller::set_api_url(const std::string& url) { this->api_url = url; }
 
