@@ -2,9 +2,9 @@
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
 // Contributors: @4hd8, @fulore 
-// Dumped at: 2026-01-11 23:20:50
+// Dumped at: 2026-01-12 22:15:49
 // Roblox Version: version-89d89cb2d6b649be
-// Total offsets dumped: 208
+// Total offsets dumped: 226
 //================================================================
 
 #pragma once
@@ -70,14 +70,18 @@ namespace offsets {
         inline constexpr uintptr_t Color = 0xD0;
     }
 
-    namespace Part {
+    namespace BasePart {
         inline constexpr uintptr_t AssemblyAngularVelocity = 0xFC;
         inline constexpr uintptr_t AssemblyLinearVelocity = 0xF0;
+        inline constexpr uintptr_t CastShadow = 0xF5;
         inline constexpr uintptr_t Color3 = 0x194;
+        inline constexpr uintptr_t Locked = 0xF6;
+        inline constexpr uintptr_t Massless = 0xF7;
         inline constexpr uintptr_t Material = 0x226;
         inline constexpr uintptr_t Position = 0xE4;
         inline constexpr uintptr_t Primitive = 0x148;
         inline constexpr uintptr_t PrimitiveFlags = 0x1AE;
+        inline constexpr uintptr_t Reflectance = 0xEC;
         inline constexpr uintptr_t Rotation = 0xC0;
         inline constexpr uintptr_t Shape = 0x1B1;
         inline constexpr uintptr_t Size = 0x1B0;
@@ -91,15 +95,24 @@ namespace offsets {
     }
 
     namespace Humanoid {
+        inline constexpr uintptr_t AutoJumpEnabled = 0x1D8;
+        inline constexpr uintptr_t AutoRotate = 0x1D9;
+        inline constexpr uintptr_t BreakJointsOnDeath = 0x1DB;
+        inline constexpr uintptr_t FloorMaterial = 0x190;
         inline constexpr uintptr_t Health = 0x194;
         inline constexpr uintptr_t HealthDisplayDistance = 0x198;
         inline constexpr uintptr_t HipHeight = 0x1A0;
         inline constexpr uintptr_t IsWalking = 0x956;
+        inline constexpr uintptr_t Jump = 0x1DD;
+        inline constexpr uintptr_t JumpHeight = 0x1AC;
         inline constexpr uintptr_t JumpPower = 0x1B0;
         inline constexpr uintptr_t MaxHealth = 0x1B4;
         inline constexpr uintptr_t MaxSlopeOffset = 0x1B8;
+        inline constexpr uintptr_t MoveDirection = 0x158;
         inline constexpr uintptr_t NameDisplayDistance = 0x1BC;
+        inline constexpr uintptr_t RequiresNeck = 0x1E0;
         inline constexpr uintptr_t RigType = 0x1C8;
+        inline constexpr uintptr_t UseJumpPower = 0x1E3;
         inline constexpr uintptr_t WalkSpeed = 0x1D4;
         inline constexpr uintptr_t WalkSpeedCheck = 0x3C0;
         inline constexpr uintptr_t WalkToPoint = 0x17C;
@@ -194,6 +207,10 @@ namespace offsets {
     }
 
     namespace GuiObject {
+        inline constexpr uintptr_t AbsolutePositionX = 0x110;
+        inline constexpr uintptr_t AbsolutePositionY = 0x114;
+        inline constexpr uintptr_t AbsoluteSizeX = 0x118;
+        inline constexpr uintptr_t AbsoluteSizeY = 0x11C;
         inline constexpr uintptr_t AnchorPoint = 0x570;
         inline constexpr uintptr_t BackgroundColor3 = 0x558;
         inline constexpr uintptr_t BackgroundTransparency = 0x57C;
@@ -203,6 +220,7 @@ namespace offsets {
         inline constexpr uintptr_t Position = 0x528;
         inline constexpr uintptr_t Rotation = 0x188;
         inline constexpr uintptr_t Size = 0x548;
+        inline constexpr uintptr_t Visible = 0x5C1;
         inline constexpr uintptr_t ZIndex = 0x5B8;
     }
 
