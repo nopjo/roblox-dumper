@@ -362,98 +362,78 @@ namespace scanner::phases {
         }
         offset_registry.add("Humanoid", "UseJumpPower", use_jump_power_offsets[0]);
 
-        LOG_INFO("Scanning for Jump...");
+        LOG_INFO("Scanning for Jump (continuous monitoring)...");
 
-        controller.set_npc_jump(false);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-        std::vector<size_t> candidates;
+        std::vector<uint8_t> baseline(SCAN_RANGE);
         for (size_t i = 0; i < SCAN_RANGE; i++) {
-            if (memory->read<uint8_t>(npc_humanoid.address + i) == 0) {
-                candidates.push_back(i);
-            }
+            baseline[i] = memory->read<uint8_t>(npc_humanoid.address + i);
         }
 
-        LOG_INFO("Jump: {} initial candidates (value=0)", candidates.size());
+        std::vector<int> toggle_count(SCAN_RANGE, 0);
+        std::vector<uint8_t> last_value = baseline;
 
-        for (int cycle = 0; cycle < 6; cycle++) {
-            std::vector<size_t> confirmed_zero;
-            for (size_t offset : candidates) {
-                if (memory->read<uint8_t>(npc_humanoid.address + offset) == 0) {
-                    confirmed_zero.push_back(offset);
-                }
-            }
-            candidates = confirmed_zero;
+        controller.send_command("set_npc_continuous_jump", {{"enabled", true}, {"duration", 4.0f}});
 
-            std::vector<bool> seen_one(SCAN_RANGE, false);
+        LOG_INFO("Monitoring memory for 4 seconds...");
 
-            controller.send_command("set_npc_jump", {{"value", true}});
+        auto start_time = std::chrono::steady_clock::now();
+        int sample_count = 0;
 
-            auto start_time = std::chrono::steady_clock::now();
-
-            while (true) {
-                for (size_t offset : candidates) {
-                    if (memory->read<uint8_t>(npc_humanoid.address + offset) == 1) {
-                        seen_one[offset] = true;
-                    }
-                }
-
-                auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
-                                   std::chrono::steady_clock::now() - start_time)
-                                   .count();
-                if (elapsed > 300)
-                    break;
-            }
-
-            std::vector<size_t> became_one;
-            for (size_t offset : candidates) {
-                if (seen_one[offset]) {
-                    became_one.push_back(offset);
-                }
-            }
-            candidates = became_one;
-
-            LOG_INFO("Jump cycle {}: {} candidates (changed to 1)", cycle + 1, candidates.size());
-
-            if (candidates.empty()) {
-                LOG_ERR("Failed to find Jump offset - no candidates after cycle {}", cycle + 1);
-                return false;
-            }
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(700));
-
-            std::vector<size_t> back_to_zero;
-            for (size_t offset : candidates) {
-                if (memory->read<uint8_t>(npc_humanoid.address + offset) == 0) {
-                    back_to_zero.push_back(offset);
-                }
-            }
-            candidates = back_to_zero;
-
-            LOG_INFO("Jump cycle {}: {} candidates (back to 0)", cycle + 1, candidates.size());
-
-            if (candidates.empty()) {
-                LOG_ERR("Failed to find Jump offset - no candidates returned to 0 after cycle {}",
-                        cycle + 1);
-                return false;
-            }
-
-            if (candidates.size() == 1) {
+        while (true) {
+            auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+                               std::chrono::steady_clock::now() - start_time)
+                               .count();
+            if (elapsed > 4000)
                 break;
+
+            for (size_t i = 0; i < SCAN_RANGE; i++) {
+                uint8_t current = memory->read<uint8_t>(npc_humanoid.address + i);
+
+                if ((last_value[i] == 0 && current == 1) || (last_value[i] == 1 && current == 0)) {
+                    toggle_count[i]++;
+                }
+
+                last_value[i] = current;
             }
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(300));
+            sample_count++;
         }
 
-        if (candidates.size() > 1) {
-            LOG_WARN("Found {} candidates for Jump:", candidates.size());
-            for (size_t off : candidates) {
-                LOG_INFO("  0x{:X}", off);
+        LOG_INFO("Took {} samples", sample_count);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+        std::vector<std::pair<size_t, int>> candidates;
+        for (size_t i = 0; i < SCAN_RANGE; i++) {
+            uint8_t current = memory->read<uint8_t>(npc_humanoid.address + i);
+
+            if (toggle_count[i] >= 4 && baseline[i] == 0 && current == 0) {
+                candidates.push_back({i, toggle_count[i]});
             }
         }
 
-        offset_registry.add("Humanoid", "Jump", candidates[0]);
-        LOG_INFO("Jump offset found: 0x{:X}", candidates[0]);
+        std::sort(candidates.begin(), candidates.end(),
+                  [](const auto& a, const auto& b) { return a.second > b.second; });
+
+        LOG_INFO("Found {} candidates with 4+ toggles:", candidates.size());
+        for (size_t i = 0; i < std::min(candidates.size(), (size_t)10); i++) {
+            LOG_INFO("  0x{:X}: {} toggles", candidates[i].first, candidates[i].second);
+        }
+
+        if (candidates.empty()) {
+            LOG_ERR("Failed to find Jump offset - no candidates");
+            return false;
+        }
+
+        if (candidates.size() == 1 || candidates[0].second >= 8) {
+            offset_registry.add("Humanoid", "Jump", candidates[0].first);
+            LOG_INFO("Jump offset found: 0x{:X} ({} toggles)", candidates[0].first,
+                     candidates[0].second);
+        } else {
+            offset_registry.add("Humanoid", "Jump", candidates[0].first);
+            LOG_INFO("Jump offset found: 0x{:X} ({} toggles) - highest of {} candidates",
+                     candidates[0].first, candidates[0].second, candidates.size());
+        }
 
         LOG_INFO("Scanning for MoveDirection...");
         controller.set_npc_move_direction(0, 0, -1);
