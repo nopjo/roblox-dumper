@@ -12,7 +12,7 @@
 #include "phases/lighting.hpp"
 #include "phases/mesh.hpp"
 #include "phases/mouse_service.hpp"
-#include "phases/part.hpp"
+#include "phases/BasePart.hpp"
 #include "phases/player.hpp"
 #include "phases/proximity_prompt.hpp"
 #include "phases/script.hpp"
@@ -42,7 +42,7 @@ namespace scanner {
         registry.register_phase("Workspace", phases::workspace);
         registry.register_phase("Player", phases::player);
         registry.register_phase("Team", phases::team);
-        registry.register_phase("Part", phases::part);
+        registry.register_phase("BasePart", phases::BasePart);
         registry.register_phase("Humanoid", phases::humanoid);
         registry.register_phase("Mesh", phases::mesh);
         registry.register_phase("Value", phases::value);
