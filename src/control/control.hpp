@@ -51,6 +51,16 @@ namespace control {
         bool set_part_locked(const std::string& part_name, bool value);
         bool set_part_massless(const std::string& part_name, bool value);
 
+        struct GuiAbsoluteInfo {
+            float abs_pos_x;
+            float abs_pos_y;
+            float abs_size_x;
+            float abs_size_y;
+        };
+
+        std::optional<GuiAbsoluteInfo> get_client_gui_info();
+        bool request_client_gui_info(const std::string& frame_name = "hello");
+
         void set_api_url(const std::string& url);
         bool clear_queue();
 
