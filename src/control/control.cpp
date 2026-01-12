@@ -197,6 +197,32 @@ namespace control {
         return execute_command("set_part_massless", {{"part_name", part_name}, {"value", value}});
     }
 
+    bool Controller::request_client_gui_info(const std::string& frame_name) {
+        return execute_command("request_client_gui_info", {{"frame_name", frame_name}});
+    }
+
+    std::optional<Controller::GuiAbsoluteInfo> Controller::get_client_gui_info() {
+        std::string cmd_id = send_command("get_client_gui_info", {});
+        if (cmd_id.empty())
+            return std::nullopt;
+
+        auto result = wait_for_completion(cmd_id, 3000);
+        if (!result.has_value() || result->status != "completed") {
+            return std::nullopt;
+        }
+
+        try {
+            GuiAbsoluteInfo info;
+            info.abs_pos_x = result->result["abs_pos_x"].get<float>();
+            info.abs_pos_y = result->result["abs_pos_y"].get<float>();
+            info.abs_size_x = result->result["abs_size_x"].get<float>();
+            info.abs_size_y = result->result["abs_size_y"].get<float>();
+            return info;
+        } catch (...) {
+            return std::nullopt;
+        }
+    }
+
     void Controller::set_api_url(const std::string& url) { this->api_url = url; }
 
     bool Controller::clear_queue() {
