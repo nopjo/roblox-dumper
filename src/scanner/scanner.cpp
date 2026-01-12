@@ -12,7 +12,7 @@
 #include "phases/lighting.hpp"
 #include "phases/mesh.hpp"
 #include "phases/mouse_service.hpp"
-#include "phases/BasePart.hpp"
+#include "phases/base_part.hpp"
 #include "phases/player.hpp"
 #include "phases/proximity_prompt.hpp"
 #include "phases/script.hpp"
