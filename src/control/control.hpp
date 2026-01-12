@@ -30,6 +30,7 @@ namespace control {
         bool set_team(const std::string& team);
         bool set_frame_position(float x_scale, int x_offset, float y_scale, int y_offset);
         bool set_frame_size(float x_scale, int x_offset, float y_scale, int y_offset);
+        bool set_frame_visible(bool value);
         bool set_tool_can_be_dropped(bool value);
         bool set_tool_enabled(bool value);
         bool set_tool_manual_activation(bool value);
@@ -38,7 +39,17 @@ namespace control {
         bool set_highlight_depth_mode(int value);
         bool set_proximity_prompt_enabled(bool value);
         bool set_proximity_prompt_requires_line_of_sight(bool value);
-
+        bool set_npc_auto_rotate(bool value);
+        bool set_npc_auto_jump_enabled(bool value);
+        bool set_npc_break_joints_on_death(bool value);
+        bool set_npc_requires_neck(bool value);
+        bool set_npc_use_jump_power(bool value);
+        bool set_npc_jump(bool value);
+        bool set_npc_move_direction(float x, float y, float z);
+        bool move_npc_to_floor(const std::string& floor_name);
+        bool set_part_cast_shadow(const std::string& part_name, bool value);
+        bool set_part_locked(const std::string& part_name, bool value);
+        bool set_part_massless(const std::string& part_name, bool value);
 
         void set_api_url(const std::string& url);
         bool clear_queue();
