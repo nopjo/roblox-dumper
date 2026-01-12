@@ -44,7 +44,7 @@ namespace control {
         bool set_npc_break_joints_on_death(bool value);
         bool set_npc_requires_neck(bool value);
         bool set_npc_use_jump_power(bool value);
-        bool set_npc_jump(bool value);
+        bool set_npc_continuous_jump(bool enabled, float duration = 3.0f);
         bool set_npc_move_direction(float x, float y, float z);
         bool move_npc_to_floor(const std::string& floor_name);
         bool set_part_cast_shadow(const std::string& part_name, bool value);
