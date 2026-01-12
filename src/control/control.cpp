@@ -171,8 +171,9 @@ namespace control {
         return execute_command("set_npc_use_jump_power", {{"value", value}});
     }
 
-    bool Controller::set_npc_jump(bool value) {
-        return execute_command("set_npc_jump", {{"value", value}});
+    bool Controller::set_npc_continuous_jump(bool enabled, float duration) {
+        return execute_command("set_npc_continuous_jump",
+                               {{"enabled", enabled}, {"duration", duration}});
     }
 
     bool Controller::set_npc_move_direction(float x, float y, float z) {
