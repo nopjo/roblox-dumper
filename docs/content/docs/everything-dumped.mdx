@@ -73,6 +73,16 @@ Character humanoid properties. See [Roblox Humanoid documentation](https://creat
 - MaxSlopeAngle
 - IsWalking state
 - WalkToPoint
+-JumpHeight 
+-MoveDirection 
+-AutoRotate 
+-AutoJumpEnabled 
+-BreakJointsOnDeath 
+-RequiresNeck 
+-UseJumpPower 
+-Jump 
+-FloorMaterial 
+
 
 ### Team
 
@@ -98,6 +108,10 @@ Physical parts in the game. See [Roblox Part documentation](https://create.roblo
 - Primitive flags (Anchored, CanCollide, CanTouch)
 - AssemblyLinearVelocity
 - AssemblyAngularVelocity (Vector3)
+- MassLess (bool)
+- Reflectance (Float 0.0-1.0)
+- Locked (bool)
+- CastShadow (bool)
 
 ### Mesh
 
@@ -263,6 +277,8 @@ Base class for 2D GUI elements like Frames, TextLabels, etc. See [Roblox GuiObje
 - Rotation (float)
 - Size (UDim2) - Complex structure (see below)
 - ZIndex (uint32_t/int)
+- Absoloute Position (Vector2) - two floats(x,y)
+- Absoloute Size (Vector2) - two floats(x,y)
 
 **UDim2 Structure:**
 UDim2 is a two-dimensional value where each dimension has both a relative scale and absolute offset:
