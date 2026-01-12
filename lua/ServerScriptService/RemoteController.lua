@@ -51,7 +51,26 @@ woodFloor.Anchored = true
 woodFloor.CanCollide = true
 woodFloor.Parent = Workspace
 
-print("[Floors] PlasticFloor and WoodFloor created!")
+local clientGuiInfo = {
+	abs_pos_x = 0,
+	abs_pos_y = 0,
+	abs_size_x = 0,
+	abs_size_y = 0,
+	ready = false
+}
+
+local guiInfoRemote = Instance.new("RemoteEvent")
+guiInfoRemote.Name = "GuiInfoRemote"
+guiInfoRemote.Parent = ReplicatedStorage
+
+guiInfoRemote.OnServerEvent:Connect(function(player, info)
+	clientGuiInfo.abs_pos_x = info.abs_pos_x
+	clientGuiInfo.abs_pos_y = info.abs_pos_y
+	clientGuiInfo.abs_size_x = info.abs_size_x
+	clientGuiInfo.abs_size_y = info.abs_size_y
+	clientGuiInfo.ready = true
+	print("Received GUI info from client:", info.abs_pos_x, info.abs_pos_y, info.abs_size_x, info.abs_size_y)
+end)
 
 local redTeam = Teams:FindFirstChild("Red Team")
 if not redTeam then
@@ -315,6 +334,24 @@ local function handleCommand(cmd)
 		else
 			submitResult(commandId, "failed", {error = err})
 		end
+		
+	elseif action == "get_client_gui_info" then
+		if clientGuiInfo.ready then
+			submitResult(commandId, "completed", {
+				abs_pos_x = clientGuiInfo.abs_pos_x,
+				abs_pos_y = clientGuiInfo.abs_pos_y,
+				abs_size_x = clientGuiInfo.abs_size_x,
+				abs_size_y = clientGuiInfo.abs_size_y
+			})
+		else
+			submitResult(commandId, "failed", {error = "Client GUI info not ready"})
+		end
+
+	elseif action == "request_client_gui_info" then
+		guiInfoRemote:FireAllClients("request", data.frame_name or "hello")
+		run(function()
+			task.wait(0.5)
+		end)
 		
 	elseif action == "set_part_cast_shadow" then
 		local part = Workspace:FindFirstChild(data.part_name)
