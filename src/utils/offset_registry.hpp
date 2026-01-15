@@ -127,6 +127,7 @@ class OffsetRegistry {
 
         LOG_SUCCESS("Created: {} ({} offsets | {:.2f}s)", filename, total_offsets, duration);
 
+        // Write JSON file
         std::string json_filename = filename.substr(0, filename.find_last_of('.')) + ".json";
         std::ofstream json_file(json_filename);
         if (!json_file.is_open()) {
@@ -156,11 +157,8 @@ class OffsetRegistry {
 
                 size_t j = 0;
                 for (const auto& [offset_name, offset_value] : ns_it->second) {
-                    std::stringstream hex_value;
-                    hex_value << "0x" << std::hex << std::uppercase << offset_value;
-
-                    json_file << "            \"" << offset_name << "\": \"" << hex_value.str()
-                              << "\"";
+                    json_file << "            \"" << offset_name << "\": " << std::dec
+                              << offset_value;
 
                     if (j < ns_it->second.size() - 1) {
                         json_file << ",";
