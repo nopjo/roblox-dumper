@@ -74,12 +74,6 @@ class OffsetRegistry {
             namespace_order.push_back("FFlags");
         }
 
-        std::ofstream file(filename);
-        if (!file.is_open()) {
-            LOG_ERR("Failed to create file: {}", filename);
-            return;
-        }
-
         auto now = std::chrono::system_clock::now();
         auto time_t_val = std::chrono::system_clock::to_time_t(now);
         std::stringstream timestamp;
@@ -88,6 +82,12 @@ class OffsetRegistry {
         size_t total_offsets = 0;
         for (const auto& [ns, offsets] : namespaces)
             total_offsets += offsets.size();
+
+        std::ofstream file(filename);
+        if (!file.is_open()) {
+            LOG_ERR("Failed to create file: {}", filename);
+            return;
+        }
 
         file << "//================================================================\n";
         file << "// Dumped By Jonah's Roblox Dumper | Discord: jonahw\n";
@@ -126,6 +126,63 @@ class OffsetRegistry {
         file.close();
 
         LOG_SUCCESS("Created: {} ({} offsets | {:.2f}s)", filename, total_offsets, duration);
+
+        std::string json_filename = filename.substr(0, filename.find_last_of('.')) + ".json";
+        std::ofstream json_file(json_filename);
+        if (!json_file.is_open()) {
+            LOG_ERR("Failed to create file: {}", json_filename);
+            return;
+        }
+
+        json_file << "{\n";
+        json_file << "    \"metadata\": {\n";
+        json_file << "        \"dumper\": \"Jonah's Roblox Dumper\",\n";
+        json_file << "        \"discord\": \"jonahw\",\n";
+        json_file << "        \"github\": \"https://github.com/nopjo/roblox-dumper\",\n";
+        json_file << "        \"contributors\": [\"@4hd8\", \"@fulore\"],\n";
+        json_file << "        \"timestamp\": \"" << timestamp.str() << "\",\n";
+        if (!roblox_version.empty()) {
+            json_file << "        \"roblox_version\": \"" << roblox_version << "\",\n";
+        }
+        json_file << "        \"total_offsets\": " << std::dec << total_offsets << "\n";
+        json_file << "    },\n";
+        json_file << "    \"offsets\": {\n";
+
+        for (size_t i = 0; i < namespace_order.size(); i++) {
+            const auto& namespace_name = namespace_order[i];
+            auto ns_it = namespaces.find(namespace_name);
+            if (ns_it != namespaces.end()) {
+                json_file << "        \"" << namespace_name << "\": {\n";
+
+                size_t j = 0;
+                for (const auto& [offset_name, offset_value] : ns_it->second) {
+                    std::stringstream hex_value;
+                    hex_value << "0x" << std::hex << std::uppercase << offset_value;
+
+                    json_file << "            \"" << offset_name << "\": \"" << hex_value.str()
+                              << "\"";
+
+                    if (j < ns_it->second.size() - 1) {
+                        json_file << ",";
+                    }
+                    json_file << "\n";
+                    j++;
+                }
+
+                json_file << "        }";
+
+                if (i < namespace_order.size() - 1) {
+                    json_file << ",";
+                }
+                json_file << "\n";
+            }
+        }
+
+        json_file << "    }\n";
+        json_file << "}\n";
+        json_file.close();
+
+        LOG_SUCCESS("Created: {}", json_filename);
     }
 };
 
