@@ -101,17 +101,21 @@ namespace scanner::phases {
         constexpr float OUTDOOR_G = 206.0f / 255.0f;
         constexpr float OUTDOOR_B = 160.0f / 255.0f;
 
-        auto outdoor_offset =
-            memory->find_verified_offset_float({lighting.address}, {OUTDOOR_R}, 0x600, 0x4);
+        std::optional<size_t> outdoor_offset;
+        for (size_t offset = 0; offset < 0x600; offset += 4) {
+            float r = memory->read<float>(lighting.address + offset);
+            float g = memory->read<float>(lighting.address + offset + 4);
+            float b = memory->read<float>(lighting.address + offset + 8);
+
+            if (std::abs(r - OUTDOOR_R) < 0.01f && std::abs(g - OUTDOOR_G) < 0.01f &&
+                std::abs(b - OUTDOOR_B) < 0.01f) {
+                outdoor_offset = offset;
+                break;
+            }
+        }
 
         if (outdoor_offset) {
-            float g = memory->read<float>(lighting.address + *outdoor_offset + 4);
-            float b = memory->read<float>(lighting.address + *outdoor_offset + 8);
-            if (std::abs(g - OUTDOOR_G) < 0.01f && std::abs(b - OUTDOOR_B) < 0.01f) {
-                offset_registry.add("Lighting", "OutdoorAmbient", *outdoor_offset);
-            } else {
-                LOG_ERR("Failed to verify OutdoorAmbient G/B channels");
-            }
+            offset_registry.add("Lighting", "OutdoorAmbient", *outdoor_offset);
         } else {
             LOG_ERR("Failed to find OutdoorAmbient offset");
         }
@@ -153,6 +157,68 @@ namespace scanner::phases {
         } else {
             LOG_ERR("Failed to find ColorShift_Bottom offset");
         }
+
+        
+        const auto exposure_compensation_offset =
+            memory->find_verified_offset_float({lighting.address}, {1.962f}, 0x400, 0x4);
+
+        if (!exposure_compensation_offset) {
+            LOG_ERR("Failed to find ExposureCompensation offset");
+            return false;
+        }
+
+        offset_registry.add("Lighting", "ExposureCompensation", *exposure_compensation_offset);
+
+        const auto geographic_latitude_offset =
+            memory->find_verified_offset_float({lighting.address}, {2.394f}, 0x400, 0x4);
+
+        if (!geographic_latitude_offset) {
+            LOG_ERR("Failed to find GeographicLatitude offset");
+            return false;
+        }
+
+        offset_registry.add("Lighting", "GeographicLatitude", *geographic_latitude_offset);
+
+        const auto fog_start_offset =
+            memory->find_verified_offset_float({lighting.address}, {345.241f}, 0x400, 0x4);
+
+        if (!fog_start_offset) {
+            LOG_ERR("Failed to find FogStart offset");
+            return false;
+        }
+
+        offset_registry.add("Lighting", "FogStart", *fog_start_offset);
+
+        const auto fog_end_offset =
+            memory->find_verified_offset_float({lighting.address}, {631.243f}, 0x400, 0x4);
+
+        if (!fog_end_offset) {
+            LOG_ERR("Failed to find FogEnd offset");
+            return false;
+        }
+
+        offset_registry.add("Lighting", "FogEnd", *fog_end_offset);
+
+        constexpr float FOG_COLOR_R = 243.0f / 255.0f;
+        constexpr float FOG_COLOR_G = 187.0f / 255.0f;
+        constexpr float FOG_COLOR_B = 127.0f / 255.0f;
+
+        auto fog_color_offset =
+            memory->find_verified_offset_float({lighting.address}, {FOG_COLOR_R}, 0x600, 0x4);
+
+        if (fog_color_offset) {
+            float g = memory->read<float>(lighting.address + *fog_color_offset + 4);
+            float b = memory->read<float>(lighting.address + *fog_color_offset + 8);
+            if (std::abs(g - FOG_COLOR_G) < 0.01f && std::abs(b - FOG_COLOR_B) < 0.01f) {
+                offset_registry.add("Lighting", "FogColor", *fog_color_offset);
+            } else {
+                LOG_ERR("Failed to verify FogColor G/B channels");
+            }
+        } else {
+            LOG_ERR("Failed to find FogColor offset");
+        }
+
+
 
         return true;
     }
