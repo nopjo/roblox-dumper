@@ -2,8 +2,8 @@
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
 // Contributors: @4hd8, @fulore 
-// Dumped at: 2026-01-14 21:34:46
-// Roblox Version: version-1588a9c58c674e38
+// Dumped at: 2026-01-21 13:49:19
+// Roblox Version: version-0f5223fb6e7e4955
 // Total offsets dumped: 226
 //================================================================
 
@@ -13,7 +13,7 @@
 namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t FakeToRealDataModel = 0x1C0;
-        inline constexpr uintptr_t Pointer = 0x7ACC4C0;
+        inline constexpr uintptr_t Pointer = 0x7A7E950;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ToFakeDataModel = 0x700;
         inline constexpr uintptr_t ViewMatrix = 0x180;
@@ -77,7 +77,7 @@ namespace offsets {
         inline constexpr uintptr_t Color3 = 0x194;
         inline constexpr uintptr_t Locked = 0xF6;
         inline constexpr uintptr_t Massless = 0xF7;
-        inline constexpr uintptr_t Material = 0x226;
+        inline constexpr uintptr_t Material = 0x246;
         inline constexpr uintptr_t Position = 0xE4;
         inline constexpr uintptr_t Primitive = 0x148;
         inline constexpr uintptr_t PrimitiveFlags = 0x1AE;
@@ -196,7 +196,7 @@ namespace offsets {
 
     namespace MouseService {
         inline constexpr uintptr_t InputObject = 0x110;
-        inline constexpr uintptr_t Position = 0xEC;
+		inline constexpr uintptr_t Position = 0xEC;
     }
 
     namespace UIGradient {
@@ -211,7 +211,7 @@ namespace offsets {
         inline constexpr uintptr_t AbsolutePositionY = 0x114;
         inline constexpr uintptr_t AbsoluteSizeX = 0x118;
         inline constexpr uintptr_t AbsoluteSizeY = 0x11C;
-        inline constexpr uintptr_t AnchorPoint = 0x360;
+        inline constexpr uintptr_t AnchorPoint = 0x570;
         inline constexpr uintptr_t BackgroundColor3 = 0x558;
         inline constexpr uintptr_t BackgroundTransparency = 0x57C;
         inline constexpr uintptr_t BorderColor3 = 0x564;
