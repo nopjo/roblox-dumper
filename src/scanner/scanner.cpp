@@ -1,5 +1,6 @@
 #include "scanner.hpp"
 #include "phases/atmosphere.hpp"
+#include "phases/base_part.hpp"
 #include "phases/bloom_effect.hpp"
 #include "phases/camera.hpp"
 #include "phases/color_correction_effect.hpp"
@@ -12,7 +13,6 @@
 #include "phases/lighting.hpp"
 #include "phases/mesh.hpp"
 #include "phases/mouse_service.hpp"
-#include "phases/base_part.hpp"
 #include "phases/player.hpp"
 #include "phases/proximity_prompt.hpp"
 #include "phases/script.hpp"
@@ -21,14 +21,15 @@
 #include "phases/sun_rays_effect.hpp"
 #include "phases/team.hpp"
 #include "phases/terrain.hpp"
-#include "phases/text_label.hpp"
-#include "phases/text_button.hpp"
 #include "phases/text_box.hpp"
+#include "phases/text_button.hpp"
+#include "phases/text_label.hpp"
 #include "phases/tool.hpp"
 #include "phases/ui_gradient.hpp"
 #include "phases/value.hpp"
 #include "phases/visual_engine.hpp"
 #include "phases/workspace.hpp"
+
 
 namespace scanner {
 
@@ -42,7 +43,7 @@ namespace scanner {
         registry.register_phase("Workspace", phases::workspace);
         registry.register_phase("Player", phases::player);
         registry.register_phase("Team", phases::team);
-        registry.register_phase("BasePart", phases::BasePart);
+        registry.register_phase("BasePart", phases::base_part);
         registry.register_phase("Humanoid", phases::humanoid);
         registry.register_phase("Mesh", phases::mesh);
         registry.register_phase("Value", phases::value);

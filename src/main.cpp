@@ -52,10 +52,14 @@ int main() {
     }
 
     std::string output_path = file_utils::get_exe_directory() + "\\offsets.hpp";
+    std::string output_json_path = file_utils::get_exe_directory() + "\\offsets.json";
+
     offset_registry.write_to_file(output_path);
+    offset_registry.write_to_json(output_json_path);
 
     LOG_SUCCESS("Dumping Complete");
-    LOG_SUCCESS("Offsets saved to: {}", output_path);
+    LOG_SUCCESS("[C++] Offsets saved to: {}", output_path);
+    LOG_SUCCESS("[JSON] Offsets saved to: {}", output_json_path);
 
     std::cin.get();
     return 0;

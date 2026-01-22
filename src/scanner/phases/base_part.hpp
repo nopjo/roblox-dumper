@@ -8,7 +8,7 @@
 
 namespace scanner::phases {
 
-    inline bool BasePart(Context& ctx) {
+    inline bool base_part(Context& ctx) {
         control::Controller controller("http://localhost:8000");
         constexpr int PROP_SLEEP_MS = 150;
 
@@ -68,7 +68,6 @@ namespace scanner::phases {
         constexpr uint8_t PART3_SHAPE = 2;
         constexpr uint16_t PART3_MATERIAL = 1088;
 
-        // Roblox's weird color ordering: RGB visually, but stored as RBG, fuck roblox man
         constexpr uint8_t PART1_R = 255, PART1_B = 0, PART1_G = 0;
         constexpr uint8_t PART2_R = 0, PART2_B = 255, PART2_G = 0;
         constexpr uint8_t PART3_R = 0, PART3_B = 0, PART3_G = 255;
@@ -82,7 +81,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Primitive offset");
             return false;
         }
-        offset_registry.add("Part", "Primitive", *primitive_offset);
+        offset_registry.add("BasePart", "Primitive", *primitive_offset);
 
         auto primitive1 = memory->read<uintptr_t>(part1.address + *primitive_offset);
         if (!primitive1) {
@@ -112,9 +111,9 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Position offset");
             return false;
         }
-        offset_registry.add("Part", "Position", *pos_offset);
+        offset_registry.add("Primitive", "Position", *pos_offset);
 
-        offset_registry.add("Part", "Rotation", *pos_offset - 36);
+        offset_registry.add("Primitive", "Rotation", *pos_offset - 36);
 
         const auto size_offset =
             memory->find_vector3_offset({primitive1, primitive2, primitive3},
@@ -127,7 +126,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Size offset");
             return false;
         }
-        offset_registry.add("Part", "Size", *size_offset);
+        offset_registry.add("Primitive", "Size", *size_offset);
 
         auto color_offset = memory->find_verified_offset<uint8_t>(
             {part1.address, part2.address, part3.address}, {PART1_R, PART2_R, PART3_R},
@@ -150,7 +149,7 @@ namespace scanner::phases {
             LOG_ERR("Color3 verification failed");
             return false;
         }
-        offset_registry.add("Part", "Color3", *color_offset);
+        offset_registry.add("BasePart", "Color3", *color_offset);
 
         auto transparency_offset = memory->find_verified_offset_float(
             {part1.address, part2.address, part3.address},
@@ -161,7 +160,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Transparency offset");
             return false;
         }
-        offset_registry.add("Part", "Transparency", *transparency_offset);
+        offset_registry.add("BasePart", "Transparency", *transparency_offset);
 
         auto shape_offset = memory->find_verified_offset<uint8_t>(
             {part1.address, part2.address, part3.address}, {PART1_SHAPE, PART2_SHAPE, PART3_SHAPE},
@@ -171,7 +170,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Shape offset");
             return false;
         }
-        offset_registry.add("Part", "Shape", *shape_offset);
+        offset_registry.add("BasePart", "Shape", *shape_offset);
 
         bool found_flags = false;
         for (size_t offset = 0; offset < 0x300; offset += 0x1) {
@@ -187,7 +186,7 @@ namespace scanner::phases {
                 ((flags1 & 0x10) != 0) && ((flags2 & 0x10) == 0) && ((flags3 & 0x10) != 0);
 
             if (anchored_match && can_collide_match && can_touch_match) {
-                offset_registry.add("Part", "PrimitiveFlags", offset);
+                offset_registry.add("Primitive", "PrimitiveFlags", offset);
                 offset_registry.add("PrimitiveFlags", "Anchored", 0x2);
                 offset_registry.add("PrimitiveFlags", "CanCollide", 0x8);
                 offset_registry.add("PrimitiveFlags", "CanTouch", 0x10);
@@ -209,7 +208,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Material offset");
             return false;
         }
-        offset_registry.add("Part", "Material", *material_offset);
+        offset_registry.add("Primitive", "Material", *material_offset);
 
         auto reflectance_offset = memory->find_verified_offset_float(
             {part1.address, part2.address, part3.address},
@@ -219,9 +218,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Reflectance offset");
             return false;
         }
-        offset_registry.add("Part", "Reflectance", *reflectance_offset);
-
-        LOG_INFO("Scanning for CastShadow...");
+        offset_registry.add("BasePart", "Reflectance", *reflectance_offset);
 
         controller.set_part_cast_shadow("Part1", true);
         std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
@@ -239,9 +236,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find CastShadow offset");
             return false;
         }
-        offset_registry.add("Part", "CastShadow", cast_shadow_offsets[0]);
-
-        LOG_INFO("Scanning for Locked...");
+        offset_registry.add("BasePart", "CastShadow", cast_shadow_offsets[0]);
 
         controller.set_part_locked("Part1", false);
         std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
@@ -259,9 +254,7 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Locked offset");
             return false;
         }
-        offset_registry.add("Part", "Locked", locked_offsets[0]);
-
-        LOG_INFO("Scanning for Massless...");
+        offset_registry.add("BasePart", "Locked", locked_offsets[0]);
 
         controller.set_part_massless("Part1", false);
         std::this_thread::sleep_for(std::chrono::milliseconds(PROP_SLEEP_MS));
@@ -279,10 +272,8 @@ namespace scanner::phases {
             LOG_ERR("Failed to find Massless offset");
             return false;
         }
-        offset_registry.add("Part", "Massless", massless_offsets[0]);
+        offset_registry.add("BasePart", "Massless", massless_offsets[0]);
 
-
-        LOG_INFO("Part offset scan complete!");
         return true;
     }
 

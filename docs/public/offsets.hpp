@@ -2,7 +2,7 @@
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
 // Contributors: @4hd8, @fulore 
-// Dumped at: 2026-01-21 13:49:19
+// Dumped at: 2026-01-22 10:03:50
 // Roblox Version: version-0f5223fb6e7e4955
 // Total offsets dumped: 226
 //================================================================
@@ -70,22 +70,25 @@ namespace offsets {
         inline constexpr uintptr_t Color = 0xD0;
     }
 
-    namespace Part {
-        inline constexpr uintptr_t AssemblyAngularVelocity = 0xFC;
-        inline constexpr uintptr_t AssemblyLinearVelocity = 0xF0;
+    namespace BasePart {
         inline constexpr uintptr_t CastShadow = 0xF5;
         inline constexpr uintptr_t Color3 = 0x194;
         inline constexpr uintptr_t Locked = 0xF6;
         inline constexpr uintptr_t Massless = 0xF7;
+        inline constexpr uintptr_t Primitive = 0x148;
+        inline constexpr uintptr_t Reflectance = 0xEC;
+        inline constexpr uintptr_t Shape = 0x1B1;
+        inline constexpr uintptr_t Transparency = 0xF0;
+    }
+
+    namespace Primitive {
+        inline constexpr uintptr_t AssemblyAngularVelocity = 0xFC;
+        inline constexpr uintptr_t AssemblyLinearVelocity = 0xF0;
         inline constexpr uintptr_t Material = 0x246;
         inline constexpr uintptr_t Position = 0xE4;
-        inline constexpr uintptr_t Primitive = 0x148;
         inline constexpr uintptr_t PrimitiveFlags = 0x1AE;
-        inline constexpr uintptr_t Reflectance = 0xEC;
         inline constexpr uintptr_t Rotation = 0xC0;
-        inline constexpr uintptr_t Shape = 0x1B1;
         inline constexpr uintptr_t Size = 0x1B0;
-        inline constexpr uintptr_t Transparency = 0xF0;
     }
 
     namespace PrimitiveFlags {
@@ -196,7 +199,7 @@ namespace offsets {
 
     namespace MouseService {
         inline constexpr uintptr_t InputObject = 0x110;
-		inline constexpr uintptr_t Position = 0xEC;
+        inline constexpr uintptr_t Position = 0xEC;
     }
 
     namespace UIGradient {

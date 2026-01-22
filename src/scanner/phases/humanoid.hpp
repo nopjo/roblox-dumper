@@ -50,7 +50,7 @@ namespace scanner::phases {
         constexpr float CHAR1_WALK_SPEED = 298.0f;
         constexpr float CHAR1_JUMP_POWER = 91.0f;
         constexpr float CHAR1_MAX_SLOPE_ANGLE = 4.26f;
-        constexpr float CHAR1_JUMP_HEIGHT = 54.457f; 
+        constexpr float CHAR1_JUMP_HEIGHT = 54.457f;
 
         constexpr uint8_t CHAR1_RIG_TYPE = 1;
 
@@ -62,7 +62,7 @@ namespace scanner::phases {
         constexpr float CHAR2_WALK_SPEED = 28.0f;
         constexpr float CHAR2_JUMP_POWER = 56.0f;
         constexpr float CHAR2_MAX_SLOPE_ANGLE = 56.74f;
-        constexpr float CHAR2_JUMP_HEIGHT = 78.324f; 
+        constexpr float CHAR2_JUMP_HEIGHT = 78.324f;
 
         constexpr uint8_t CHAR2_RIG_TYPE = 0;
 
@@ -251,8 +251,8 @@ namespace scanner::phases {
             LOG_ERR("Failed to find AssemblyLinearVelocity offset");
             return false;
         }
-        offset_registry.add("Part", "AssemblyLinearVelocity", *velocity_offset);
-        offset_registry.add("Part", "AssemblyAngularVelocity", *velocity_offset + 12);
+        offset_registry.add("Primitive", "AssemblyLinearVelocity", *velocity_offset);
+        offset_registry.add("Primitive", "AssemblyAngularVelocity", *velocity_offset + 12);
 
         auto walkto_offset = memory->find_vector3_offset(
             {npc_humanoid.address}, {{-41.001f, 0.5f, -728.995f}}, 0x600, 5.0f);
@@ -265,7 +265,7 @@ namespace scanner::phases {
 
         controller.set_npc_move_to(false);
 
-        constexpr int PROP_SLEEP_MS = 150; 
+        constexpr int PROP_SLEEP_MS = 150;
 
         LOG_INFO("Scanning for AutoRotate...");
         controller.set_npc_auto_rotate(false);
@@ -450,9 +450,8 @@ namespace scanner::phases {
 
         controller.set_npc_move_direction(0, 0, 0);
 
-        LOG_INFO("Scanning for FloorMaterial...");
         controller.move_npc_to_floor("PlasticFloor");
-        std::this_thread::sleep_for(std::chrono::milliseconds(500)); 
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
         std::vector<uint32_t> floor_values = {256, 512, 256, 512};
         auto floor_offsets = memory->find_offsets_with_snapshots<uint32_t>(
@@ -463,13 +462,12 @@ namespace scanner::phases {
                 } else {
                     controller.move_npc_to_floor("WoodFloor");
                 }
-                std::this_thread::sleep_for(std::chrono::milliseconds(500)); 
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
             },
             SCAN_RANGE, 0x4);
 
         if (floor_offsets.empty()) {
             LOG_ERR("Failed to find FloorMaterial offset");
-            return false;
         }
         offset_registry.add("Humanoid", "FloorMaterial", floor_offsets[0]);
 
