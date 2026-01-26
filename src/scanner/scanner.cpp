@@ -29,6 +29,7 @@
 #include "phases/value.hpp"
 #include "phases/visual_engine.hpp"
 #include "phases/workspace.hpp"
+#include "phases/charactermesh.hpp"
 
 
 namespace scanner {
@@ -45,6 +46,7 @@ namespace scanner {
         registry.register_phase("Team", phases::team);
         registry.register_phase("BasePart", phases::base_part);
         registry.register_phase("Humanoid", phases::humanoid);
+        registry.register_phase("CharacterMesh", phases::characterMesh);
         registry.register_phase("Mesh", phases::mesh);
         registry.register_phase("Value", phases::value);
         registry.register_phase("SpecialMesh", phases::special_mesh);
