@@ -3,22 +3,22 @@
     "dumped_by": "Jonah's Roblox Dumper",
     "github": "https://github.com/nopjo/roblox-dumper",
     "contributors": ["@4hd8", "@fulore"],
-    "timestamp": "2026-01-22 10:03:50",
-    "roblox_version": "version-0f5223fb6e7e4955",
+    "timestamp": "2026-01-27 11:24:11",
+    "roblox_version": "version-f8734e043e1e40a2",
     "total_offsets": 226,
-    "duration_seconds": 128.83
+    "duration_seconds": 126.8
   },
   "offsets": {
     "VisualEngine": {
       "FakeToRealDataModel": 448,
-      "Pointer": 128444752,
+      "Pointer": 128448848,
       "RenderView": 2048,
       "ToFakeDataModel": 1792,
       "ViewMatrix": 384,
       "WindowDimensions": 1824
     },
     "RenderView": {
-      "InvalidateLighting": 3074
+      "InvalidateLighting": 328
     },
     "DataModel": {
       "ClientReplicator": 984,
@@ -218,7 +218,7 @@
       "Text": 4264,
       "TextBounds": 3968,
       "TextColor3": 4440,
-      "TextSize": 6288,
+      "TextSize": 3972,
       "TextStrokeColor3": 4452,
       "TextTransparency": 4492
     },
