@@ -2,8 +2,8 @@
 // Dumped By Jonah's Roblox Dumper | Discord: jonahw
 // Github Link: https://github.com/nopjo/roblox-dumper
 // Contributors: @4hd8, @fulore 
-// Dumped at: 2026-01-27 11:24:11
-// Roblox Version: version-f8734e043e1e40a2
+// Dumped at: 2026-01-29 20:05:59
+// Roblox Version: version-4464ba36ceea461e
 // Total offsets dumped: 226
 //================================================================
 
@@ -13,10 +13,10 @@
 namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t FakeToRealDataModel = 0x1C0;
-        inline constexpr uintptr_t Pointer = 0x7A7F950;
+        inline constexpr uintptr_t Pointer = 0x7AED020;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ToFakeDataModel = 0x700;
-        inline constexpr uintptr_t ViewMatrix = 0x180;
+        inline constexpr uintptr_t ViewMatrix = 0x120;
         inline constexpr uintptr_t WindowDimensions = 0x720;
     }
 
@@ -52,7 +52,7 @@ namespace offsets {
 
     namespace Workspace {
         inline constexpr uintptr_t Camera = 0x460;
-        inline constexpr uintptr_t Gravity = 0x9B8;
+        inline constexpr uintptr_t Gravity = 0x9C0;
     }
 
     namespace Players {
@@ -60,10 +60,10 @@ namespace offsets {
     }
 
     namespace Player {
-        inline constexpr uintptr_t Character = 0x370;
+        inline constexpr uintptr_t Character = 0x380;
         inline constexpr uintptr_t DisplayName = 0x130;
-        inline constexpr uintptr_t Team = 0x280;
-        inline constexpr uintptr_t UserId = 0x2A8;
+        inline constexpr uintptr_t Team = 0x290;
+        inline constexpr uintptr_t UserId = 0x2B8;
     }
 
     namespace Team {
@@ -214,52 +214,52 @@ namespace offsets {
         inline constexpr uintptr_t AbsolutePositionY = 0x114;
         inline constexpr uintptr_t AbsoluteSizeX = 0x118;
         inline constexpr uintptr_t AbsoluteSizeY = 0x11C;
-        inline constexpr uintptr_t AnchorPoint = 0x570;
-        inline constexpr uintptr_t BackgroundColor3 = 0x558;
-        inline constexpr uintptr_t BackgroundTransparency = 0x57C;
-        inline constexpr uintptr_t BorderColor3 = 0x564;
-        inline constexpr uintptr_t BorderSizePixel = 0x584;
-        inline constexpr uintptr_t LayoutOrder = 0x594;
-        inline constexpr uintptr_t Position = 0x528;
+        inline constexpr uintptr_t AnchorPoint = 0x560;
+        inline constexpr uintptr_t BackgroundColor3 = 0x548;
+        inline constexpr uintptr_t BackgroundTransparency = 0x56C;
+        inline constexpr uintptr_t BorderColor3 = 0x554;
+        inline constexpr uintptr_t BorderSizePixel = 0x574;
+        inline constexpr uintptr_t LayoutOrder = 0x584;
+        inline constexpr uintptr_t Position = 0x518;
         inline constexpr uintptr_t Rotation = 0x188;
-        inline constexpr uintptr_t Size = 0x548;
-        inline constexpr uintptr_t Visible = 0x5C1;
-        inline constexpr uintptr_t ZIndex = 0x5B8;
+        inline constexpr uintptr_t Size = 0x538;
+        inline constexpr uintptr_t Visible = 0x5B1;
+        inline constexpr uintptr_t ZIndex = 0x5A8;
     }
 
     namespace TextLabel {
-        inline constexpr uintptr_t ContentText = 0xAC8;
-        inline constexpr uintptr_t LineHeight = 0xB3C;
-        inline constexpr uintptr_t MaxVisibleGraphemes = 0xEFC;
-        inline constexpr uintptr_t Text = 0xE28;
-        inline constexpr uintptr_t TextBounds = 0xD00;
-        inline constexpr uintptr_t TextColor3 = 0xED8;
-        inline constexpr uintptr_t TextSize = 0xD04;
-        inline constexpr uintptr_t TextStrokeColor3 = 0xEE4;
-        inline constexpr uintptr_t TextStrokeTransparency = 0xF08;
-        inline constexpr uintptr_t TextTransparency = 0xF0C;
+        inline constexpr uintptr_t ContentText = 0xAA8;
+        inline constexpr uintptr_t LineHeight = 0xB1C;
+        inline constexpr uintptr_t MaxVisibleGraphemes = 0xEDC;
+        inline constexpr uintptr_t Text = 0xE08;
+        inline constexpr uintptr_t TextBounds = 0xCE0;
+        inline constexpr uintptr_t TextColor3 = 0xEB8;
+        inline constexpr uintptr_t TextSize = 0xCE4;
+        inline constexpr uintptr_t TextStrokeColor3 = 0xEC4;
+        inline constexpr uintptr_t TextStrokeTransparency = 0xEE8;
+        inline constexpr uintptr_t TextTransparency = 0xEEC;
     }
 
     namespace TextButton {
-        inline constexpr uintptr_t ContentText = 0xD48;
-        inline constexpr uintptr_t LineHeight = 0xDBC;
-        inline constexpr uintptr_t Text = 0x10A8;
-        inline constexpr uintptr_t TextBounds = 0xF80;
-        inline constexpr uintptr_t TextColor3 = 0x1158;
-        inline constexpr uintptr_t TextSize = 0xF84;
-        inline constexpr uintptr_t TextStrokeColor3 = 0x1164;
-        inline constexpr uintptr_t TextTransparency = 0x118C;
+        inline constexpr uintptr_t ContentText = 0xD28;
+        inline constexpr uintptr_t LineHeight = 0xD9C;
+        inline constexpr uintptr_t Text = 0x1088;
+        inline constexpr uintptr_t TextBounds = 0xF60;
+        inline constexpr uintptr_t TextColor3 = 0x1138;
+        inline constexpr uintptr_t TextSize = 0xF64;
+        inline constexpr uintptr_t TextStrokeColor3 = 0x1144;
+        inline constexpr uintptr_t TextTransparency = 0x116C;
     }
 
     namespace TextBox {
-        inline constexpr uintptr_t ContentText = 0xAC0;
-        inline constexpr uintptr_t LineHeight = 0xB34;
-        inline constexpr uintptr_t Text = 0xE20;
-        inline constexpr uintptr_t TextBounds = 0xCF8;
-        inline constexpr uintptr_t TextColor3 = 0xEFC;
-        inline constexpr uintptr_t TextSize = 0xCFC;
-        inline constexpr uintptr_t TextStrokeColor3 = 0xF08;
-        inline constexpr uintptr_t TextTransparency = 0xF40;
+        inline constexpr uintptr_t ContentText = 0xAA0;
+        inline constexpr uintptr_t LineHeight = 0xB14;
+        inline constexpr uintptr_t Text = 0xE00;
+        inline constexpr uintptr_t TextBounds = 0xCD8;
+        inline constexpr uintptr_t TextColor3 = 0xEDC;
+        inline constexpr uintptr_t TextSize = 0xCDC;
+        inline constexpr uintptr_t TextStrokeColor3 = 0xEE8;
+        inline constexpr uintptr_t TextTransparency = 0xF20;
     }
 
     namespace Tool {
