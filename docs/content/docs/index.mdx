@@ -1,31 +1,32 @@
 ---
 title: Roblox Dumper
-description: A patternless external Roblox Dumper
+description: A patternless external Roblox memory dumper that automatically extracts game offsets
 ---
 
-Welcome to the documentation! This tool dumps offsets for Roblox.
+# External Roblox Dumper
 
-## What is Roblox Dumper?
+## Github
 
-Roblox Dumper is a tool that connects to a running Roblox game and automatically scans memory to find offsets for various classes and properties. It generates an `offsets.hpp` file that you can use in your own external/projects.
+- [Main Repository](https://github.com/nopjo/roblox-dumper)
+- [Releases](https://github.com/nopjo/roblox-dumper/releases)
 
-## Quick Start
+## What Is Roblox Dumper?
 
-1. [Install the dumper](/install) - Download the tool
-2. [Configure your game](/configuration) - Set up game IDs and user information
-3. [Run the tool](/running-the-tool) - Step-by-step guide to using the dumper
-4. [View everything dumped](/everything-dumped) - See what gets extracted
+Roblox Dumper is a tool that connects to a running Roblox game and automatically scans memory to find offsets for various classes and properties. It generates offset files in multiple formats that you can use in your own external tools and projects.
 
-## Features
+**Note:** As of version 2.0, the dumper has been completely rewritten with significant changes to the codebase. The Lua game has been made private for the time being.
 
-- Support for custom games that uploaded the rblx file from the github or the published dumper game
-- Generates ready-to-use C++ header files
-- Dumps Instance, Part, Player, Camera, and many more classes
+## Pre-Generated Offset Files
 
-## Want More Offsets?
+Pre-generated offset files are available and updated regularly:
 
-Need additional offsets that aren't currently dumped? Reach out on Discord: **jonahw** - I'll try to support new offsets for the community.
+- **C++ Header**: [offsets.h](https://dumper.jonah.cool/offsets.h)
+- **Python**: [offsets.py](https://dumper.jonah.cool/offsets.py)
+- **C#**: [offsets.cs](https://dumper.jonah.cool/offsets.cs)
+- **JSON**: [offsets.json](https://dumper.jonah.cool/offsets.json)
 
-If you'd like to implement it yourself, feel free to create a pull request on GitHub!
+## Need More Offsets?
 
-Get started by checking out the [Installation Guide](/install)!
+Need additional offsets that aren't currently being dumped? Reach out on Discord and I'll try to add them.
+
+**Discord**: jonahw / 315412038455132160

@@ -34,6 +34,6 @@ echo cloudflared installed successfully
 
 :run_tunnel
 echo Starting tunnel...
-cloudflared tunnel --url http://localhost:8000
+cloudflared tunnel --url http://localhost:8080
 
 pause
