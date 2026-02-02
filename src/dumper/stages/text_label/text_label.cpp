@@ -19,21 +19,11 @@ namespace dumper::stages::text_label {
         -> std::optional<std::vector<TextLabelData>> {
         std::vector<TextLabelData> text_label_data;
 
-        const auto replicated_storage = dumper::g_data_model.find_first_child("ReplicatedStorage");
-        if (!replicated_storage->is_valid()) {
-            spdlog::error("Failed to find ReplicatedStorage");
-            return std::nullopt;
-        }
-
-        const auto test_frames_gui = replicated_storage->find_first_child("TestFramesGui");
-        if (!test_frames_gui->is_valid()) {
-            spdlog::error("Failed to find TestFramesGui in ReplicatedStorage");
-            return std::nullopt;
-        }
-
-        const auto text_labels_folder = test_frames_gui->find_first_child("TextLabels");
+        const auto text_labels_folder = dumper::g_data_model.find_first_child("ReplicatedStorage")
+                                            ->find_first_child("TestFramesGui")
+                                            ->find_first_child("TextLabels");
         if (!text_labels_folder->is_valid()) {
-            spdlog::error("Failed to find TextLabels folder in TestFramesGui");
+            spdlog::error("Failed to find TextLabels Folder");
             return std::nullopt;
         }
 
@@ -112,16 +102,6 @@ namespace dumper::stages::text_label {
             return false;
         }
         dumper::g_dumper.add_offset("TextLabel", "RichText", *rich_text_offset);
-
-        const auto text_bounds_offset = process::helpers::find_vec_offset<glm::vec2>(
-            text_label_addrs[0],
-            glm::vec2((*text_labels)[0].props.text_bounds_x, (*text_labels)[0].props.text_bounds_y),
-            0x1000, 0.01f, 0x4);
-        if (!text_bounds_offset) {
-            spdlog::error("Failed to find TextBounds offset");
-            return false;
-        }
-        dumper::g_dumper.add_offset("TextLabel", "TextBounds", *text_bounds_offset);
 
         const auto text_color_offset = process::helpers::find_vec_offset<glm::vec3>(
             text_label_addrs[0],

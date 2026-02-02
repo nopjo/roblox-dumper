@@ -19,19 +19,9 @@ namespace dumper::stages::gui_object {
         -> std::optional<std::vector<FrameData>> {
         std::vector<FrameData> frame_data;
 
-        const auto starter_gui = dumper::g_data_model.find_first_child("ReplicatedStorage");
-        if (!starter_gui->is_valid()) {
-            spdlog::error("Failed to find ReplicatedStorage");
-            return std::nullopt;
-        }
-
-        const auto test_frames_gui = starter_gui->find_first_child("TestFramesGui");
-        if (!test_frames_gui->is_valid()) {
-            spdlog::error("Failed to find TestFramesGui in StarterGui");
-            return std::nullopt;
-        }
-
-        const auto frames_folder = test_frames_gui->find_first_child("Frames");
+        const auto frames_folder = dumper::g_data_model.find_first_child("ReplicatedStorage")
+                                       ->find_first_child("TestFramesGui")
+                                       ->find_first_child("Frames");
         if (!frames_folder->is_valid()) {
             spdlog::error("Failed to find Frames folder in TestFramesGui");
             return std::nullopt;

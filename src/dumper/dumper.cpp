@@ -15,6 +15,7 @@
 #include "stages/mouse_service/mouse_service.h"
 #include "stages/player/player.h"
 #include "stages/proximity_prompt/proximity_prompt.h"
+#include "stages/script/script.h"
 #include "stages/sky/sky.h"
 #include "stages/special_mesh/special_mesh.h"
 #include "stages/team/team.h"
@@ -83,6 +84,7 @@ namespace dumper {
         threads.emplace_back([]() { stages::proximity_prompt::dump(); });
         threads.emplace_back([]() { stages::text_label::dump(); });
         threads.emplace_back([]() { stages::text_button::dump(); });
+        threads.emplace_back([]() { stages::script::dump(); });
 
         for (auto& thread : threads) {
             thread.join();

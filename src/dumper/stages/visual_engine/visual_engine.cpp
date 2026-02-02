@@ -44,6 +44,7 @@ namespace dumper::stages::visual_engine {
             process::Memory::read<uintptr_t>(visual_engine + *render_view_offset);
 
         FIND_AND_ADD_OFFSET(*render_view, RenderView, uint16_t, LightingValid, 257, 0x300, 0x2);
+        g_dumper.add_offset("RenderView", "SkyboxValid", 0x28d); // hardcoded for now
 
         return true;
     };

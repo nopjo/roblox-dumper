@@ -19,19 +19,9 @@ namespace dumper::stages::gui_base2d {
             return false;
         }
 
-        const auto replicated_storage = dumper::g_data_model.find_first_child("ReplicatedStorage");
-        if (!replicated_storage->is_valid()) {
-            spdlog::error("Failed to find ReplicatedStorage");
-            return false;
-        }
-
-        const auto test_frames_gui = replicated_storage->find_first_child("TestFramesGui");
-        if (!test_frames_gui->is_valid()) {
-            spdlog::error("Failed to find TestFramesGui");
-            return false;
-        }
-
-        const auto frames_folder = test_frames_gui->find_first_child("Frames");
+        const auto frames_folder = dumper::g_data_model.find_first_child("ReplicatedStorage")
+                                       ->find_first_child("TestFramesGui")
+                                       ->find_first_child("Frames");
         if (!frames_folder->is_valid()) {
             spdlog::error("Failed to find Frames folder");
             return false;

@@ -19,19 +19,9 @@ namespace dumper::stages::text_button {
         -> std::optional<std::vector<TextButtonData>> {
         std::vector<TextButtonData> text_button_data;
 
-        const auto replicated_storage = dumper::g_data_model.find_first_child("ReplicatedStorage");
-        if (!replicated_storage->is_valid()) {
-            spdlog::error("Failed to find ReplicatedStorage");
-            return std::nullopt;
-        }
-
-        const auto test_frames_gui = replicated_storage->find_first_child("TestFramesGui");
-        if (!test_frames_gui->is_valid()) {
-            spdlog::error("Failed to find TestFramesGui in ReplicatedStorage");
-            return std::nullopt;
-        }
-
-        const auto text_buttons_folder = test_frames_gui->find_first_child("TextButtons");
+        const auto text_buttons_folder = dumper::g_data_model.find_first_child("ReplicatedStorage")
+                                             ->find_first_child("TestFramesGui")
+                                             ->find_first_child("TextButtons");
         if (!text_buttons_folder->is_valid()) {
             spdlog::error("Failed to find TextButtons folder in TestFramesGui");
             return std::nullopt;
@@ -113,17 +103,6 @@ namespace dumper::stages::text_button {
             return false;
         }
         dumper::g_dumper.add_offset("TextButton", "RichText", *rich_text_offset);
-
-        const auto text_bounds_offset = process::helpers::find_vec_offset<glm::vec2>(
-            text_button_addrs[0],
-            glm::vec2((*text_buttons)[0].props.text_bounds_x,
-                      (*text_buttons)[0].props.text_bounds_y),
-            0x1200, 0.01f, 0x4);
-        if (!text_bounds_offset) {
-            spdlog::error("Failed to find TextBounds offset");
-            return false;
-        }
-        dumper::g_dumper.add_offset("TextButton", "TextBounds", *text_bounds_offset);
 
         const auto text_color_offset = process::helpers::find_vec_offset<glm::vec3>(
             text_button_addrs[0],
