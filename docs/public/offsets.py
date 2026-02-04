@@ -1,12 +1,12 @@
-# Dumped With: roblox-dumper 2.1
+# Dumped With: roblox-dumper 2.4
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-db4634f0e27d4d36
-# Time Taken: 4255 ms (4.255000 seconds)
-# Total Offsets: 252
+# Roblox Version: version-3e7a57d7e53b4881
+# Time Taken: 4017 ms (4.017000 seconds)
+# Total Offsets: 250
 
 class Offsets:
-    ROBLOX_VERSION = "version-db4634f0e27d4d36"
+    ROBLOX_VERSION = "version-3e7a57d7e53b4881"
 
     class Atmosphere:
         Color = 208
@@ -59,7 +59,7 @@ class Offsets:
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 134303368
+        Pointer = 130504488
         RealDataModel = 448
 
     class GuiBase2D:
@@ -146,7 +146,7 @@ class Offsets:
 
     class LocalScript:
         Bytecode = 424
-        Hash = 232
+        Hash = 208
 
     class MaterialColors:
         Asphalt = 48
@@ -177,7 +177,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 352
+        Hash = 208
 
     class MouseService:
         InputObject = 272
@@ -270,8 +270,7 @@ class Offsets:
         Text = 3368
         TextColor3 = 4408
         TextDirection = 3656
-        TextFits = 48
-        TextScaled = 2345
+        TextScaled = 3480
         TextSize = 4452
         TextStrokeColor3 = 4420
         TextStrokeTransparency = 4456
@@ -291,7 +290,6 @@ class Offsets:
         Text = 2728
         TextColor3 = 3768
         TextDirection = 3016
-        TextFits = 3285
         TextScaled = 2840
         TextSize = 3812
         TextStrokeColor3 = 3780
@@ -320,13 +318,13 @@ class Offsets:
     class VisualEngine:
         Dimensions = 1824
         FakeDataModel = 1792
-        Pointer = 128919328
+        Pointer = 125167824
         RenderView = 2048
         ViewMatrix = 288
 
     class Workspace:
         CurrentCamera = 1120
-        ReadOnlyGravity = 2496
+        ReadOnlyGravity = 2368
         World = 984
 
     class World:

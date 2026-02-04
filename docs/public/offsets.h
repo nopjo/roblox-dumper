@@ -1,10 +1,10 @@
 /*
- * Dumped With: roblox-dumper 2.1
+ * Dumped With: roblox-dumper 2.4
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-db4634f0e27d4d36
- * Time Taken: 4255 ms (4.255000 seconds)
- * Total Offsets: 252
+ * Roblox Version: version-3e7a57d7e53b4881
+ * Time Taken: 4017 ms (4.017000 seconds)
+ * Total Offsets: 250
  */
 
 #pragma once
@@ -12,7 +12,7 @@
 
 // clang-format off
 namespace offsets {
-    inline constexpr const char* roblox_version = "version-db4634f0e27d4d36";
+    inline constexpr const char* roblox_version = "version-3e7a57d7e53b4881";
 
     namespace Atmosphere {
         inline constexpr uintptr_t Color = 0xD0;
@@ -72,7 +72,7 @@ namespace offsets {
     }
 
     namespace FakeDataModel {
-        inline constexpr uintptr_t Pointer = 0x8014E88;
+        inline constexpr uintptr_t Pointer = 0x7C75728;
         inline constexpr uintptr_t RealDataModel = 0x1C0;
     }
 
@@ -166,7 +166,7 @@ namespace offsets {
 
     namespace LocalScript {
         inline constexpr uintptr_t Bytecode = 0x1A8;
-        inline constexpr uintptr_t Hash = 0xE8;
+        inline constexpr uintptr_t Hash = 0xD0;
     }
 
     namespace MaterialColors {
@@ -200,7 +200,7 @@ namespace offsets {
 
     namespace ModuleScript {
         inline constexpr uintptr_t Bytecode = 0x150;
-        inline constexpr uintptr_t Hash = 0x160;
+        inline constexpr uintptr_t Hash = 0xD0;
     }
 
     namespace MouseService {
@@ -305,8 +305,7 @@ namespace offsets {
         inline constexpr uintptr_t Text = 0xD28;
         inline constexpr uintptr_t TextColor3 = 0x1138;
         inline constexpr uintptr_t TextDirection = 0xE48;
-        inline constexpr uintptr_t TextFits = 0x30;
-        inline constexpr uintptr_t TextScaled = 0x929;
+        inline constexpr uintptr_t TextScaled = 0xD98;
         inline constexpr uintptr_t TextSize = 0x1164;
         inline constexpr uintptr_t TextStrokeColor3 = 0x1144;
         inline constexpr uintptr_t TextStrokeTransparency = 0x1168;
@@ -327,7 +326,6 @@ namespace offsets {
         inline constexpr uintptr_t Text = 0xAA8;
         inline constexpr uintptr_t TextColor3 = 0xEB8;
         inline constexpr uintptr_t TextDirection = 0xBC8;
-        inline constexpr uintptr_t TextFits = 0xCD5;
         inline constexpr uintptr_t TextScaled = 0xB18;
         inline constexpr uintptr_t TextSize = 0xEE4;
         inline constexpr uintptr_t TextStrokeColor3 = 0xEC4;
@@ -359,14 +357,14 @@ namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t Dimensions = 0x720;
         inline constexpr uintptr_t FakeDataModel = 0x700;
-        inline constexpr uintptr_t Pointer = 0x7AF2720;
+        inline constexpr uintptr_t Pointer = 0x775E8D0;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ViewMatrix = 0x120;
     }
 
     namespace Workspace {
         inline constexpr uintptr_t CurrentCamera = 0x460;
-        inline constexpr uintptr_t ReadOnlyGravity = 0x9C0;
+        inline constexpr uintptr_t ReadOnlyGravity = 0x940;
         inline constexpr uintptr_t World = 0x3D8;
     }
 

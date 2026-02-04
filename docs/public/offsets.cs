@@ -1,10 +1,10 @@
 /*
- * Dumped With: roblox-dumper 2.1
+ * Dumped With: roblox-dumper 2.4
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-db4634f0e27d4d36
- * Time Taken: 4255 ms (4.255000 seconds)
- * Total Offsets: 252
+ * Roblox Version: version-3e7a57d7e53b4881
+ * Time Taken: 4017 ms (4.017000 seconds)
+ * Total Offsets: 250
  */
 
 using System;
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-db4634f0e27d4d36";
+        public const string RobloxVersion = "version-3e7a57d7e53b4881";
     }
 
     public static class Atmosphere
@@ -82,7 +82,7 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x8014E88;
+        public const ulong Pointer = 0x7C75728;
         public const ulong RealDataModel = 0x1C0;
     }
 
@@ -183,7 +183,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0xD0;
     }
 
     public static class MaterialColors
@@ -220,7 +220,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0x160;
+        public const ulong Hash = 0xD0;
     }
 
     public static class MouseService
@@ -337,8 +337,7 @@ namespace RobloxOffsets
         public const ulong Text = 0xD28;
         public const ulong TextColor3 = 0x1138;
         public const ulong TextDirection = 0xE48;
-        public const ulong TextFits = 0x30;
-        public const ulong TextScaled = 0x929;
+        public const ulong TextScaled = 0xD98;
         public const ulong TextSize = 0x1164;
         public const ulong TextStrokeColor3 = 0x1144;
         public const ulong TextStrokeTransparency = 0x1168;
@@ -360,7 +359,6 @@ namespace RobloxOffsets
         public const ulong Text = 0xAA8;
         public const ulong TextColor3 = 0xEB8;
         public const ulong TextDirection = 0xBC8;
-        public const ulong TextFits = 0xCD5;
         public const ulong TextScaled = 0xB18;
         public const ulong TextSize = 0xEE4;
         public const ulong TextStrokeColor3 = 0xEC4;
@@ -395,7 +393,7 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0x720;
         public const ulong FakeDataModel = 0x700;
-        public const ulong Pointer = 0x7AF2720;
+        public const ulong Pointer = 0x775E8D0;
         public const ulong RenderView = 0x800;
         public const ulong ViewMatrix = 0x120;
     }
@@ -403,7 +401,7 @@ namespace RobloxOffsets
     public static class Workspace
     {
         public const ulong CurrentCamera = 0x460;
-        public const ulong ReadOnlyGravity = 0x9C0;
+        public const ulong ReadOnlyGravity = 0x940;
         public const ulong World = 0x3D8;
     }
 
