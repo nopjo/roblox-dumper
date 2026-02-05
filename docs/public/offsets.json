@@ -3,7 +3,7 @@
     "dumper": "roblox-dumper 2.4",
     "author": "Jonah (jonahw on Discord)",
     "github": "https://github.com/nopjo/roblox-dumper",
-    "roblox_version": "version-4464ba36ceea461e",
+    "roblox_version": "version-80c7b8e578f241ff",
     "total_offsets": 250
   },
   "offsets": {
@@ -58,7 +58,7 @@
       "Workspace": 376
     },
     "FakeDataModel": {
-      "Pointer": 134281080,
+      "Pointer": 130504488,
       "RealDataModel": 448
     },
     "GuiBase2D": {
@@ -106,7 +106,7 @@
       "MaxSlopeAngle": 440,
       "NameDisplayDistance": 444,
       "NameOcclusion": 448,
-      "RequiresNeck": 474,
+      "RequiresNeck": 480,
       "RigType": 456,
       "Sit": 481,
       "TargetPoint": 356,
@@ -176,7 +176,7 @@
     },
     "ModuleScript": {
       "Bytecode": 336,
-      "Hash": 232
+      "Hash": 352
     },
     "MouseService": {
       "InputObject": 272
@@ -317,13 +317,13 @@
     "VisualEngine": {
       "Dimensions": 1824,
       "FakeDataModel": 1792,
-      "Pointer": 128897056,
+      "Pointer": 125167824,
       "RenderView": 2048,
       "ViewMatrix": 288
     },
     "Workspace": {
       "CurrentCamera": 1120,
-      "ReadOnlyGravity": 2496,
+      "ReadOnlyGravity": 2368,
       "World": 984
     },
     "World": {
