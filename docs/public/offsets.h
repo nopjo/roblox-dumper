@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.4
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-3e7a57d7e53b4881
- * Time Taken: 4017 ms (4.017000 seconds)
+ * Roblox Version: version-4464ba36ceea461e
+ * Time Taken: 4034 ms (4.034000 seconds)
  * Total Offsets: 250
  */
 
@@ -12,7 +12,7 @@
 
 // clang-format off
 namespace offsets {
-    inline constexpr const char* roblox_version = "version-3e7a57d7e53b4881";
+    inline constexpr const char* roblox_version = "version-4464ba36ceea461e";
 
     namespace Atmosphere {
         inline constexpr uintptr_t Color = 0xD0;
@@ -72,7 +72,7 @@ namespace offsets {
     }
 
     namespace FakeDataModel {
-        inline constexpr uintptr_t Pointer = 0x7C75728;
+        inline constexpr uintptr_t Pointer = 0x800F778;
         inline constexpr uintptr_t RealDataModel = 0x1C0;
     }
 
@@ -123,7 +123,7 @@ namespace offsets {
         inline constexpr uintptr_t MaxSlopeAngle = 0x1B8;
         inline constexpr uintptr_t NameDisplayDistance = 0x1BC;
         inline constexpr uintptr_t NameOcclusion = 0x1C0;
-        inline constexpr uintptr_t RequiresNeck = 0x1E0;
+        inline constexpr uintptr_t RequiresNeck = 0x1DA;
         inline constexpr uintptr_t RigType = 0x1C8;
         inline constexpr uintptr_t Sit = 0x1E1;
         inline constexpr uintptr_t TargetPoint = 0x164;
@@ -166,7 +166,7 @@ namespace offsets {
 
     namespace LocalScript {
         inline constexpr uintptr_t Bytecode = 0x1A8;
-        inline constexpr uintptr_t Hash = 0xD0;
+        inline constexpr uintptr_t Hash = 0xE8;
     }
 
     namespace MaterialColors {
@@ -200,7 +200,7 @@ namespace offsets {
 
     namespace ModuleScript {
         inline constexpr uintptr_t Bytecode = 0x150;
-        inline constexpr uintptr_t Hash = 0xD0;
+        inline constexpr uintptr_t Hash = 0xE8;
     }
 
     namespace MouseService {
@@ -357,14 +357,14 @@ namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t Dimensions = 0x720;
         inline constexpr uintptr_t FakeDataModel = 0x700;
-        inline constexpr uintptr_t Pointer = 0x775E8D0;
+        inline constexpr uintptr_t Pointer = 0x7AED020;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ViewMatrix = 0x120;
     }
 
     namespace Workspace {
         inline constexpr uintptr_t CurrentCamera = 0x460;
-        inline constexpr uintptr_t ReadOnlyGravity = 0x940;
+        inline constexpr uintptr_t ReadOnlyGravity = 0x9C0;
         inline constexpr uintptr_t World = 0x3D8;
     }
 

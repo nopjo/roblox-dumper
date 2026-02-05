@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.4
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-3e7a57d7e53b4881
- * Time Taken: 4017 ms (4.017000 seconds)
+ * Roblox Version: version-4464ba36ceea461e
+ * Time Taken: 4034 ms (4.034000 seconds)
  * Total Offsets: 250
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-3e7a57d7e53b4881";
+        public const string RobloxVersion = "version-4464ba36ceea461e";
     }
 
     public static class Atmosphere
@@ -82,7 +82,7 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7C75728;
+        public const ulong Pointer = 0x800F778;
         public const ulong RealDataModel = 0x1C0;
     }
 
@@ -136,7 +136,7 @@ namespace RobloxOffsets
         public const ulong MaxSlopeAngle = 0x1B8;
         public const ulong NameDisplayDistance = 0x1BC;
         public const ulong NameOcclusion = 0x1C0;
-        public const ulong RequiresNeck = 0x1E0;
+        public const ulong RequiresNeck = 0x1DA;
         public const ulong RigType = 0x1C8;
         public const ulong Sit = 0x1E1;
         public const ulong TargetPoint = 0x164;
@@ -183,7 +183,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xD0;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MaterialColors
@@ -220,7 +220,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xD0;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MouseService
@@ -393,7 +393,7 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0x720;
         public const ulong FakeDataModel = 0x700;
-        public const ulong Pointer = 0x775E8D0;
+        public const ulong Pointer = 0x7AED020;
         public const ulong RenderView = 0x800;
         public const ulong ViewMatrix = 0x120;
     }
@@ -401,7 +401,7 @@ namespace RobloxOffsets
     public static class Workspace
     {
         public const ulong CurrentCamera = 0x460;
-        public const ulong ReadOnlyGravity = 0x940;
+        public const ulong ReadOnlyGravity = 0x9C0;
         public const ulong World = 0x3D8;
     }
 
