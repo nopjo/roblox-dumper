@@ -28,7 +28,8 @@ namespace dumper::stages::data_model {
         }
 
         dumper::g_dumper.add_offset("FakeDataModel", "RealDataModel", *real_data_model);
-
+        dumper::g_dumper.add_offset("VisualEngine", "RealDataModel", *real_data_model);
+        
         const auto data_model =
             process::Memory::read<uintptr_t>(*fake_data_model + *real_data_model);
 

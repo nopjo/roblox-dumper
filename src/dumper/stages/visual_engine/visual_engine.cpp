@@ -71,6 +71,7 @@ namespace dumper::stages::visual_engine {
             return true;
         };
 
+        std::vector<size_t> offsets; 
         for (size_t offset = 0; offset < 0x2000; offset += 0x10) {
             float mat[16];
             bool valid_read = true;
@@ -88,13 +89,19 @@ namespace dumper::stages::visual_engine {
                 continue;
 
             if (is_valid_view_matrix(mat)) {
-                g_dumper.add_offset("VisualEngine", "ViewMatrix", offset);
-                return true;
+                offsets.push_back(offset);
             }
         }
 
-        spdlog::error("Failed to find ViewMatrix");
-        return false;
+        if (offsets.empty()) {
+            spdlog::error("Failed to find ViewMatrix");
+            return false;
+        }
+
+        g_dumper.add_offset("VisualEngine", "ViewMatrix", offsets.front());
+        g_dumper.add_offset("VisualEngine", "ViewMatrix1", offsets.back()); 
+        
+        return true;
     }
 
     auto dump() -> bool {
