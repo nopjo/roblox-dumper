@@ -31,6 +31,16 @@ namespace dumper::stages::workspace {
         g_dumper.add_offset("Workspace", "World", world);
         g_dumper.add_offset("World", "Gravity", gravity);
 
+        const auto result2 = process::helpers::find_offset_in_pointer<float>(
+            dumper::g_workspace->get_address(), 240.0f, 0x400, 0x1000, 0x8, 0x4);
+
+        if (!result2) {
+            spdlog::error("Failed to dump World and World Tickrate in Workspace");
+            return false;
+        }
+
+        g_dumper.add_offset("World", "Tickrate", result2->second);
+
         return true;
     }
 } // namespace dumper::stages::workspace
