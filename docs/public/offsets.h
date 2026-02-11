@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.4
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-80c7b8e578f241ff
- * Time Taken: 4060 ms (4.060000 seconds)
+ * Roblox Version: version-bd08027bb04e4045
+ * Time Taken: 3991 ms (3.991000 seconds)
  * Total Offsets: 250
  */
 
@@ -12,7 +12,7 @@
 
 // clang-format off
 namespace offsets {
-    inline constexpr const char* roblox_version = "version-80c7b8e578f241ff";
+    inline constexpr const char* roblox_version = "version-bd08027bb04e4045";
 
     namespace Atmosphere {
         inline constexpr uintptr_t Color = 0xD0;
@@ -72,7 +72,7 @@ namespace offsets {
     }
 
     namespace FakeDataModel {
-        inline constexpr uintptr_t Pointer = 0x7C75728;
+        inline constexpr uintptr_t Pointer = 0x7D909F8;
         inline constexpr uintptr_t RealDataModel = 0x1C0;
     }
 
@@ -200,7 +200,7 @@ namespace offsets {
 
     namespace ModuleScript {
         inline constexpr uintptr_t Bytecode = 0x150;
-        inline constexpr uintptr_t Hash = 0x160;
+        inline constexpr uintptr_t Hash = 0xE8;
     }
 
     namespace MouseService {
@@ -357,14 +357,14 @@ namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t Dimensions = 0x720;
         inline constexpr uintptr_t FakeDataModel = 0x700;
-        inline constexpr uintptr_t Pointer = 0x775E8D0;
+        inline constexpr uintptr_t Pointer = 0x79449E0;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ViewMatrix = 0x120;
     }
 
     namespace Workspace {
-        inline constexpr uintptr_t CurrentCamera = 0x460;
-        inline constexpr uintptr_t ReadOnlyGravity = 0x940;
+        inline constexpr uintptr_t CurrentCamera = 0x4A0;
+        inline constexpr uintptr_t ReadOnlyGravity = 0xA28;
         inline constexpr uintptr_t World = 0x3D8;
     }
 

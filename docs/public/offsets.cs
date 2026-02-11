@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.4
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-80c7b8e578f241ff
- * Time Taken: 4060 ms (4.060000 seconds)
+ * Roblox Version: version-bd08027bb04e4045
+ * Time Taken: 3991 ms (3.991000 seconds)
  * Total Offsets: 250
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-80c7b8e578f241ff";
+        public const string RobloxVersion = "version-bd08027bb04e4045";
     }
 
     public static class Atmosphere
@@ -82,7 +82,7 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7C75728;
+        public const ulong Pointer = 0x7D909F8;
         public const ulong RealDataModel = 0x1C0;
     }
 
@@ -220,7 +220,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0x160;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MouseService
@@ -393,15 +393,15 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0x720;
         public const ulong FakeDataModel = 0x700;
-        public const ulong Pointer = 0x775E8D0;
+        public const ulong Pointer = 0x79449E0;
         public const ulong RenderView = 0x800;
         public const ulong ViewMatrix = 0x120;
     }
 
     public static class Workspace
     {
-        public const ulong CurrentCamera = 0x460;
-        public const ulong ReadOnlyGravity = 0x940;
+        public const ulong CurrentCamera = 0x4A0;
+        public const ulong ReadOnlyGravity = 0xA28;
         public const ulong World = 0x3D8;
     }
 

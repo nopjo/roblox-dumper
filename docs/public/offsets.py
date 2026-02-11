@@ -1,12 +1,12 @@
 # Dumped With: roblox-dumper 2.4
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-80c7b8e578f241ff
-# Time Taken: 4060 ms (4.060000 seconds)
+# Roblox Version: version-bd08027bb04e4045
+# Time Taken: 3991 ms (3.991000 seconds)
 # Total Offsets: 250
 
 class Offsets:
-    ROBLOX_VERSION = "version-80c7b8e578f241ff"
+    ROBLOX_VERSION = "version-bd08027bb04e4045"
 
     class Atmosphere:
         Color = 208
@@ -59,7 +59,7 @@ class Offsets:
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 130504488
+        Pointer = 131664376
         RealDataModel = 448
 
     class GuiBase2D:
@@ -177,7 +177,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 352
+        Hash = 232
 
     class MouseService:
         InputObject = 272
@@ -318,13 +318,13 @@ class Offsets:
     class VisualEngine:
         Dimensions = 1824
         FakeDataModel = 1792
-        Pointer = 125167824
+        Pointer = 127158752
         RenderView = 2048
         ViewMatrix = 288
 
     class Workspace:
-        CurrentCamera = 1120
-        ReadOnlyGravity = 2368
+        CurrentCamera = 1184
+        ReadOnlyGravity = 2600
         World = 984
 
     class World:
