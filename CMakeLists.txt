@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project("roblox-dumper" VERSION 2.4 LANGUAGES CXX)
+project("roblox-dumper" VERSION 2.5 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
