@@ -1,12 +1,12 @@
-# Dumped With: roblox-dumper 2.4
+# Dumped With: roblox-dumper 2.5
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-bd08027bb04e4045
-# Time Taken: 3991 ms (3.991000 seconds)
+# Roblox Version: version-df7528517c6849f7
+# Time Taken: 4250 ms (4.250000 seconds)
 # Total Offsets: 250
 
 class Offsets:
-    ROBLOX_VERSION = "version-bd08027bb04e4045"
+    ROBLOX_VERSION = "version-df7528517c6849f7"
 
     class Atmosphere:
         Color = 208
@@ -44,10 +44,10 @@ class Offsets:
         ViewportSize = 744
 
     class CharacterMesh:
-        BaseTextureId = 208
-        BodyPart = 232
-        MeshId = 216
-        OverlayTextureId = 224
+        BaseTextureId = 224
+        BodyPart = 352
+        MeshId = 272
+        OverlayTextureId = 320
 
     class DataModel:
         CreatorId = 392
@@ -59,7 +59,7 @@ class Offsets:
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 131664376
+        Pointer = 132339800
         RealDataModel = 448
 
     class GuiBase2D:
@@ -86,7 +86,7 @@ class Offsets:
         SelectionOrder = 1440
         Size = 1336
         SizeConstraint = 1444
-        Visible = 1457
+        Visible = 13
         ZIndex = 1448
 
     class Humanoid:
@@ -108,7 +108,7 @@ class Offsets:
         NameDisplayDistance = 444
         NameOcclusion = 448
         RequiresNeck = 480
-        RigType = 456
+        RigType = 69
         Sit = 481
         TargetPoint = 356
         UseJumpPower = 483
@@ -146,7 +146,7 @@ class Offsets:
 
     class LocalScript:
         Bytecode = 424
-        Hash = 232
+        Hash = 208
 
     class MaterialColors:
         Asphalt = 48
@@ -177,7 +177,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 232
+        Hash = 208
 
     class MouseService:
         InputObject = 272
@@ -318,7 +318,7 @@ class Offsets:
     class VisualEngine:
         Dimensions = 1824
         FakeDataModel = 1792
-        Pointer = 127158752
+        Pointer = 127833192
         RenderView = 2048
         ViewMatrix = 288
 

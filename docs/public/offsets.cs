@@ -1,9 +1,9 @@
 /*
- * Dumped With: roblox-dumper 2.4
+ * Dumped With: roblox-dumper 2.5
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-bd08027bb04e4045
- * Time Taken: 3991 ms (3.991000 seconds)
+ * Roblox Version: version-df7528517c6849f7
+ * Time Taken: 4250 ms (4.250000 seconds)
  * Total Offsets: 250
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-bd08027bb04e4045";
+        public const string RobloxVersion = "version-df7528517c6849f7";
     }
 
     public static class Atmosphere
@@ -63,10 +63,10 @@ namespace RobloxOffsets
 
     public static class CharacterMesh
     {
-        public const ulong BaseTextureId = 0xD0;
-        public const ulong BodyPart = 0xE8;
-        public const ulong MeshId = 0xD8;
-        public const ulong OverlayTextureId = 0xE0;
+        public const ulong BaseTextureId = 0xE0;
+        public const ulong BodyPart = 0x160;
+        public const ulong MeshId = 0x110;
+        public const ulong OverlayTextureId = 0x140;
     }
 
     public static class DataModel
@@ -82,7 +82,7 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7D909F8;
+        public const ulong Pointer = 0x7E35858;
         public const ulong RealDataModel = 0x1C0;
     }
 
@@ -113,7 +113,7 @@ namespace RobloxOffsets
         public const ulong SelectionOrder = 0x5A0;
         public const ulong Size = 0x538;
         public const ulong SizeConstraint = 0x5A4;
-        public const ulong Visible = 0x5B1;
+        public const ulong Visible = 0xD;
         public const ulong ZIndex = 0x5A8;
     }
 
@@ -137,7 +137,7 @@ namespace RobloxOffsets
         public const ulong NameDisplayDistance = 0x1BC;
         public const ulong NameOcclusion = 0x1C0;
         public const ulong RequiresNeck = 0x1E0;
-        public const ulong RigType = 0x1C8;
+        public const ulong RigType = 0x45;
         public const ulong Sit = 0x1E1;
         public const ulong TargetPoint = 0x164;
         public const ulong UseJumpPower = 0x1E3;
@@ -183,7 +183,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0xD0;
     }
 
     public static class MaterialColors
@@ -220,7 +220,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0xD0;
     }
 
     public static class MouseService
@@ -393,7 +393,7 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0x720;
         public const ulong FakeDataModel = 0x700;
-        public const ulong Pointer = 0x79449E0;
+        public const ulong Pointer = 0x79E9468;
         public const ulong RenderView = 0x800;
         public const ulong ViewMatrix = 0x120;
     }

@@ -1,9 +1,9 @@
 /*
- * Dumped With: roblox-dumper 2.4
+ * Dumped With: roblox-dumper 2.5
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-bd08027bb04e4045
- * Time Taken: 3991 ms (3.991000 seconds)
+ * Roblox Version: version-df7528517c6849f7
+ * Time Taken: 4250 ms (4.250000 seconds)
  * Total Offsets: 250
  */
 
@@ -12,7 +12,7 @@
 
 // clang-format off
 namespace offsets {
-    inline constexpr const char* roblox_version = "version-bd08027bb04e4045";
+    inline constexpr const char* roblox_version = "version-df7528517c6849f7";
 
     namespace Atmosphere {
         inline constexpr uintptr_t Color = 0xD0;
@@ -55,10 +55,10 @@ namespace offsets {
     }
 
     namespace CharacterMesh {
-        inline constexpr uintptr_t BaseTextureId = 0xD0;
-        inline constexpr uintptr_t BodyPart = 0xE8;
-        inline constexpr uintptr_t MeshId = 0xD8;
-        inline constexpr uintptr_t OverlayTextureId = 0xE0;
+        inline constexpr uintptr_t BaseTextureId = 0xE0;
+        inline constexpr uintptr_t BodyPart = 0x160;
+        inline constexpr uintptr_t MeshId = 0x110;
+        inline constexpr uintptr_t OverlayTextureId = 0x140;
     }
 
     namespace DataModel {
@@ -72,7 +72,7 @@ namespace offsets {
     }
 
     namespace FakeDataModel {
-        inline constexpr uintptr_t Pointer = 0x7D909F8;
+        inline constexpr uintptr_t Pointer = 0x7E35858;
         inline constexpr uintptr_t RealDataModel = 0x1C0;
     }
 
@@ -101,7 +101,7 @@ namespace offsets {
         inline constexpr uintptr_t SelectionOrder = 0x5A0;
         inline constexpr uintptr_t Size = 0x538;
         inline constexpr uintptr_t SizeConstraint = 0x5A4;
-        inline constexpr uintptr_t Visible = 0x5B1;
+        inline constexpr uintptr_t Visible = 0xD;
         inline constexpr uintptr_t ZIndex = 0x5A8;
     }
 
@@ -124,7 +124,7 @@ namespace offsets {
         inline constexpr uintptr_t NameDisplayDistance = 0x1BC;
         inline constexpr uintptr_t NameOcclusion = 0x1C0;
         inline constexpr uintptr_t RequiresNeck = 0x1E0;
-        inline constexpr uintptr_t RigType = 0x1C8;
+        inline constexpr uintptr_t RigType = 0x45;
         inline constexpr uintptr_t Sit = 0x1E1;
         inline constexpr uintptr_t TargetPoint = 0x164;
         inline constexpr uintptr_t UseJumpPower = 0x1E3;
@@ -166,7 +166,7 @@ namespace offsets {
 
     namespace LocalScript {
         inline constexpr uintptr_t Bytecode = 0x1A8;
-        inline constexpr uintptr_t Hash = 0xE8;
+        inline constexpr uintptr_t Hash = 0xD0;
     }
 
     namespace MaterialColors {
@@ -200,7 +200,7 @@ namespace offsets {
 
     namespace ModuleScript {
         inline constexpr uintptr_t Bytecode = 0x150;
-        inline constexpr uintptr_t Hash = 0xE8;
+        inline constexpr uintptr_t Hash = 0xD0;
     }
 
     namespace MouseService {
@@ -357,7 +357,7 @@ namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t Dimensions = 0x720;
         inline constexpr uintptr_t FakeDataModel = 0x700;
-        inline constexpr uintptr_t Pointer = 0x79449E0;
+        inline constexpr uintptr_t Pointer = 0x79E9468;
         inline constexpr uintptr_t RenderView = 0x800;
         inline constexpr uintptr_t ViewMatrix = 0x120;
     }

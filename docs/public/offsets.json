@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "dumper": "roblox-dumper 2.4",
+    "dumper": "roblox-dumper 2.5",
     "author": "Jonah (jonahw on Discord)",
     "github": "https://github.com/nopjo/roblox-dumper",
-    "roblox_version": "version-bd08027bb04e4045",
+    "roblox_version": "version-df7528517c6849f7",
     "total_offsets": 250
   },
   "offsets": {
@@ -43,10 +43,10 @@
       "ViewportSize": 744
     },
     "CharacterMesh": {
-      "BaseTextureId": 208,
-      "BodyPart": 232,
-      "MeshId": 216,
-      "OverlayTextureId": 224
+      "BaseTextureId": 224,
+      "BodyPart": 352,
+      "MeshId": 272,
+      "OverlayTextureId": 320
     },
     "DataModel": {
       "CreatorId": 392,
@@ -58,7 +58,7 @@
       "Workspace": 376
     },
     "FakeDataModel": {
-      "Pointer": 131664376,
+      "Pointer": 132339800,
       "RealDataModel": 448
     },
     "GuiBase2D": {
@@ -85,7 +85,7 @@
       "SelectionOrder": 1440,
       "Size": 1336,
       "SizeConstraint": 1444,
-      "Visible": 1457,
+      "Visible": 13,
       "ZIndex": 1448
     },
     "Humanoid": {
@@ -107,7 +107,7 @@
       "NameDisplayDistance": 444,
       "NameOcclusion": 448,
       "RequiresNeck": 480,
-      "RigType": 456,
+      "RigType": 69,
       "Sit": 481,
       "TargetPoint": 356,
       "UseJumpPower": 483,
@@ -145,7 +145,7 @@
     },
     "LocalScript": {
       "Bytecode": 424,
-      "Hash": 232
+      "Hash": 208
     },
     "MaterialColors": {
       "Asphalt": 48,
@@ -176,7 +176,7 @@
     },
     "ModuleScript": {
       "Bytecode": 336,
-      "Hash": 232
+      "Hash": 208
     },
     "MouseService": {
       "InputObject": 272
@@ -317,7 +317,7 @@
     "VisualEngine": {
       "Dimensions": 1824,
       "FakeDataModel": 1792,
-      "Pointer": 127158752,
+      "Pointer": 127833192,
       "RenderView": 2048,
       "ViewMatrix": 288
     },
