@@ -85,7 +85,7 @@
       "SelectionOrder": 1440,
       "Size": 1336,
       "SizeConstraint": 1444,
-      "Visible": 13,
+      "Visible": 1457,
       "ZIndex": 1448
     },
     "Humanoid": {
@@ -107,7 +107,7 @@
       "NameDisplayDistance": 444,
       "NameOcclusion": 448,
       "RequiresNeck": 480,
-      "RigType": 69,
+      "RigType": 456,
       "Sit": 481,
       "TargetPoint": 356,
       "UseJumpPower": 483,
@@ -145,7 +145,7 @@
     },
     "LocalScript": {
       "Bytecode": 424,
-      "Hash": 208
+      "Hash": 232
     },
     "MaterialColors": {
       "Asphalt": 48,
@@ -176,7 +176,7 @@
     },
     "ModuleScript": {
       "Bytecode": 336,
-      "Hash": 208
+      "Hash": 232
     },
     "MouseService": {
       "InputObject": 272

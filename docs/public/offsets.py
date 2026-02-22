@@ -2,7 +2,7 @@
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
 # Roblox Version: version-df7528517c6849f7
-# Time Taken: 4250 ms (4.250000 seconds)
+# Time Taken: 3878 ms (3.878000 seconds)
 # Total Offsets: 250
 
 class Offsets:
@@ -86,7 +86,7 @@ class Offsets:
         SelectionOrder = 1440
         Size = 1336
         SizeConstraint = 1444
-        Visible = 13
+        Visible = 1457
         ZIndex = 1448
 
     class Humanoid:
@@ -108,7 +108,7 @@ class Offsets:
         NameDisplayDistance = 444
         NameOcclusion = 448
         RequiresNeck = 480
-        RigType = 69
+        RigType = 456
         Sit = 481
         TargetPoint = 356
         UseJumpPower = 483
@@ -146,7 +146,7 @@ class Offsets:
 
     class LocalScript:
         Bytecode = 424
-        Hash = 208
+        Hash = 232
 
     class MaterialColors:
         Asphalt = 48
@@ -177,7 +177,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 208
+        Hash = 232
 
     class MouseService:
         InputObject = 272

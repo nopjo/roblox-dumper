@@ -3,7 +3,7 @@
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-df7528517c6849f7
- * Time Taken: 4250 ms (4.250000 seconds)
+ * Time Taken: 3878 ms (3.878000 seconds)
  * Total Offsets: 250
  */
 
@@ -113,7 +113,7 @@ namespace RobloxOffsets
         public const ulong SelectionOrder = 0x5A0;
         public const ulong Size = 0x538;
         public const ulong SizeConstraint = 0x5A4;
-        public const ulong Visible = 0xD;
+        public const ulong Visible = 0x5B1;
         public const ulong ZIndex = 0x5A8;
     }
 
@@ -137,7 +137,7 @@ namespace RobloxOffsets
         public const ulong NameDisplayDistance = 0x1BC;
         public const ulong NameOcclusion = 0x1C0;
         public const ulong RequiresNeck = 0x1E0;
-        public const ulong RigType = 0x45;
+        public const ulong RigType = 0x1C8;
         public const ulong Sit = 0x1E1;
         public const ulong TargetPoint = 0x164;
         public const ulong UseJumpPower = 0x1E3;
@@ -183,7 +183,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xD0;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MaterialColors
@@ -220,7 +220,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xD0;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MouseService
