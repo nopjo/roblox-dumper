@@ -43,5 +43,7 @@ namespace process {
         static auto read_string(uintptr_t address, size_t max_length = 256)
             -> std::optional<std::string>;
         static auto read_sso_string(uintptr_t address) -> std::optional<std::string>;
+        static auto scan_string(const std::string& target, std::string_view section = "")
+            -> std::vector<uintptr_t>;
     };
 } // namespace process

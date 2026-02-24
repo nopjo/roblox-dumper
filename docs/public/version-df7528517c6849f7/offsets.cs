@@ -1,10 +1,10 @@
 /*
- * Dumped With: roblox-dumper 2.5
+ * Dumped With: roblox-dumper 2.6
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-df7528517c6849f7
- * Time Taken: 4250 ms (4.250000 seconds)
- * Total Offsets: 250
+ * Time Taken: 4004 ms (4.004000 seconds)
+ * Total Offsets: 280
  */
 
 using System;
@@ -113,7 +113,7 @@ namespace RobloxOffsets
         public const ulong SelectionOrder = 0x5A0;
         public const ulong Size = 0x538;
         public const ulong SizeConstraint = 0x5A4;
-        public const ulong Visible = 0xD;
+        public const ulong Visible = 0x5B1;
         public const ulong ZIndex = 0x5A8;
     }
 
@@ -137,7 +137,8 @@ namespace RobloxOffsets
         public const ulong NameDisplayDistance = 0x1BC;
         public const ulong NameOcclusion = 0x1C0;
         public const ulong RequiresNeck = 0x1E0;
-        public const ulong RigType = 0x45;
+        public const ulong RigType = 0x1C8;
+        public const ulong SeatPart = 0x120;
         public const ulong Sit = 0x1E1;
         public const ulong TargetPoint = 0x164;
         public const ulong UseJumpPower = 0x1E3;
@@ -175,15 +176,31 @@ namespace RobloxOffsets
         public const ulong ColorShift_Top = 0xF0;
         public const ulong EnvironmentDiffuseScale = 0x124;
         public const ulong EnvironmentSpecularScale = 0x128;
-        public const ulong GeographicLatitude = 0x190;
+        public const ulong ExposureCompensation = 0x12C;
+        public const ulong FogColor = 0xFC;
+        public const ulong FogEnd = 0x134;
+        public const ulong FogStart = 0x138;
         public const ulong OutdoorAmbient = 0x108;
+        public const ulong ShadowSoftness = 0x140;
         public const ulong Sky = 0x1D8;
+    }
+
+    public static class LightingParameters
+    {
+        public const ulong GeographicLatitude = 0x190;
+        public const ulong LightColor = 0x15C;
+        public const ulong LightDirection = 0x168;
+        public const ulong SkyAmbient = 0x150;
+        public const ulong SkyAmbient2 = 0x194;
+        public const ulong Source = 0x174;
+        public const ulong TrueMoonPosition = 0x184;
+        public const ulong TrueSunPosition = 0x178;
     }
 
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xD0;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MaterialColors
@@ -220,7 +237,8 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xD0;
+        public const ulong Hash = 0xE8;
+        public const ulong IsRobloxScript = 0x180;
     }
 
     public static class MouseService
@@ -263,6 +281,7 @@ namespace RobloxOffsets
     {
         public const ulong Anchored = 0x2;
         public const ulong CanCollide = 0x8;
+        public const ulong CanQuery = 0x20;
         public const ulong CanTouch = 0x10;
     }
 
@@ -281,6 +300,16 @@ namespace RobloxOffsets
     {
         public const ulong LightingValid = 0x148;
         public const ulong SkyboxValid = 0x28D;
+    }
+
+    public static class ScriptContext
+    {
+        public const ulong RequireBypass = 0x948;
+    }
+
+    public static class Seat
+    {
+        public const ulong Occupant = 0x220;
     }
 
     public static class Sky
@@ -305,6 +334,15 @@ namespace RobloxOffsets
         public const ulong Offset = 0xD0;
         public const ulong Scale = 0xDC;
         public const ulong TextureId = 0x130;
+    }
+
+    public static class TaskScheduler
+    {
+        public const ulong JobEnd = 0x1D8;
+        public const ulong JobName = 0x18;
+        public const ulong JobStart = 0x1D0;
+        public const ulong MaxFps = 0x1B0;
+        public const ulong Pointer = 0x7EF3C48;
     }
 
     public static class Team
@@ -389,6 +427,16 @@ namespace RobloxOffsets
         public const ulong Value = 0xD0;
     }
 
+    public static class VehicleSeat
+    {
+        public const ulong MaxSpeed = 0x238;
+        public const ulong Occupant = 0x218;
+        public const ulong SteerFloat = 0x240;
+        public const ulong ThrottleFloat = 0x248;
+        public const ulong Torque = 0x24C;
+        public const ulong TurnSpeed = 0x250;
+    }
+
     public static class VisualEngine
     {
         public const ulong Dimensions = 0x720;
@@ -408,6 +456,8 @@ namespace RobloxOffsets
     public static class World
     {
         public const ulong Gravity = 0x1D0;
+        public const ulong Primitives = 0x240;
+        public const ulong WorldSteps = 0x658;
     }
 
 } // namespace RobloxOffsets

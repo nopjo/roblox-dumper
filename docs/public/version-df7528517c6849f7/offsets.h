@@ -1,10 +1,10 @@
 /*
- * Dumped With: roblox-dumper 2.5
+ * Dumped With: roblox-dumper 2.6
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-df7528517c6849f7
- * Time Taken: 4250 ms (4.250000 seconds)
- * Total Offsets: 250
+ * Time Taken: 4004 ms (4.004000 seconds)
+ * Total Offsets: 280
  */
 
 #pragma once
@@ -101,7 +101,7 @@ namespace offsets {
         inline constexpr uintptr_t SelectionOrder = 0x5A0;
         inline constexpr uintptr_t Size = 0x538;
         inline constexpr uintptr_t SizeConstraint = 0x5A4;
-        inline constexpr uintptr_t Visible = 0xD;
+        inline constexpr uintptr_t Visible = 0x5B1;
         inline constexpr uintptr_t ZIndex = 0x5A8;
     }
 
@@ -124,7 +124,8 @@ namespace offsets {
         inline constexpr uintptr_t NameDisplayDistance = 0x1BC;
         inline constexpr uintptr_t NameOcclusion = 0x1C0;
         inline constexpr uintptr_t RequiresNeck = 0x1E0;
-        inline constexpr uintptr_t RigType = 0x45;
+        inline constexpr uintptr_t RigType = 0x1C8;
+        inline constexpr uintptr_t SeatPart = 0x120;
         inline constexpr uintptr_t Sit = 0x1E1;
         inline constexpr uintptr_t TargetPoint = 0x164;
         inline constexpr uintptr_t UseJumpPower = 0x1E3;
@@ -159,14 +160,29 @@ namespace offsets {
         inline constexpr uintptr_t ColorShift_Top = 0xF0;
         inline constexpr uintptr_t EnvironmentDiffuseScale = 0x124;
         inline constexpr uintptr_t EnvironmentSpecularScale = 0x128;
-        inline constexpr uintptr_t GeographicLatitude = 0x190;
+        inline constexpr uintptr_t ExposureCompensation = 0x12C;
+        inline constexpr uintptr_t FogColor = 0xFC;
+        inline constexpr uintptr_t FogEnd = 0x134;
+        inline constexpr uintptr_t FogStart = 0x138;
         inline constexpr uintptr_t OutdoorAmbient = 0x108;
+        inline constexpr uintptr_t ShadowSoftness = 0x140;
         inline constexpr uintptr_t Sky = 0x1D8;
+    }
+
+    namespace LightingParameters {
+        inline constexpr uintptr_t GeographicLatitude = 0x190;
+        inline constexpr uintptr_t LightColor = 0x15C;
+        inline constexpr uintptr_t LightDirection = 0x168;
+        inline constexpr uintptr_t SkyAmbient = 0x150;
+        inline constexpr uintptr_t SkyAmbient2 = 0x194;
+        inline constexpr uintptr_t Source = 0x174;
+        inline constexpr uintptr_t TrueMoonPosition = 0x184;
+        inline constexpr uintptr_t TrueSunPosition = 0x178;
     }
 
     namespace LocalScript {
         inline constexpr uintptr_t Bytecode = 0x1A8;
-        inline constexpr uintptr_t Hash = 0xD0;
+        inline constexpr uintptr_t Hash = 0xE8;
     }
 
     namespace MaterialColors {
@@ -200,7 +216,8 @@ namespace offsets {
 
     namespace ModuleScript {
         inline constexpr uintptr_t Bytecode = 0x150;
-        inline constexpr uintptr_t Hash = 0xD0;
+        inline constexpr uintptr_t Hash = 0xE8;
+        inline constexpr uintptr_t IsRobloxScript = 0x180;
     }
 
     namespace MouseService {
@@ -238,6 +255,7 @@ namespace offsets {
     namespace PrimitiveFlags {
         inline constexpr uintptr_t Anchored = 0x2;
         inline constexpr uintptr_t CanCollide = 0x8;
+        inline constexpr uintptr_t CanQuery = 0x20;
         inline constexpr uintptr_t CanTouch = 0x10;
     }
 
@@ -254,6 +272,14 @@ namespace offsets {
     namespace RenderView {
         inline constexpr uintptr_t LightingValid = 0x148;
         inline constexpr uintptr_t SkyboxValid = 0x28D;
+    }
+
+    namespace ScriptContext {
+        inline constexpr uintptr_t RequireBypass = 0x948;
+    }
+
+    namespace Seat {
+        inline constexpr uintptr_t Occupant = 0x220;
     }
 
     namespace Sky {
@@ -276,6 +302,14 @@ namespace offsets {
         inline constexpr uintptr_t Offset = 0xD0;
         inline constexpr uintptr_t Scale = 0xDC;
         inline constexpr uintptr_t TextureId = 0x130;
+    }
+
+    namespace TaskScheduler {
+        inline constexpr uintptr_t JobEnd = 0x1D8;
+        inline constexpr uintptr_t JobName = 0x18;
+        inline constexpr uintptr_t JobStart = 0x1D0;
+        inline constexpr uintptr_t MaxFps = 0x1B0;
+        inline constexpr uintptr_t Pointer = 0x7EF3C48;
     }
 
     namespace Team {
@@ -354,6 +388,15 @@ namespace offsets {
         inline constexpr uintptr_t Value = 0xD0;
     }
 
+    namespace VehicleSeat {
+        inline constexpr uintptr_t MaxSpeed = 0x238;
+        inline constexpr uintptr_t Occupant = 0x218;
+        inline constexpr uintptr_t SteerFloat = 0x240;
+        inline constexpr uintptr_t ThrottleFloat = 0x248;
+        inline constexpr uintptr_t Torque = 0x24C;
+        inline constexpr uintptr_t TurnSpeed = 0x250;
+    }
+
     namespace VisualEngine {
         inline constexpr uintptr_t Dimensions = 0x720;
         inline constexpr uintptr_t FakeDataModel = 0x700;
@@ -370,6 +413,8 @@ namespace offsets {
 
     namespace World {
         inline constexpr uintptr_t Gravity = 0x1D0;
+        inline constexpr uintptr_t Primitives = 0x240;
+        inline constexpr uintptr_t WorldSteps = 0x658;
     }
 
 } // namespace offsets

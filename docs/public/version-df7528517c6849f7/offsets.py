@@ -1,9 +1,9 @@
-# Dumped With: roblox-dumper 2.5
+# Dumped With: roblox-dumper 2.6
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
 # Roblox Version: version-df7528517c6849f7
-# Time Taken: 4250 ms (4.250000 seconds)
-# Total Offsets: 250
+# Time Taken: 4004 ms (4.004000 seconds)
+# Total Offsets: 280
 
 class Offsets:
     ROBLOX_VERSION = "version-df7528517c6849f7"
@@ -86,7 +86,7 @@ class Offsets:
         SelectionOrder = 1440
         Size = 1336
         SizeConstraint = 1444
-        Visible = 13
+        Visible = 1457
         ZIndex = 1448
 
     class Humanoid:
@@ -108,7 +108,8 @@ class Offsets:
         NameDisplayDistance = 444
         NameOcclusion = 448
         RequiresNeck = 480
-        RigType = 69
+        RigType = 456
+        SeatPart = 288
         Sit = 481
         TargetPoint = 356
         UseJumpPower = 483
@@ -140,13 +141,27 @@ class Offsets:
         ColorShift_Top = 240
         EnvironmentDiffuseScale = 292
         EnvironmentSpecularScale = 296
-        GeographicLatitude = 400
+        ExposureCompensation = 300
+        FogColor = 252
+        FogEnd = 308
+        FogStart = 312
         OutdoorAmbient = 264
+        ShadowSoftness = 320
         Sky = 472
+
+    class LightingParameters:
+        GeographicLatitude = 400
+        LightColor = 348
+        LightDirection = 360
+        SkyAmbient = 336
+        SkyAmbient2 = 404
+        Source = 372
+        TrueMoonPosition = 388
+        TrueSunPosition = 376
 
     class LocalScript:
         Bytecode = 424
-        Hash = 208
+        Hash = 232
 
     class MaterialColors:
         Asphalt = 48
@@ -177,7 +192,8 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 208
+        Hash = 232
+        IsRobloxScript = 384
 
     class MouseService:
         InputObject = 272
@@ -210,6 +226,7 @@ class Offsets:
     class PrimitiveFlags:
         Anchored = 2
         CanCollide = 8
+        CanQuery = 32
         CanTouch = 16
 
     class ProximityPrompt:
@@ -224,6 +241,12 @@ class Offsets:
     class RenderView:
         LightingValid = 328
         SkyboxValid = 653
+
+    class ScriptContext:
+        RequireBypass = 2376
+
+    class Seat:
+        Occupant = 544
 
     class Sky:
         MoonAngularSize = 604
@@ -244,6 +267,13 @@ class Offsets:
         Offset = 208
         Scale = 220
         TextureId = 304
+
+    class TaskScheduler:
+        JobEnd = 472
+        JobName = 24
+        JobStart = 464
+        MaxFps = 432
+        Pointer = 133119048
 
     class Team:
         TeamColor = 208
@@ -315,6 +345,14 @@ class Offsets:
     class Value:
         Value = 208
 
+    class VehicleSeat:
+        MaxSpeed = 568
+        Occupant = 536
+        SteerFloat = 576
+        ThrottleFloat = 584
+        Torque = 588
+        TurnSpeed = 592
+
     class VisualEngine:
         Dimensions = 1824
         FakeDataModel = 1792
@@ -329,4 +367,6 @@ class Offsets:
 
     class World:
         Gravity = 464
+        Primitives = 576
+        WorldSteps = 1624
 

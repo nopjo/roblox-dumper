@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project("roblox-dumper" VERSION 2.5 LANGUAGES CXX)
+project("roblox-dumper" VERSION 2.6 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -59,12 +59,18 @@ FetchContent_Declare(
     GIT_TAG v3.11.3
 )
 
-FetchContent_MakeAvailable(spdlog glm cpr httplib json)
+FetchContent_Declare(
+    zydis
+    GIT_REPOSITORY https://github.com/zyantific/zydis.git
+    GIT_TAG v4.1.1
+)
+
+FetchContent_MakeAvailable(spdlog glm cpr httplib json zydis)
 
 include_directories(src ${PROJECT_BINARY_DIR})
 
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.cxx" "src/*.cc")
 
 add_executable(roblox-dumper ${SOURCES})
-target_link_libraries(roblox-dumper PRIVATE spdlog::spdlog glm::glm cpr::cpr httplib::httplib nlohmann_json::nlohmann_json)
+target_link_libraries(roblox-dumper PRIVATE spdlog::spdlog glm::glm cpr::cpr httplib::httplib nlohmann_json::nlohmann_json Zydis)
 set_property(TARGET roblox-dumper PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")

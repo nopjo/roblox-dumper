@@ -1,31 +1,6 @@
 #include "dumper.h"
 #include "process/memory/memory.h"
-#include "stages/atmosphere/atmosphere.h"
-#include "stages/base_part/base_part.h"
-#include "stages/bloom_effect/bloom_effect.h"
-#include "stages/camera/camera.h"
-#include "stages/character_mesh/character_mesh.h"
-#include "stages/data_model/data_model.h"
-#include "stages/gui_base2d/gui_base2d.h"
-#include "stages/gui_object/gui_object.h"
-#include "stages/humanoid/humanoid.h"
-#include "stages/instance/instance.h"
-#include "stages/lighting/lighting.h"
-#include "stages/mesh_part/mesh_part.h"
-#include "stages/mouse_service/mouse_service.h"
-#include "stages/player/player.h"
-#include "stages/proximity_prompt/proximity_prompt.h"
-#include "stages/script/script.h"
-#include "stages/sky/sky.h"
-#include "stages/special_mesh/special_mesh.h"
-#include "stages/team/team.h"
-#include "stages/terrain/terrain.h"
-#include "stages/text_button/text_button.h"
-#include "stages/text_label/text_label.h"
-#include "stages/tool/tool.h"
-#include "stages/value/value.h"
-#include "stages/visual_engine/visual_engine.h"
-#include "stages/workspace/workspace.h"
+#include "stages/stages.h"
 #include <cstring>
 #include <fstream>
 #include <spdlog/spdlog.h>
@@ -85,6 +60,9 @@ namespace dumper {
         threads.emplace_back([]() { stages::text_label::dump(); });
         threads.emplace_back([]() { stages::text_button::dump(); });
         threads.emplace_back([]() { stages::script::dump(); });
+        threads.emplace_back([]() { stages::task_scheduler::dump(); });
+        threads.emplace_back([]() { stages::script_context::dump(); });
+        threads.emplace_back([]() { stages::vehicle_seat::dump(); });
 
         for (auto& thread : threads) {
             thread.join();

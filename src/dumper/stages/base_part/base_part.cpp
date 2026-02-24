@@ -158,6 +158,7 @@ namespace dumper::stages::base_part {
         dumper::g_dumper.add_offset("PrimitiveFlags", "Anchored", 0x2);
         dumper::g_dumper.add_offset("PrimitiveFlags", "CanCollide", 0x8);
         dumper::g_dumper.add_offset("PrimitiveFlags", "CanTouch", 0x10);
+        dumper::g_dumper.add_offset("PrimitiveFlags", "CanQuery", 0x20);
 
         const auto position_offset =
             process::helpers::find_vec3_offset_multi<glm::vec3>(primitive_addrs, [&](size_t i) {

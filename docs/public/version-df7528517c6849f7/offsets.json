@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "dumper": "roblox-dumper 2.5",
+    "dumper": "roblox-dumper 2.6",
     "author": "Jonah (jonahw on Discord)",
     "github": "https://github.com/nopjo/roblox-dumper",
     "roblox_version": "version-df7528517c6849f7",
-    "total_offsets": 250
+    "total_offsets": 280
   },
   "offsets": {
     "Atmosphere": {
@@ -85,7 +85,7 @@
       "SelectionOrder": 1440,
       "Size": 1336,
       "SizeConstraint": 1444,
-      "Visible": 13,
+      "Visible": 1457,
       "ZIndex": 1448
     },
     "Humanoid": {
@@ -107,7 +107,8 @@
       "NameDisplayDistance": 444,
       "NameOcclusion": 448,
       "RequiresNeck": 480,
-      "RigType": 69,
+      "RigType": 456,
+      "SeatPart": 288,
       "Sit": 481,
       "TargetPoint": 356,
       "UseJumpPower": 483,
@@ -139,13 +140,27 @@
       "ColorShift_Top": 240,
       "EnvironmentDiffuseScale": 292,
       "EnvironmentSpecularScale": 296,
-      "GeographicLatitude": 400,
+      "ExposureCompensation": 300,
+      "FogColor": 252,
+      "FogEnd": 308,
+      "FogStart": 312,
       "OutdoorAmbient": 264,
+      "ShadowSoftness": 320,
       "Sky": 472
+    },
+    "LightingParameters": {
+      "GeographicLatitude": 400,
+      "LightColor": 348,
+      "LightDirection": 360,
+      "SkyAmbient": 336,
+      "SkyAmbient2": 404,
+      "Source": 372,
+      "TrueMoonPosition": 388,
+      "TrueSunPosition": 376
     },
     "LocalScript": {
       "Bytecode": 424,
-      "Hash": 208
+      "Hash": 232
     },
     "MaterialColors": {
       "Asphalt": 48,
@@ -176,7 +191,8 @@
     },
     "ModuleScript": {
       "Bytecode": 336,
-      "Hash": 208
+      "Hash": 232,
+      "IsRobloxScript": 384
     },
     "MouseService": {
       "InputObject": 272
@@ -209,6 +225,7 @@
     "PrimitiveFlags": {
       "Anchored": 2,
       "CanCollide": 8,
+      "CanQuery": 32,
       "CanTouch": 16
     },
     "ProximityPrompt": {
@@ -223,6 +240,12 @@
     "RenderView": {
       "LightingValid": 328,
       "SkyboxValid": 653
+    },
+    "ScriptContext": {
+      "RequireBypass": 2376
+    },
+    "Seat": {
+      "Occupant": 544
     },
     "Sky": {
       "MoonAngularSize": 604,
@@ -243,6 +266,13 @@
       "Offset": 208,
       "Scale": 220,
       "TextureId": 304
+    },
+    "TaskScheduler": {
+      "JobEnd": 472,
+      "JobName": 24,
+      "JobStart": 464,
+      "MaxFps": 432,
+      "Pointer": 133119048
     },
     "Team": {
       "TeamColor": 208
@@ -314,6 +344,14 @@
     "Value": {
       "Value": 208
     },
+    "VehicleSeat": {
+      "MaxSpeed": 568,
+      "Occupant": 536,
+      "SteerFloat": 576,
+      "ThrottleFloat": 584,
+      "Torque": 588,
+      "TurnSpeed": 592
+    },
     "VisualEngine": {
       "Dimensions": 1824,
       "FakeDataModel": 1792,
@@ -327,7 +365,9 @@
       "World": 984
     },
     "World": {
-      "Gravity": 464
+      "Gravity": 464,
+      "Primitives": 576,
+      "WorldSteps": 1624
     }
   }
 }

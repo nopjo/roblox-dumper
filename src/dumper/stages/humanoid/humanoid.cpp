@@ -315,6 +315,39 @@ namespace dumper::stages::humanoid {
         }
         dumper::g_dumper.add_offset("Humanoid", "NameOcclusion", *name_occlusion_offset);
 
+        const auto sitting_npc_hum = dumper::g_workspace->find_first_child("SittingNPC")
+                                         ->find_first_child_of_class("Humanoid");
+
+        if (!sitting_npc_hum) {
+            spdlog::error("Failed to find SittingNPC.Humanoid in Workspace");
+        }
+
+        const auto seat_part = dumper::g_workspace->find_first_child("Seat");
+
+        if (!seat_part) {
+            spdlog::error("Failed to find Seat in Workspace");
+        }
+
+        const auto seat_part_offset = process::helpers::find_pointer_offset(
+            sitting_npc_hum->get_address(), seat_part->get_address(), 0x1000, 0x8);
+
+        if (!seat_part_offset) {
+            spdlog::error("Failed to find SeatPart offset");
+            return false;
+        }
+
+        g_dumper.add_offset("Humanoid", "SeatPart", *seat_part_offset);
+
+        const auto seat_occupant = process::helpers::find_pointer_offset(
+            seat_part->get_address(), sitting_npc_hum->get_address(), 0x1000, 0x8);
+
+        if (!seat_occupant) {
+            spdlog::error("Failed to find Seat Occupant offset (this is inside Humanoid stage)");
+            return false;
+        }
+
+        g_dumper.add_offset("Seat", "Occupant", *seat_occupant);
+
         return true;
     }
 

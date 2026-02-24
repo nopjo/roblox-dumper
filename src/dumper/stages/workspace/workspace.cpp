@@ -31,6 +31,40 @@ namespace dumper::stages::workspace {
         g_dumper.add_offset("Workspace", "World", world);
         g_dumper.add_offset("World", "Gravity", gravity);
 
+        const auto world_addr =
+            process::Memory::read<uintptr_t>(g_workspace->get_address() + world);
+
+        if (!world_addr) {
+            spdlog::error("Failed to read World offset in Workspace");
+            return false;
+        }
+
+        FIND_AND_ADD_OFFSET(*world_addr, World, float, WorldSteps, 240.0f, 0x1000, 0x4);
+
+        std::optional<size_t> primitives_offset;
+
+        for (size_t offset = 0; offset < 0x1000; offset += 0x8) {
+            const auto ptr = process::Memory::read<uintptr_t>(*world_addr + offset);
+
+            if (!ptr || *ptr == 0) {
+                continue;
+            }
+
+            const auto rtti_offset = process::Rtti::find(*ptr, "Primitive@RBX");
+
+            if (rtti_offset) {
+                primitives_offset = offset;
+                break;
+            }
+        }
+
+        if (!primitives_offset) {
+            spdlog::error("Failed to find Primitives offset in World");
+            return false;
+        }
+
+        g_dumper.add_offset("World", "Primitives", *primitives_offset);
+
         return true;
     }
 } // namespace dumper::stages::workspace

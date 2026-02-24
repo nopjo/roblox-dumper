@@ -105,34 +105,6 @@ namespace process::helpers {
     }
 
     template <typename T>
-    auto find_common_offset(const std::vector<std::pair<uintptr_t, T>>& address_value_pairs,
-                            size_t max_offset = 0x1000, size_t alignment = 8)
-        -> std::optional<size_t> {
-        if (address_value_pairs.empty()) {
-            return std::nullopt;
-        }
-
-        for (size_t offset = 0; offset < max_offset; offset += alignment) {
-            bool all_match = true;
-
-            for (const auto& [address, expected_value] : address_value_pairs) {
-                auto read_value = Memory::read<T>(address + offset);
-
-                if (!read_value || read_value.value() != expected_value) {
-                    all_match = false;
-                    break;
-                }
-            }
-
-            if (all_match) {
-                return offset;
-            }
-        }
-
-        return std::nullopt;
-    }
-
-    template <typename T>
     auto find_offset_with_getter(const std::vector<uintptr_t>& addresses,
                                  std::function<T(size_t)> get_expected_value, size_t max_offset,
                                  size_t alignment,

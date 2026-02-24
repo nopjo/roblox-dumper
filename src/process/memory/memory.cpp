@@ -1,4 +1,5 @@
 #include "process/memory/memory.h"
+#include "memory.h"
 #include <algorithm>
 
 namespace process {
@@ -62,4 +63,61 @@ namespace process {
 
         return read_string(data_ptr, *length);
     }
+
+    auto Memory::scan_string(const std::string& target, std::string_view section)
+        -> std::vector<uintptr_t> {
+        std::vector<uintptr_t> matches;
+
+        if (target.empty()) {
+            return matches;
+        }
+
+        if (!section.empty()) {
+            auto sec = g_process.get_section(section);
+            if (!sec) {
+                return matches;
+            }
+
+            auto buffer = read_bytes(sec->first, sec->second);
+            if (buffer.size() < target.size()) {
+                return matches;
+            }
+
+            for (size_t offset = 0; offset <= buffer.size() - target.size(); offset++) {
+                if (std::memcmp(buffer.data() + offset, target.data(), target.size()) == 0) {
+                    matches.push_back(sec->first + offset);
+                }
+            }
+
+            return matches;
+        }
+
+        MEMORY_BASIC_INFORMATION mbi{};
+        uintptr_t current = g_process.get_module_base();
+
+        while (VirtualQueryEx(g_process.get_handle(), reinterpret_cast<LPCVOID>(current), &mbi,
+                              sizeof(mbi)) == sizeof(mbi)) {
+            const uintptr_t region_start = reinterpret_cast<uintptr_t>(mbi.BaseAddress);
+            const uintptr_t region_end = region_start + mbi.RegionSize;
+
+            if (mbi.State == MEM_COMMIT && !(mbi.Protect & PAGE_GUARD) &&
+                !(mbi.Protect & PAGE_NOACCESS)) {
+                auto buffer = read_bytes(region_start, mbi.RegionSize);
+
+                if (buffer.size() >= target.size()) {
+                    for (size_t offset = 0; offset <= buffer.size() - target.size(); offset++) {
+                        if (std::memcmp(buffer.data() + offset, target.data(), target.size()) ==
+                            0) {
+                            matches.push_back(region_start + offset);
+                        }
+                    }
+                }
+            }
+
+            current = region_end;
+        }
+
+        return matches;
+    }
+
 } // namespace process
