@@ -48,6 +48,52 @@ namespace dumper::stages::task_scheduler {
 
     static auto get_job_name_offset(uintptr_t task_sched, size_t job_start_offset)
         -> std::optional<size_t> {
+        static const std::unordered_set<std::string> job_names = {
+            "WorkspaceTaskQueue",
+            "PerformanceControlCoordinatorV2Job",
+            "NotifyAliveJob",
+            "LuaGc",
+            "WaitingHybridScriptsJob",
+            "ClearUnusedLuaRefsJob",
+            "LuauTelemetry",
+            "DataModelCharacterTaskQueue",
+            "TimerTickerJob",
+            "MemoryPrioritizationJob",
+            "PerformanceControlOrchestrator",
+            "Write Marshalled",
+            "Read Marshalled",
+            "None Marshalled",
+            "ThumbnailFetchJob",
+            "Sound",
+            "LogServiceJob",
+            "HttpRbxApiJob",
+            "Simulation",
+            "Heartbeat",
+            "AnalyticsServiceJob",
+            "HumanoidParallelManagerTaskQueue",
+            "AnimatorParallelManagerTaskQueue",
+            "ScriptContextTaskQueue",
+            "EventBroadcastrelayFireEventJob",
+            "Video",
+            "RenderJob",
+            "Replicator ProcessPackets",
+            "Network Quality Responder",
+            "PreRenderJob",
+            "SceneUpdaterTaskQueue",
+            "SmoothClusterTaskQueue",
+            "DummyClient Event Processor",
+            "Network Disconnect Clean Up",
+            "Allocate Bandwidth and Run Senders",
+            "ScopeCheckCleanupJob",
+            "AvatarCreationServiceJob",
+            "Net PacketReceive",
+            "Net Peer Send",
+            "Net Peer Stats",
+            "MegaReplicatorPPRTaskQueue",
+            "MegaReplicatorTaskQueue",
+            "DynamicTranslationSender_LocalizationService",
+            "LocalizationTableAnalyticsSender_LocalizationService"};
+
         const auto job_start = process::Memory::read<uintptr_t>(task_sched + job_start_offset);
         const auto job_end = process::Memory::read<uintptr_t>(task_sched + job_start_offset + 0x8);
 
@@ -64,9 +110,7 @@ namespace dumper::stages::task_scheduler {
                 if (!str || str->empty())
                     continue;
 
-                if (str->find("WorkspaceTaskQueue") != std::string::npos ||
-                    str->find("NotifyAliveJob") != std::string::npos ||
-                    str->find("ClearUnusedLuaRefsJob") != std::string::npos) {
+                if (job_names.contains(*str)) {
                     return offset;
                 }
             }

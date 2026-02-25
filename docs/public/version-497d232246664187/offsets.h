@@ -3,7 +3,7 @@
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-497d232246664187
- * Time Taken: 3748 ms (3.748000 seconds)
+ * Time Taken: 4305 ms (4.305000 seconds)
  * Total Offsets: 280
  */
 
@@ -182,7 +182,7 @@ namespace offsets {
 
     namespace LocalScript {
         inline constexpr uintptr_t Bytecode = 0x1A8;
-        inline constexpr uintptr_t Hash = 0xE8;
+        inline constexpr uintptr_t Hash = 0xD0;
     }
 
     namespace MaterialColors {
@@ -216,7 +216,7 @@ namespace offsets {
 
     namespace ModuleScript {
         inline constexpr uintptr_t Bytecode = 0x150;
-        inline constexpr uintptr_t Hash = 0xE8;
+        inline constexpr uintptr_t Hash = 0xD0;
         inline constexpr uintptr_t IsRobloxScript = 0x180;
     }
 
@@ -306,7 +306,7 @@ namespace offsets {
 
     namespace TaskScheduler {
         inline constexpr uintptr_t JobEnd = 0xD0;
-        inline constexpr uintptr_t JobName = 0xFE0;
+        inline constexpr uintptr_t JobName = 0x18;
         inline constexpr uintptr_t JobStart = 0xC8;
         inline constexpr uintptr_t MaxFps = 0xB0;
         inline constexpr uintptr_t Pointer = 0x7F25E08;

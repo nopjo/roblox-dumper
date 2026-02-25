@@ -2,7 +2,7 @@
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
 # Roblox Version: version-497d232246664187
-# Time Taken: 3748 ms (3.748000 seconds)
+# Time Taken: 4305 ms (4.305000 seconds)
 # Total Offsets: 280
 
 class Offsets:
@@ -161,7 +161,7 @@ class Offsets:
 
     class LocalScript:
         Bytecode = 424
-        Hash = 232
+        Hash = 208
 
     class MaterialColors:
         Asphalt = 48
@@ -192,7 +192,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 232
+        Hash = 208
         IsRobloxScript = 384
 
     class MouseService:
@@ -270,7 +270,7 @@ class Offsets:
 
     class TaskScheduler:
         JobEnd = 208
-        JobName = 4064
+        JobName = 24
         JobStart = 200
         MaxFps = 176
         Pointer = 133324296

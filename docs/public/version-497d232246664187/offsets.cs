@@ -3,7 +3,7 @@
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-497d232246664187
- * Time Taken: 3748 ms (3.748000 seconds)
+ * Time Taken: 4305 ms (4.305000 seconds)
  * Total Offsets: 280
  */
 
@@ -200,7 +200,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0xD0;
     }
 
     public static class MaterialColors
@@ -237,7 +237,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0xD0;
         public const ulong IsRobloxScript = 0x180;
     }
 
@@ -339,7 +339,7 @@ namespace RobloxOffsets
     public static class TaskScheduler
     {
         public const ulong JobEnd = 0xD0;
-        public const ulong JobName = 0xFE0;
+        public const ulong JobName = 0x18;
         public const ulong JobStart = 0xC8;
         public const ulong MaxFps = 0xB0;
         public const ulong Pointer = 0x7F25E08;
