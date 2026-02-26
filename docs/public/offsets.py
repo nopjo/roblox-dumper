@@ -1,12 +1,12 @@
 # Dumped With: roblox-dumper 2.6
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-df7528517c6849f7
-# Time Taken: 4004 ms (4.004000 seconds)
+# Roblox Version: version-760d064d05424689
+# Time Taken: 3833 ms (3.833000 seconds)
 # Total Offsets: 280
 
 class Offsets:
-    ROBLOX_VERSION = "version-df7528517c6849f7"
+    ROBLOX_VERSION = "version-760d064d05424689"
 
     class Atmosphere:
         Color = 208
@@ -59,7 +59,7 @@ class Offsets:
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 132339800
+        Pointer = 132657512
         RealDataModel = 448
 
     class GuiBase2D:
@@ -68,26 +68,26 @@ class Offsets:
         AbsoluteSize = 280
 
     class GuiObject:
-        Active = 1452
-        AnchorPoint = 1376
-        AutomaticSize = 1384
-        BackgroundColor3 = 1352
-        BackgroundTransparency = 1388
-        BorderColor3 = 1364
-        BorderMode = 1392
-        BorderSizePixel = 1396
-        ClipsDescendants = 1453
-        GuiState = 1408
-        Interactable = 1455
-        LayoutOrder = 1412
-        Position = 1304
+        Active = 1436
+        AnchorPoint = 1360
+        AutomaticSize = 1368
+        BackgroundColor3 = 1336
+        BackgroundTransparency = 1372
+        BorderColor3 = 1348
+        BorderMode = 1376
+        BorderSizePixel = 1380
+        ClipsDescendants = 1437
+        GuiState = 1392
+        Interactable = 1439
+        LayoutOrder = 1396
+        Position = 1288
         Rotation = 392
-        Selectable = 1456
-        SelectionOrder = 1440
-        Size = 1336
-        SizeConstraint = 1444
-        Visible = 1457
-        ZIndex = 1448
+        Selectable = 1440
+        SelectionOrder = 1424
+        Size = 1320
+        SizeConstraint = 1428
+        Visible = 1441
+        ZIndex = 1432
 
     class Humanoid:
         AutoJumpEnabled = 472
@@ -243,7 +243,7 @@ class Offsets:
         SkyboxValid = 653
 
     class ScriptContext:
-        RequireBypass = 2376
+        RequireBypass = 2276
 
     class Seat:
         Occupant = 544
@@ -269,11 +269,11 @@ class Offsets:
         TextureId = 304
 
     class TaskScheduler:
-        JobEnd = 472
+        JobEnd = 208
         JobName = 24
-        JobStart = 464
-        MaxFps = 432
-        Pointer = 133119048
+        JobStart = 200
+        MaxFps = 176
+        Pointer = 133324296
 
     class Team:
         TeamColor = 208
@@ -288,47 +288,47 @@ class Offsets:
         WaterWaveSpeed = 524
 
     class TextButton:
-        AutoButtonColor = 2580
-        ContentText = 3368
-        Font = 4432
-        LineHeight = 3484
-        LocalizedText = 3368
-        MaxVisibleGraphemes = 4444
-        Modal = 2581
-        RichText = 3653
-        Selected = 2582
-        Text = 3368
-        TextColor3 = 4408
-        TextDirection = 3656
-        TextScaled = 3480
-        TextSize = 4452
-        TextStrokeColor3 = 4420
-        TextStrokeTransparency = 4456
-        TextTransparency = 4460
-        TextTruncate = 4464
-        TextWrapped = 3560
-        TextXAlignment = 4468
-        TextYAlignment = 3556
+        AutoButtonColor = 2564
+        ContentText = 3352
+        Font = 4416
+        LineHeight = 3468
+        LocalizedText = 3352
+        MaxVisibleGraphemes = 4428
+        Modal = 2565
+        RichText = 3637
+        Selected = 2566
+        Text = 3352
+        TextColor3 = 4392
+        TextDirection = 3640
+        TextScaled = 3464
+        TextSize = 4436
+        TextStrokeColor3 = 4404
+        TextStrokeTransparency = 4440
+        TextTransparency = 4444
+        TextTruncate = 4448
+        TextWrapped = 3544
+        TextXAlignment = 4452
+        TextYAlignment = 3540
 
     class TextLabel:
-        ContentText = 2728
-        Font = 3792
-        LineHeight = 2844
-        LocalizedText = 2728
-        MaxVisibleGraphemes = 3804
-        RichText = 3013
-        Text = 2728
-        TextColor3 = 3768
-        TextDirection = 3016
-        TextScaled = 2840
-        TextSize = 3812
-        TextStrokeColor3 = 3780
-        TextStrokeTransparency = 3816
-        TextTransparency = 3820
-        TextTruncate = 3824
-        TextWrapped = 2920
-        TextXAlignment = 3828
-        TextYAlignment = 2916
+        ContentText = 2712
+        Font = 3776
+        LineHeight = 2828
+        LocalizedText = 2712
+        MaxVisibleGraphemes = 3788
+        RichText = 2997
+        Text = 2712
+        TextColor3 = 3752
+        TextDirection = 3000
+        TextScaled = 2824
+        TextSize = 3796
+        TextStrokeColor3 = 3764
+        TextStrokeTransparency = 3800
+        TextTransparency = 3804
+        TextTruncate = 3808
+        TextWrapped = 2904
+        TextXAlignment = 3812
+        TextYAlignment = 2900
 
     class Tool:
         CanBeDropped = 1184
@@ -356,17 +356,17 @@ class Offsets:
     class VisualEngine:
         Dimensions = 1824
         FakeDataModel = 1792
-        Pointer = 127833192
+        Pointer = 128150744
         RenderView = 2048
         ViewMatrix = 288
 
     class Workspace:
-        CurrentCamera = 1184
-        ReadOnlyGravity = 2600
+        CurrentCamera = 1120
+        ReadOnlyGravity = 2368
         World = 984
 
     class World:
         Gravity = 464
         Primitives = 576
-        WorldSteps = 1624
+        WorldSteps = 1632
 
