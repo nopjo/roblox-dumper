@@ -1,12 +1,12 @@
 # Dumped With: roblox-dumper 2.6
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-760d064d05424689
-# Time Taken: 3833 ms (3.833000 seconds)
+# Roblox Version: version-d599f7fc52a8404c
+# Time Taken: 4186 ms (4.186000 seconds)
 # Total Offsets: 280
 
 class Offsets:
-    ROBLOX_VERSION = "version-760d064d05424689"
+    ROBLOX_VERSION = "version-d599f7fc52a8404c"
 
     class Atmosphere:
         Color = 208
@@ -52,14 +52,14 @@ class Offsets:
     class DataModel:
         CreatorId = 392
         GameId = 400
-        GameLoaded = 1528
+        GameLoaded = 1536
         JobId = 312
         PlaceId = 408
-        ServerIP = 1504
+        ServerIP = 1512
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 132657512
+        Pointer = 133612072
         RealDataModel = 448
 
     class GuiBase2D:
@@ -68,7 +68,7 @@ class Offsets:
         AbsoluteSize = 280
 
     class GuiObject:
-        Active = 1436
+        Active = 1440
         AnchorPoint = 1360
         AutomaticSize = 1368
         BackgroundColor3 = 1336
@@ -76,18 +76,18 @@ class Offsets:
         BorderColor3 = 1348
         BorderMode = 1376
         BorderSizePixel = 1380
-        ClipsDescendants = 1437
+        ClipsDescendants = 1441
         GuiState = 1392
-        Interactable = 1439
-        LayoutOrder = 1396
+        Interactable = 1443
+        LayoutOrder = 1400
         Position = 1288
         Rotation = 392
-        Selectable = 1440
-        SelectionOrder = 1424
+        Selectable = 1444
+        SelectionOrder = 1428
         Size = 1320
-        SizeConstraint = 1428
-        Visible = 1441
-        ZIndex = 1432
+        SizeConstraint = 1432
+        Visible = 1445
+        ZIndex = 1436
 
     class Humanoid:
         AutoJumpEnabled = 472
@@ -108,13 +108,13 @@ class Offsets:
         NameDisplayDistance = 444
         NameOcclusion = 448
         RequiresNeck = 480
-        RigType = 456
+        RigType = 69
         SeatPart = 288
         Sit = 481
         TargetPoint = 356
         UseJumpPower = 483
         WalkSpeed = 468
-        WalkSpeedCheck = 960
+        WalkSpeedCheck = 952
         WalkToPoint = 380
 
     class InputObject:
@@ -192,7 +192,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 232
+        Hash = 352
         IsRobloxScript = 384
 
     class MouseService:
@@ -203,7 +203,7 @@ class Offsets:
         Character = 896
         DisplayName = 304
         HealthDisplayDistance = 824
-        LocaleId = 1720
+        LocaleId = 1712
         NameDisplayDistance = 836
         Team = 656
         TeamColor = 848
@@ -243,7 +243,7 @@ class Offsets:
         SkyboxValid = 653
 
     class ScriptContext:
-        RequireBypass = 2276
+        RequireBypass = 2376
 
     class Seat:
         Occupant = 544
@@ -269,11 +269,11 @@ class Offsets:
         TextureId = 304
 
     class TaskScheduler:
-        JobEnd = 208
+        JobEnd = 472
         JobName = 24
-        JobStart = 200
-        MaxFps = 176
-        Pointer = 133324296
+        JobStart = 464
+        MaxFps = 432
+        Pointer = 134337544
 
     class Team:
         TeamColor = 208
@@ -354,15 +354,15 @@ class Offsets:
         TurnSpeed = 592
 
     class VisualEngine:
-        Dimensions = 1824
-        FakeDataModel = 1792
-        Pointer = 128150744
-        RenderView = 2048
-        ViewMatrix = 288
+        Dimensions = 2672
+        FakeDataModel = 2640
+        Pointer = 129101928
+        RenderView = 2896
+        ViewMatrix = 320
 
     class Workspace:
         CurrentCamera = 1120
-        ReadOnlyGravity = 2368
+        ReadOnlyGravity = 2424
         World = 984
 
     class World:

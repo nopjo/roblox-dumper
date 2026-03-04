@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.6
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-760d064d05424689
- * Time Taken: 3833 ms (3.833000 seconds)
+ * Roblox Version: version-d599f7fc52a8404c
+ * Time Taken: 4186 ms (4.186000 seconds)
  * Total Offsets: 280
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-760d064d05424689";
+        public const string RobloxVersion = "version-d599f7fc52a8404c";
     }
 
     public static class Atmosphere
@@ -73,16 +73,16 @@ namespace RobloxOffsets
     {
         public const ulong CreatorId = 0x188;
         public const ulong GameId = 0x190;
-        public const ulong GameLoaded = 0x5F8;
+        public const ulong GameLoaded = 0x600;
         public const ulong JobId = 0x138;
         public const ulong PlaceId = 0x198;
-        public const ulong ServerIP = 0x5E0;
+        public const ulong ServerIP = 0x5E8;
         public const ulong Workspace = 0x178;
     }
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7E83168;
+        public const ulong Pointer = 0x7F6C228;
         public const ulong RealDataModel = 0x1C0;
     }
 
@@ -95,7 +95,7 @@ namespace RobloxOffsets
 
     public static class GuiObject
     {
-        public const ulong Active = 0x59C;
+        public const ulong Active = 0x5A0;
         public const ulong AnchorPoint = 0x550;
         public const ulong AutomaticSize = 0x558;
         public const ulong BackgroundColor3 = 0x538;
@@ -103,18 +103,18 @@ namespace RobloxOffsets
         public const ulong BorderColor3 = 0x544;
         public const ulong BorderMode = 0x560;
         public const ulong BorderSizePixel = 0x564;
-        public const ulong ClipsDescendants = 0x59D;
+        public const ulong ClipsDescendants = 0x5A1;
         public const ulong GuiState = 0x570;
-        public const ulong Interactable = 0x59F;
-        public const ulong LayoutOrder = 0x574;
+        public const ulong Interactable = 0x5A3;
+        public const ulong LayoutOrder = 0x578;
         public const ulong Position = 0x508;
         public const ulong Rotation = 0x188;
-        public const ulong Selectable = 0x5A0;
-        public const ulong SelectionOrder = 0x590;
+        public const ulong Selectable = 0x5A4;
+        public const ulong SelectionOrder = 0x594;
         public const ulong Size = 0x528;
-        public const ulong SizeConstraint = 0x594;
-        public const ulong Visible = 0x5A1;
-        public const ulong ZIndex = 0x598;
+        public const ulong SizeConstraint = 0x598;
+        public const ulong Visible = 0x5A5;
+        public const ulong ZIndex = 0x59C;
     }
 
     public static class Humanoid
@@ -137,13 +137,13 @@ namespace RobloxOffsets
         public const ulong NameDisplayDistance = 0x1BC;
         public const ulong NameOcclusion = 0x1C0;
         public const ulong RequiresNeck = 0x1E0;
-        public const ulong RigType = 0x1C8;
+        public const ulong RigType = 0x45;
         public const ulong SeatPart = 0x120;
         public const ulong Sit = 0x1E1;
         public const ulong TargetPoint = 0x164;
         public const ulong UseJumpPower = 0x1E3;
         public const ulong WalkSpeed = 0x1D4;
-        public const ulong WalkSpeedCheck = 0x3C0;
+        public const ulong WalkSpeedCheck = 0x3B8;
         public const ulong WalkToPoint = 0x17C;
     }
 
@@ -237,7 +237,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0x160;
         public const ulong IsRobloxScript = 0x180;
     }
 
@@ -252,7 +252,7 @@ namespace RobloxOffsets
         public const ulong Character = 0x380;
         public const ulong DisplayName = 0x130;
         public const ulong HealthDisplayDistance = 0x338;
-        public const ulong LocaleId = 0x6B8;
+        public const ulong LocaleId = 0x6B0;
         public const ulong NameDisplayDistance = 0x344;
         public const ulong Team = 0x290;
         public const ulong TeamColor = 0x350;
@@ -304,7 +304,7 @@ namespace RobloxOffsets
 
     public static class ScriptContext
     {
-        public const ulong RequireBypass = 0x8E4;
+        public const ulong RequireBypass = 0x948;
     }
 
     public static class Seat
@@ -338,11 +338,11 @@ namespace RobloxOffsets
 
     public static class TaskScheduler
     {
-        public const ulong JobEnd = 0xD0;
+        public const ulong JobEnd = 0x1D8;
         public const ulong JobName = 0x18;
-        public const ulong JobStart = 0xC8;
-        public const ulong MaxFps = 0xB0;
-        public const ulong Pointer = 0x7F25E08;
+        public const ulong JobStart = 0x1D0;
+        public const ulong MaxFps = 0x1B0;
+        public const ulong Pointer = 0x801D408;
     }
 
     public static class Team
@@ -439,17 +439,17 @@ namespace RobloxOffsets
 
     public static class VisualEngine
     {
-        public const ulong Dimensions = 0x720;
-        public const ulong FakeDataModel = 0x700;
-        public const ulong Pointer = 0x7A36CD8;
-        public const ulong RenderView = 0x800;
-        public const ulong ViewMatrix = 0x120;
+        public const ulong Dimensions = 0xA70;
+        public const ulong FakeDataModel = 0xA50;
+        public const ulong Pointer = 0x7B1F068;
+        public const ulong RenderView = 0xB50;
+        public const ulong ViewMatrix = 0x140;
     }
 
     public static class Workspace
     {
         public const ulong CurrentCamera = 0x460;
-        public const ulong ReadOnlyGravity = 0x940;
+        public const ulong ReadOnlyGravity = 0x978;
         public const ulong World = 0x3D8;
     }
 
