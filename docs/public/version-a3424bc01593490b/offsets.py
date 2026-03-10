@@ -1,0 +1,372 @@
+# Dumped With: roblox-dumper 2.6
+# Created by: Jonah (jonahw on Discord)
+# Github: https://github.com/nopjo/roblox-dumper
+# Roblox Version: version-a3424bc01593490b
+# Time Taken: 3869 ms (3.869000 seconds)
+# Total Offsets: 280
+
+class Offsets:
+    ROBLOX_VERSION = "version-a3424bc01593490b"
+
+    class Atmosphere:
+        Color = 208
+        Decay = 220
+        Density = 232
+        Glare = 236
+        Haze = 240
+        Offset = 244
+
+    class BasePart:
+        CastShadow = 245
+        Color3 = 404
+        Locked = 246
+        Massless = 247
+        Primitive = 328
+        Reflectance = 236
+        Shape = 433
+        Transparency = 240
+
+    class BloomEffect:
+        Intensity = 208
+        Size = 212
+        Threshold = 216
+
+    class ByteCode:
+        Pointer = 16
+        Size = 32
+
+    class Camera:
+        CFrame = 248
+        FieldOfView = 352
+        Position = 284
+        Rotation = 248
+        ViewportInt16 = 684
+        ViewportSize = 744
+
+    class CharacterMesh:
+        BaseTextureId = 224
+        BodyPart = 352
+        MeshId = 272
+        OverlayTextureId = 320
+
+    class DataModel:
+        CreatorId = 392
+        GameId = 400
+        GameLoaded = 1536
+        JobId = 312
+        PlaceId = 408
+        ServerIP = 1512
+        Workspace = 376
+
+    class FakeDataModel:
+        Pointer = 136060248
+        RealDataModel = 448
+
+    class GuiBase2D:
+        AbsolutePosition = 268
+        AbsoluteRotation = 392
+        AbsoluteSize = 280
+
+    class GuiObject:
+        Active = 1440
+        AnchorPoint = 1360
+        AutomaticSize = 1368
+        BackgroundColor3 = 1336
+        BackgroundTransparency = 1372
+        BorderColor3 = 1348
+        BorderMode = 1376
+        BorderSizePixel = 1380
+        ClipsDescendants = 1441
+        GuiState = 1392
+        Interactable = 1443
+        LayoutOrder = 1400
+        Position = 1288
+        Rotation = 392
+        Selectable = 1444
+        SelectionOrder = 1428
+        Size = 1320
+        SizeConstraint = 1432
+        Visible = 1445
+        ZIndex = 1436
+
+    class Humanoid:
+        AutoJumpEnabled = 472
+        AutoRotate = 473
+        AutomaticScalingEnabled = 474
+        BreakJointsOnDeath = 475
+        CameraOffset = 320
+        DisplayDistanceType = 396
+        EvaluateStateMachine = 476
+        Health = 404
+        HealthDisplayDistance = 408
+        HealthDisplayType = 412
+        HipHeight = 416
+        JumpHeight = 428
+        JumpPower = 432
+        MaxHealth = 436
+        MaxSlopeAngle = 440
+        NameDisplayDistance = 444
+        NameOcclusion = 448
+        RequiresNeck = 480
+        RigType = 456
+        SeatPart = 288
+        Sit = 481
+        TargetPoint = 356
+        UseJumpPower = 483
+        WalkSpeed = 468
+        WalkSpeedCheck = 956
+        WalkToPoint = 380
+
+    class InputObject:
+        MousePosition = 236
+
+    class Instance:
+        AttributeContainer = 72
+        AttributeList = 24
+        AttributeToNext = 88
+        AttributeToValue = 24
+        ChildrenEnd = 8
+        ChildrenStart = 112
+        ClassDescriptor = 24
+        ClassName = 8
+        Name = 176
+        Parent = 104
+
+    class Lighting:
+        Ambient = 216
+        Atmosphere = 488
+        Brightness = 288
+        ClockTime = 440
+        ColorShift_Bottom = 228
+        ColorShift_Top = 240
+        EnvironmentDiffuseScale = 292
+        EnvironmentSpecularScale = 296
+        ExposureCompensation = 300
+        FogColor = 252
+        FogEnd = 308
+        FogStart = 312
+        OutdoorAmbient = 264
+        ShadowSoftness = 320
+        Sky = 472
+
+    class LightingParameters:
+        GeographicLatitude = 400
+        LightColor = 348
+        LightDirection = 360
+        SkyAmbient = 336
+        SkyAmbient2 = 404
+        Source = 372
+        TrueMoonPosition = 388
+        TrueSunPosition = 376
+
+    class LocalScript:
+        Bytecode = 424
+        Hash = 232
+
+    class MaterialColors:
+        Asphalt = 48
+        Basalt = 39
+        Brick = 15
+        Cobblestone = 51
+        Concrete = 12
+        CrackedLava = 45
+        Glacier = 27
+        Grass = 6
+        Ground = 42
+        Ice = 54
+        LeafyGrass = 57
+        Limestone = 63
+        Mud = 36
+        Pavement = 66
+        Rock = 24
+        Salt = 60
+        Sand = 18
+        Sandstone = 33
+        Slate = 9
+        Snow = 30
+        WoodPlanks = 21
+
+    class MeshPart:
+        MeshId = 744
+        TextureId = 792
+
+    class ModuleScript:
+        Bytecode = 336
+        Hash = 232
+        IsRobloxScript = 384
+
+    class MouseService:
+        InputObject = 272
+
+    class Player:
+        AccountAge = 796
+        Character = 920
+        DisplayName = 304
+        HealthDisplayDistance = 840
+        LocaleId = 1736
+        NameDisplayDistance = 852
+        Team = 672
+        TeamColor = 864
+        UserId = 712
+
+    class Players:
+        LocalPlayer = 304
+
+    class Primitive:
+        AssemblyAngularVelocity = 252
+        AssemblyLinearVelocity = 240
+        CFrame = 192
+        Material = 582
+        Orientation = 192
+        Position = 228
+        PrimitiveFlags = 430
+        Rotation = 192
+        Size = 432
+
+    class PrimitiveFlags:
+        Anchored = 2
+        CanCollide = 8
+        CanQuery = 32
+        CanTouch = 16
+
+    class ProximityPrompt:
+        ActionText = 208
+        Enabled = 342
+        HoldDuration = 320
+        KeyboardKeyCode = 324
+        MaxActivationDistance = 328
+        ObjectText = 240
+        RequiresLineOfSight = 343
+
+    class RenderView:
+        LightingValid = 328
+        SkyboxValid = 653
+
+    class ScriptContext:
+        RequireBypass = 2617
+
+    class Seat:
+        Occupant = 544
+
+    class Sky:
+        MoonAngularSize = 604
+        MoonTextureId = 224
+        SkyboxBk = 272
+        SkyboxDn = 320
+        SkyboxFt = 368
+        SkyboxLf = 416
+        SkyboxOrientation = 592
+        SkyboxRt = 464
+        SkyboxUp = 512
+        StarCount = 608
+        SunAngularSize = 612
+        SunTextureId = 560
+
+    class SpecialMesh:
+        MeshId = 264
+        Offset = 208
+        Scale = 220
+        TextureId = 304
+
+    class TaskScheduler:
+        JobEnd = 208
+        JobName = 24
+        JobStart = 200
+        MaxFps = 176
+        Pointer = 136796168
+
+    class Team:
+        TeamColor = 208
+
+    class Terrain:
+        GrassLength = 504
+        MaterialColors = 640
+        WaterColor = 488
+        WaterReflectance = 512
+        WaterTransparency = 516
+        WaterWaveSize = 520
+        WaterWaveSpeed = 524
+
+    class TextButton:
+        AutoButtonColor = 2612
+        ContentText = 3400
+        Font = 4464
+        LineHeight = 3516
+        LocalizedText = 3400
+        MaxVisibleGraphemes = 4476
+        Modal = 2613
+        RichText = 3685
+        Selected = 2614
+        Text = 3400
+        TextColor3 = 4440
+        TextDirection = 3688
+        TextScaled = 3512
+        TextSize = 4484
+        TextStrokeColor3 = 4452
+        TextStrokeTransparency = 4488
+        TextTransparency = 4492
+        TextTruncate = 4496
+        TextWrapped = 3592
+        TextXAlignment = 4500
+        TextYAlignment = 3588
+
+    class TextLabel:
+        ContentText = 2760
+        Font = 3824
+        LineHeight = 2876
+        LocalizedText = 2760
+        MaxVisibleGraphemes = 3836
+        RichText = 3045
+        Text = 2760
+        TextColor3 = 3800
+        TextDirection = 3048
+        TextScaled = 2872
+        TextSize = 3844
+        TextStrokeColor3 = 3812
+        TextStrokeTransparency = 3848
+        TextTransparency = 3852
+        TextTruncate = 3856
+        TextWrapped = 2952
+        TextXAlignment = 3860
+        TextYAlignment = 2948
+
+    class Tool:
+        CanBeDropped = 1184
+        Enabled = 1185
+        Grip = 1136
+        GripForward = 1160
+        GripPos = 1172
+        GripRight = 1136
+        GripUp = 1148
+        ManualActivationOnly = 1186
+        RequiresHandle = 1187
+        Tooltip = 1104
+
+    class Value:
+        Value = 208
+
+    class VehicleSeat:
+        MaxSpeed = 568
+        Occupant = 536
+        SteerFloat = 576
+        ThrottleFloat = 584
+        Torque = 588
+        TurnSpeed = 592
+
+    class VisualEngine:
+        Dimensions = 2672
+        FakeDataModel = 2640
+        Pointer = 131560008
+        RenderView = 2896
+        ViewMatrix = 320
+
+    class Workspace:
+        CurrentCamera = 1128
+        ReadOnlyGravity = 2440
+        World = 992
+
+    class World:
+        Gravity = 464
+        Primitives = 576
+        WorldSteps = 1632
+
