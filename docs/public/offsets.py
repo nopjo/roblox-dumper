@@ -1,12 +1,12 @@
 # Dumped With: roblox-dumper 2.6
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-b130242ed064436f
-# Time Taken: 3797 ms (3.797000 seconds)
+# Roblox Version: version-ae421f0582e54718
+# Time Taken: 4058 ms (4.058000 seconds)
 # Total Offsets: 280
 
 class Offsets:
-    ROBLOX_VERSION = "version-b130242ed064436f"
+    ROBLOX_VERSION = "version-ae421f0582e54718"
 
     class Atmosphere:
         Color = 208
@@ -59,7 +59,7 @@ class Offsets:
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 136064056
+        Pointer = 136134312
         RealDataModel = 448
 
     class GuiBase2D:
@@ -68,26 +68,26 @@ class Offsets:
         AbsoluteSize = 280
 
     class GuiObject:
-        Active = 1440
-        AnchorPoint = 1360
-        AutomaticSize = 1368
-        BackgroundColor3 = 1336
-        BackgroundTransparency = 1372
-        BorderColor3 = 1348
-        BorderMode = 1376
-        BorderSizePixel = 1380
-        ClipsDescendants = 1441
-        GuiState = 1392
-        Interactable = 1443
-        LayoutOrder = 1400
-        Position = 1288
+        Active = 1456
+        AnchorPoint = 1376
+        AutomaticSize = 1384
+        BackgroundColor3 = 1352
+        BackgroundTransparency = 1388
+        BorderColor3 = 1364
+        BorderMode = 1392
+        BorderSizePixel = 1396
+        ClipsDescendants = 1457
+        GuiState = 1408
+        Interactable = 1459
+        LayoutOrder = 1416
+        Position = 1304
         Rotation = 392
-        Selectable = 1444
-        SelectionOrder = 1428
-        Size = 1320
-        SizeConstraint = 1432
-        Visible = 1445
-        ZIndex = 1436
+        Selectable = 1460
+        SelectionOrder = 1444
+        Size = 1336
+        SizeConstraint = 1448
+        Visible = 1461
+        ZIndex = 1452
 
     class Humanoid:
         AutoJumpEnabled = 472
@@ -161,7 +161,7 @@ class Offsets:
 
     class LocalScript:
         Bytecode = 424
-        Hash = 232
+        Hash = 440
 
     class MaterialColors:
         Asphalt = 48
@@ -192,7 +192,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 232
+        Hash = 352
         IsRobloxScript = 384
 
     class MouseService:
@@ -243,7 +243,7 @@ class Offsets:
         SkyboxValid = 653
 
     class ScriptContext:
-        RequireBypass = 2617
+        RequireBypass = 2352
 
     class Seat:
         Occupant = 544
@@ -273,14 +273,14 @@ class Offsets:
         JobName = 24
         JobStart = 200
         MaxFps = 176
-        Pointer = 136799944
+        Pointer = 136870728
 
     class Team:
         TeamColor = 208
 
     class Terrain:
         GrassLength = 504
-        MaterialColors = 640
+        MaterialColors = 656
         WaterColor = 488
         WaterReflectance = 512
         WaterTransparency = 516
@@ -288,47 +288,47 @@ class Offsets:
         WaterWaveSpeed = 524
 
     class TextButton:
-        AutoButtonColor = 2612
-        ContentText = 3400
-        Font = 4464
-        LineHeight = 3516
-        LocalizedText = 3400
-        MaxVisibleGraphemes = 4476
-        Modal = 2613
-        RichText = 3685
-        Selected = 2614
-        Text = 3400
-        TextColor3 = 4440
-        TextDirection = 3688
-        TextScaled = 3512
-        TextSize = 4484
-        TextStrokeColor3 = 4452
-        TextStrokeTransparency = 4488
-        TextTransparency = 4492
-        TextTruncate = 4496
-        TextWrapped = 3592
-        TextXAlignment = 4500
-        TextYAlignment = 3588
+        AutoButtonColor = 2508
+        ContentText = 3296
+        Font = 4360
+        LineHeight = 3412
+        LocalizedText = 3296
+        MaxVisibleGraphemes = 4372
+        Modal = 2509
+        RichText = 3581
+        Selected = 2510
+        Text = 3296
+        TextColor3 = 4336
+        TextDirection = 3584
+        TextScaled = 3408
+        TextSize = 4380
+        TextStrokeColor3 = 4348
+        TextStrokeTransparency = 4384
+        TextTransparency = 4388
+        TextTruncate = 4392
+        TextWrapped = 3488
+        TextXAlignment = 4396
+        TextYAlignment = 3484
 
     class TextLabel:
-        ContentText = 2760
-        Font = 3824
-        LineHeight = 2876
-        LocalizedText = 2760
-        MaxVisibleGraphemes = 3836
-        RichText = 3045
-        Text = 2760
-        TextColor3 = 3800
-        TextDirection = 3048
-        TextScaled = 2872
-        TextSize = 3844
-        TextStrokeColor3 = 3812
-        TextStrokeTransparency = 3848
-        TextTransparency = 3852
-        TextTruncate = 3856
-        TextWrapped = 2952
-        TextXAlignment = 3860
-        TextYAlignment = 2948
+        ContentText = 2656
+        Font = 3720
+        LineHeight = 2772
+        LocalizedText = 2656
+        MaxVisibleGraphemes = 3732
+        RichText = 2941
+        Text = 2656
+        TextColor3 = 3696
+        TextDirection = 2944
+        TextScaled = 2768
+        TextSize = 3740
+        TextStrokeColor3 = 3708
+        TextStrokeTransparency = 3744
+        TextTransparency = 3748
+        TextTruncate = 3752
+        TextWrapped = 2848
+        TextXAlignment = 3756
+        TextYAlignment = 2844
 
     class Tool:
         CanBeDropped = 1184
@@ -356,7 +356,7 @@ class Offsets:
     class VisualEngine:
         Dimensions = 2672
         FakeDataModel = 2640
-        Pointer = 131563848
+        Pointer = 131633600
         RenderView = 2896
         ViewMatrix = 320
 
@@ -367,6 +367,6 @@ class Offsets:
 
     class World:
         Gravity = 464
-        Primitives = 576
+        Primitives = 512
         WorldSteps = 1632
 

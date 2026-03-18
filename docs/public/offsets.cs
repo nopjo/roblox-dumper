@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.6
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-b130242ed064436f
- * Time Taken: 3797 ms (3.797000 seconds)
+ * Roblox Version: version-ae421f0582e54718
+ * Time Taken: 4058 ms (4.058000 seconds)
  * Total Offsets: 280
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-b130242ed064436f";
+        public const string RobloxVersion = "version-ae421f0582e54718";
     }
 
     public static class Atmosphere
@@ -82,7 +82,7 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x81C2C38;
+        public const ulong Pointer = 0x81D3EA8;
         public const ulong RealDataModel = 0x1C0;
     }
 
@@ -95,26 +95,26 @@ namespace RobloxOffsets
 
     public static class GuiObject
     {
-        public const ulong Active = 0x5A0;
-        public const ulong AnchorPoint = 0x550;
-        public const ulong AutomaticSize = 0x558;
-        public const ulong BackgroundColor3 = 0x538;
-        public const ulong BackgroundTransparency = 0x55C;
-        public const ulong BorderColor3 = 0x544;
-        public const ulong BorderMode = 0x560;
-        public const ulong BorderSizePixel = 0x564;
-        public const ulong ClipsDescendants = 0x5A1;
-        public const ulong GuiState = 0x570;
-        public const ulong Interactable = 0x5A3;
-        public const ulong LayoutOrder = 0x578;
-        public const ulong Position = 0x508;
+        public const ulong Active = 0x5B0;
+        public const ulong AnchorPoint = 0x560;
+        public const ulong AutomaticSize = 0x568;
+        public const ulong BackgroundColor3 = 0x548;
+        public const ulong BackgroundTransparency = 0x56C;
+        public const ulong BorderColor3 = 0x554;
+        public const ulong BorderMode = 0x570;
+        public const ulong BorderSizePixel = 0x574;
+        public const ulong ClipsDescendants = 0x5B1;
+        public const ulong GuiState = 0x580;
+        public const ulong Interactable = 0x5B3;
+        public const ulong LayoutOrder = 0x588;
+        public const ulong Position = 0x518;
         public const ulong Rotation = 0x188;
-        public const ulong Selectable = 0x5A4;
-        public const ulong SelectionOrder = 0x594;
-        public const ulong Size = 0x528;
-        public const ulong SizeConstraint = 0x598;
-        public const ulong Visible = 0x5A5;
-        public const ulong ZIndex = 0x59C;
+        public const ulong Selectable = 0x5B4;
+        public const ulong SelectionOrder = 0x5A4;
+        public const ulong Size = 0x538;
+        public const ulong SizeConstraint = 0x5A8;
+        public const ulong Visible = 0x5B5;
+        public const ulong ZIndex = 0x5AC;
     }
 
     public static class Humanoid
@@ -200,7 +200,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0x1B8;
     }
 
     public static class MaterialColors
@@ -237,7 +237,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0xE8;
+        public const ulong Hash = 0x160;
         public const ulong IsRobloxScript = 0x180;
     }
 
@@ -304,7 +304,7 @@ namespace RobloxOffsets
 
     public static class ScriptContext
     {
-        public const ulong RequireBypass = 0xA39;
+        public const ulong RequireBypass = 0x930;
     }
 
     public static class Seat
@@ -342,7 +342,7 @@ namespace RobloxOffsets
         public const ulong JobName = 0x18;
         public const ulong JobStart = 0xC8;
         public const ulong MaxFps = 0xB0;
-        public const ulong Pointer = 0x82766C8;
+        public const ulong Pointer = 0x8287B48;
     }
 
     public static class Team
@@ -353,7 +353,7 @@ namespace RobloxOffsets
     public static class Terrain
     {
         public const ulong GrassLength = 0x1F8;
-        public const ulong MaterialColors = 0x280;
+        public const ulong MaterialColors = 0x290;
         public const ulong WaterColor = 0x1E8;
         public const ulong WaterReflectance = 0x200;
         public const ulong WaterTransparency = 0x204;
@@ -363,49 +363,49 @@ namespace RobloxOffsets
 
     public static class TextButton
     {
-        public const ulong AutoButtonColor = 0xA34;
-        public const ulong ContentText = 0xD48;
-        public const ulong Font = 0x1170;
-        public const ulong LineHeight = 0xDBC;
-        public const ulong LocalizedText = 0xD48;
-        public const ulong MaxVisibleGraphemes = 0x117C;
-        public const ulong Modal = 0xA35;
-        public const ulong RichText = 0xE65;
-        public const ulong Selected = 0xA36;
-        public const ulong Text = 0xD48;
-        public const ulong TextColor3 = 0x1158;
-        public const ulong TextDirection = 0xE68;
-        public const ulong TextScaled = 0xDB8;
-        public const ulong TextSize = 0x1184;
-        public const ulong TextStrokeColor3 = 0x1164;
-        public const ulong TextStrokeTransparency = 0x1188;
-        public const ulong TextTransparency = 0x118C;
-        public const ulong TextTruncate = 0x1190;
-        public const ulong TextWrapped = 0xE08;
-        public const ulong TextXAlignment = 0x1194;
-        public const ulong TextYAlignment = 0xE04;
+        public const ulong AutoButtonColor = 0x9CC;
+        public const ulong ContentText = 0xCE0;
+        public const ulong Font = 0x1108;
+        public const ulong LineHeight = 0xD54;
+        public const ulong LocalizedText = 0xCE0;
+        public const ulong MaxVisibleGraphemes = 0x1114;
+        public const ulong Modal = 0x9CD;
+        public const ulong RichText = 0xDFD;
+        public const ulong Selected = 0x9CE;
+        public const ulong Text = 0xCE0;
+        public const ulong TextColor3 = 0x10F0;
+        public const ulong TextDirection = 0xE00;
+        public const ulong TextScaled = 0xD50;
+        public const ulong TextSize = 0x111C;
+        public const ulong TextStrokeColor3 = 0x10FC;
+        public const ulong TextStrokeTransparency = 0x1120;
+        public const ulong TextTransparency = 0x1124;
+        public const ulong TextTruncate = 0x1128;
+        public const ulong TextWrapped = 0xDA0;
+        public const ulong TextXAlignment = 0x112C;
+        public const ulong TextYAlignment = 0xD9C;
     }
 
     public static class TextLabel
     {
-        public const ulong ContentText = 0xAC8;
-        public const ulong Font = 0xEF0;
-        public const ulong LineHeight = 0xB3C;
-        public const ulong LocalizedText = 0xAC8;
-        public const ulong MaxVisibleGraphemes = 0xEFC;
-        public const ulong RichText = 0xBE5;
-        public const ulong Text = 0xAC8;
-        public const ulong TextColor3 = 0xED8;
-        public const ulong TextDirection = 0xBE8;
-        public const ulong TextScaled = 0xB38;
-        public const ulong TextSize = 0xF04;
-        public const ulong TextStrokeColor3 = 0xEE4;
-        public const ulong TextStrokeTransparency = 0xF08;
-        public const ulong TextTransparency = 0xF0C;
-        public const ulong TextTruncate = 0xF10;
-        public const ulong TextWrapped = 0xB88;
-        public const ulong TextXAlignment = 0xF14;
-        public const ulong TextYAlignment = 0xB84;
+        public const ulong ContentText = 0xA60;
+        public const ulong Font = 0xE88;
+        public const ulong LineHeight = 0xAD4;
+        public const ulong LocalizedText = 0xA60;
+        public const ulong MaxVisibleGraphemes = 0xE94;
+        public const ulong RichText = 0xB7D;
+        public const ulong Text = 0xA60;
+        public const ulong TextColor3 = 0xE70;
+        public const ulong TextDirection = 0xB80;
+        public const ulong TextScaled = 0xAD0;
+        public const ulong TextSize = 0xE9C;
+        public const ulong TextStrokeColor3 = 0xE7C;
+        public const ulong TextStrokeTransparency = 0xEA0;
+        public const ulong TextTransparency = 0xEA4;
+        public const ulong TextTruncate = 0xEA8;
+        public const ulong TextWrapped = 0xB20;
+        public const ulong TextXAlignment = 0xEAC;
+        public const ulong TextYAlignment = 0xB1C;
     }
 
     public static class Tool
@@ -441,7 +441,7 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0xA70;
         public const ulong FakeDataModel = 0xA50;
-        public const ulong Pointer = 0x7D78148;
+        public const ulong Pointer = 0x7D891C0;
         public const ulong RenderView = 0xB50;
         public const ulong ViewMatrix = 0x140;
     }
@@ -456,7 +456,7 @@ namespace RobloxOffsets
     public static class World
     {
         public const ulong Gravity = 0x1D0;
-        public const ulong Primitives = 0x240;
+        public const ulong Primitives = 0x200;
         public const ulong WorldSteps = 0x660;
     }
 
