@@ -12,6 +12,7 @@
 
 // clang-format off
 namespace offsets {
+    
     inline constexpr const char* roblox_version = "version-3e7a57d7e53b4881";
 
     namespace Atmosphere {
