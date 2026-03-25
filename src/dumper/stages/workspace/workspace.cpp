@@ -20,7 +20,7 @@ namespace dumper::stages::workspace {
                             196.2f, 0x1000, 0x4);
 
         const auto result = process::helpers::find_offset_in_pointer<float>(
-            dumper::g_workspace->get_address(), 196.2f, 0x400, 0x200, 0x8, 0x4);
+            dumper::g_workspace->get_address(), 196.2f, 0x800, 0x400, 0x8, 0x4);
 
         if (!result) {
             spdlog::error("Failed to dump World and World Gravity in Workspace");
