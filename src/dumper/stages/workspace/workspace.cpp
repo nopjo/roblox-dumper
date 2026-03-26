@@ -44,15 +44,22 @@ namespace dumper::stages::workspace {
         std::optional<size_t> primitives_offset;
 
         for (size_t offset = 0; offset < 0x1000; offset += 0x8) {
-            const auto ptr = process::Memory::read<uintptr_t>(*world_addr + offset);
-
-            if (!ptr || *ptr == 0) {
+            const auto array_ptr = process::Memory::read<uintptr_t>(*world_addr + offset);
+            if (!array_ptr || *array_ptr == 0)
                 continue;
-            }
 
-            const auto rtti_offset = process::Rtti::find(*ptr, "Primitive@RBX");
+            const auto check_slot = [&](size_t slot) -> bool {
+                const auto primitive_ptr = process::Memory::read<uintptr_t>(*array_ptr + slot);
+                if (!primitive_ptr || *primitive_ptr == 0)
+                    return false;
 
-            if (rtti_offset) {
+                const auto names = process::Rtti::get_all_names(*primitive_ptr);
+                return std::ranges::any_of(names, [](const auto& name) {
+                    return name.find("Primitive@RBX") != std::string::npos;
+                });
+            };
+
+            if (check_slot(0x0) && check_slot(0x8)) {
                 primitives_offset = offset;
                 break;
             }
