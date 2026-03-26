@@ -3,7 +3,7 @@
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-6776addb8fbc4d17
- * Time Taken: 3366 ms (3.366000 seconds)
+ * Time Taken: 3249 ms (3.249000 seconds)
  * Total Offsets: 280
  */
 
@@ -200,7 +200,7 @@ namespace RobloxOffsets
     public static class LocalScript
     {
         public const ulong Bytecode = 0x1A8;
-        public const ulong Hash = 0x1B8;
+        public const ulong Hash = 0xE8;
     }
 
     public static class MaterialColors
@@ -237,7 +237,7 @@ namespace RobloxOffsets
     public static class ModuleScript
     {
         public const ulong Bytecode = 0x150;
-        public const ulong Hash = 0x160;
+        public const ulong Hash = 0xE8;
         public const ulong IsRobloxScript = 0x180;
     }
 
@@ -456,7 +456,7 @@ namespace RobloxOffsets
     public static class World
     {
         public const ulong Gravity = 0x1D8;
-        public const ulong Primitives = 0x150;
+        public const ulong Primitives = 0x248;
         public const ulong WorldSteps = 0x668;
     }
 

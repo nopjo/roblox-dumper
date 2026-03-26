@@ -160,7 +160,7 @@
     },
     "LocalScript": {
       "Bytecode": 424,
-      "Hash": 440
+      "Hash": 232
     },
     "MaterialColors": {
       "Asphalt": 48,
@@ -191,7 +191,7 @@
     },
     "ModuleScript": {
       "Bytecode": 336,
-      "Hash": 352,
+      "Hash": 232,
       "IsRobloxScript": 384
     },
     "MouseService": {
@@ -366,7 +366,7 @@
     },
     "World": {
       "Gravity": 472,
-      "Primitives": 336,
+      "Primitives": 584,
       "WorldSteps": 1640
     }
   }
