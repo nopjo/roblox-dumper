@@ -3,7 +3,7 @@
     "dumper": "roblox-dumper 2.6",
     "author": "Jonah (jonahw on Discord)",
     "github": "https://github.com/nopjo/roblox-dumper",
-    "roblox_version": "version-ae421f0582e54718",
+    "roblox_version": "version-6776addb8fbc4d17",
     "total_offsets": 280
   },
   "offsets": {
@@ -58,7 +58,7 @@
       "Workspace": 376
     },
     "FakeDataModel": {
-      "Pointer": 136134312,
+      "Pointer": 127246552,
       "RealDataModel": 448
     },
     "GuiBase2D": {
@@ -125,11 +125,11 @@
       "AttributeToNext": 88,
       "AttributeToValue": 24,
       "ChildrenEnd": 8,
-      "ChildrenStart": 112,
+      "ChildrenStart": 120,
       "ClassDescriptor": 24,
       "ClassName": 8,
       "Name": 176,
-      "Parent": 104
+      "Parent": 112
     },
     "Lighting": {
       "Ambient": 216,
@@ -191,7 +191,7 @@
     },
     "ModuleScript": {
       "Bytecode": 336,
-      "Hash": 352,
+      "Hash": 232,
       "IsRobloxScript": 384
     },
     "MouseService": {
@@ -203,9 +203,9 @@
       "DisplayName": 304,
       "HealthDisplayDistance": 840,
       "LocaleId": 1736,
-      "NameDisplayDistance": 852,
+      "NameDisplayDistance": 856,
       "Team": 672,
-      "TeamColor": 864,
+      "TeamColor": 868,
       "UserId": 712
     },
     "Players": {
@@ -215,7 +215,7 @@
       "AssemblyAngularVelocity": 252,
       "AssemblyLinearVelocity": 240,
       "CFrame": 192,
-      "Material": 582,
+      "Material": 558,
       "Orientation": 192,
       "Position": 228,
       "PrimitiveFlags": 430,
@@ -242,7 +242,7 @@
       "SkyboxValid": 653
     },
     "ScriptContext": {
-      "RequireBypass": 2352
+      "RequireBypass": 2301
     },
     "Seat": {
       "Occupant": 544
@@ -272,7 +272,7 @@
       "JobName": 24,
       "JobStart": 200,
       "MaxFps": 176,
-      "Pointer": 136870728
+      "Pointer": 127960848
     },
     "Team": {
       "TeamColor": 208
@@ -299,7 +299,7 @@
       "Text": 3296,
       "TextColor3": 4336,
       "TextDirection": 3584,
-      "TextScaled": 6,
+      "TextScaled": 3408,
       "TextSize": 4380,
       "TextStrokeColor3": 4348,
       "TextStrokeTransparency": 4384,
@@ -330,16 +330,16 @@
       "TextYAlignment": 2844
     },
     "Tool": {
-      "CanBeDropped": 1184,
-      "Enabled": 1185,
-      "Grip": 1136,
-      "GripForward": 1160,
-      "GripPos": 1172,
-      "GripRight": 1136,
-      "GripUp": 1148,
-      "ManualActivationOnly": 1186,
-      "RequiresHandle": 1187,
-      "Tooltip": 1104
+      "CanBeDropped": 1216,
+      "Enabled": 1217,
+      "Grip": 1168,
+      "GripForward": 1192,
+      "GripPos": 1204,
+      "GripRight": 1168,
+      "GripUp": 1180,
+      "ManualActivationOnly": 1218,
+      "RequiresHandle": 1219,
+      "Tooltip": 1136
     },
     "Value": {
       "Value": 208
@@ -353,21 +353,21 @@
       "TurnSpeed": 592
     },
     "VisualEngine": {
-      "Dimensions": 2672,
-      "FakeDataModel": 2640,
-      "Pointer": 131633600,
-      "RenderView": 2896,
-      "ViewMatrix": 320
+      "Dimensions": 2656,
+      "FakeDataModel": 2624,
+      "Pointer": 122751576,
+      "RenderView": 2880,
+      "ViewMatrix": 304
     },
     "Workspace": {
-      "CurrentCamera": 1128,
-      "ReadOnlyGravity": 2440,
-      "World": 992
+      "CurrentCamera": 1160,
+      "ReadOnlyGravity": 2472,
+      "World": 1024
     },
     "World": {
-      "Gravity": 464,
-      "Primitives": 576,
-      "WorldSteps": 1632
+      "Gravity": 472,
+      "Primitives": 584,
+      "WorldSteps": 1640
     }
   }
 }

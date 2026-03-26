@@ -1,12 +1,12 @@
 # Dumped With: roblox-dumper 2.6
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-ae421f0582e54718
-# Time Taken: 3906 ms (3.906000 seconds)
+# Roblox Version: version-6776addb8fbc4d17
+# Time Taken: 3249 ms (3.249000 seconds)
 # Total Offsets: 280
 
 class Offsets:
-    ROBLOX_VERSION = "version-ae421f0582e54718"
+    ROBLOX_VERSION = "version-6776addb8fbc4d17"
 
     class Atmosphere:
         Color = 208
@@ -59,7 +59,7 @@ class Offsets:
         Workspace = 376
 
     class FakeDataModel:
-        Pointer = 136134312
+        Pointer = 127246552
         RealDataModel = 448
 
     class GuiBase2D:
@@ -126,11 +126,11 @@ class Offsets:
         AttributeToNext = 88
         AttributeToValue = 24
         ChildrenEnd = 8
-        ChildrenStart = 112
+        ChildrenStart = 120
         ClassDescriptor = 24
         ClassName = 8
         Name = 176
-        Parent = 104
+        Parent = 112
 
     class Lighting:
         Ambient = 216
@@ -192,7 +192,7 @@ class Offsets:
 
     class ModuleScript:
         Bytecode = 336
-        Hash = 352
+        Hash = 232
         IsRobloxScript = 384
 
     class MouseService:
@@ -204,9 +204,9 @@ class Offsets:
         DisplayName = 304
         HealthDisplayDistance = 840
         LocaleId = 1736
-        NameDisplayDistance = 852
+        NameDisplayDistance = 856
         Team = 672
-        TeamColor = 864
+        TeamColor = 868
         UserId = 712
 
     class Players:
@@ -216,7 +216,7 @@ class Offsets:
         AssemblyAngularVelocity = 252
         AssemblyLinearVelocity = 240
         CFrame = 192
-        Material = 582
+        Material = 558
         Orientation = 192
         Position = 228
         PrimitiveFlags = 430
@@ -243,7 +243,7 @@ class Offsets:
         SkyboxValid = 653
 
     class ScriptContext:
-        RequireBypass = 2352
+        RequireBypass = 2301
 
     class Seat:
         Occupant = 544
@@ -273,7 +273,7 @@ class Offsets:
         JobName = 24
         JobStart = 200
         MaxFps = 176
-        Pointer = 136870728
+        Pointer = 127960848
 
     class Team:
         TeamColor = 208
@@ -300,7 +300,7 @@ class Offsets:
         Text = 3296
         TextColor3 = 4336
         TextDirection = 3584
-        TextScaled = 6
+        TextScaled = 3408
         TextSize = 4380
         TextStrokeColor3 = 4348
         TextStrokeTransparency = 4384
@@ -331,16 +331,16 @@ class Offsets:
         TextYAlignment = 2844
 
     class Tool:
-        CanBeDropped = 1184
-        Enabled = 1185
-        Grip = 1136
-        GripForward = 1160
-        GripPos = 1172
-        GripRight = 1136
-        GripUp = 1148
-        ManualActivationOnly = 1186
-        RequiresHandle = 1187
-        Tooltip = 1104
+        CanBeDropped = 1216
+        Enabled = 1217
+        Grip = 1168
+        GripForward = 1192
+        GripPos = 1204
+        GripRight = 1168
+        GripUp = 1180
+        ManualActivationOnly = 1218
+        RequiresHandle = 1219
+        Tooltip = 1136
 
     class Value:
         Value = 208
@@ -354,19 +354,19 @@ class Offsets:
         TurnSpeed = 592
 
     class VisualEngine:
-        Dimensions = 2672
-        FakeDataModel = 2640
-        Pointer = 131633600
-        RenderView = 2896
-        ViewMatrix = 320
+        Dimensions = 2656
+        FakeDataModel = 2624
+        Pointer = 122751576
+        RenderView = 2880
+        ViewMatrix = 304
 
     class Workspace:
-        CurrentCamera = 1128
-        ReadOnlyGravity = 2440
-        World = 992
+        CurrentCamera = 1160
+        ReadOnlyGravity = 2472
+        World = 1024
 
     class World:
-        Gravity = 464
-        Primitives = 576
-        WorldSteps = 1632
+        Gravity = 472
+        Primitives = 584
+        WorldSteps = 1640
 
