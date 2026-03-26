@@ -2,7 +2,7 @@
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
 # Roblox Version: version-ae421f0582e54718
-# Time Taken: 4058 ms (4.058000 seconds)
+# Time Taken: 3906 ms (3.906000 seconds)
 # Total Offsets: 280
 
 class Offsets:
@@ -161,7 +161,7 @@ class Offsets:
 
     class LocalScript:
         Bytecode = 424
-        Hash = 440
+        Hash = 232
 
     class MaterialColors:
         Asphalt = 48
@@ -300,7 +300,7 @@ class Offsets:
         Text = 3296
         TextColor3 = 4336
         TextDirection = 3584
-        TextScaled = 3408
+        TextScaled = 6
         TextSize = 4380
         TextStrokeColor3 = 4348
         TextStrokeTransparency = 4384
@@ -367,6 +367,6 @@ class Offsets:
 
     class World:
         Gravity = 464
-        Primitives = 512
+        Primitives = 576
         WorldSteps = 1632
 

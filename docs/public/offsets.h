@@ -3,7 +3,7 @@
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-ae421f0582e54718
- * Time Taken: 4058 ms (4.058000 seconds)
+ * Time Taken: 3906 ms (3.906000 seconds)
  * Total Offsets: 280
  */
 
@@ -182,7 +182,7 @@ namespace offsets {
 
     namespace LocalScript {
         inline constexpr uintptr_t Bytecode = 0x1A8;
-        inline constexpr uintptr_t Hash = 0x1B8;
+        inline constexpr uintptr_t Hash = 0xE8;
     }
 
     namespace MaterialColors {
@@ -339,7 +339,7 @@ namespace offsets {
         inline constexpr uintptr_t Text = 0xCE0;
         inline constexpr uintptr_t TextColor3 = 0x10F0;
         inline constexpr uintptr_t TextDirection = 0xE00;
-        inline constexpr uintptr_t TextScaled = 0xD50;
+        inline constexpr uintptr_t TextScaled = 0x6;
         inline constexpr uintptr_t TextSize = 0x111C;
         inline constexpr uintptr_t TextStrokeColor3 = 0x10FC;
         inline constexpr uintptr_t TextStrokeTransparency = 0x1120;
@@ -413,7 +413,7 @@ namespace offsets {
 
     namespace World {
         inline constexpr uintptr_t Gravity = 0x1D0;
-        inline constexpr uintptr_t Primitives = 0x200;
+        inline constexpr uintptr_t Primitives = 0x240;
         inline constexpr uintptr_t WorldSteps = 0x660;
     }
 

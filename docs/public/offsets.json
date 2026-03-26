@@ -160,7 +160,7 @@
     },
     "LocalScript": {
       "Bytecode": 424,
-      "Hash": 440
+      "Hash": 232
     },
     "MaterialColors": {
       "Asphalt": 48,
@@ -299,7 +299,7 @@
       "Text": 3296,
       "TextColor3": 4336,
       "TextDirection": 3584,
-      "TextScaled": 3408,
+      "TextScaled": 6,
       "TextSize": 4380,
       "TextStrokeColor3": 4348,
       "TextStrokeTransparency": 4384,
@@ -366,7 +366,7 @@
     },
     "World": {
       "Gravity": 464,
-      "Primitives": 512,
+      "Primitives": 576,
       "WorldSteps": 1632
     }
   }
