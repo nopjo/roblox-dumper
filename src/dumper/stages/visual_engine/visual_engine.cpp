@@ -132,6 +132,8 @@ namespace dumper::stages::visual_engine {
             return false;
         }
 
+        g_visual_engine = *visual_engine;
+
         g_dumper.add_offset("VisualEngine", "FakeDataModel", *fake_data_model);
 
         return true;

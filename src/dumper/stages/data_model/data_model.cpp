@@ -12,8 +12,8 @@ namespace dumper::stages::data_model {
 
     static auto dump_real_data_model() -> bool {
         const auto fake_data_model = process::Memory::read<uintptr_t>(
-            process::g_process.get_module_base() +
-            *dumper::g_dumper.get_offset("FakeDataModel", "Pointer"));
+            g_visual_engine + 
+            *dumper::g_dumper.get_offset("VisualEngine", "FakeDataModel"));
 
         if (!fake_data_model) {
             spdlog::error("Failed to read FakeDataModel pointer.");
