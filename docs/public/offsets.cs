@@ -1,9 +1,9 @@
 /*
- * Dumped With: roblox-dumper 2.6
+ * Dumped With: roblox-dumper 2.7
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-9d412f44a6fe4081
- * Time Taken: 3693 ms (3.693000 seconds)
+ * Roblox Version: version-2e6461290a3541f5
+ * Time Taken: 3398 ms (3.398000 seconds)
  * Total Offsets: 280
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-9d412f44a6fe4081";
+        public const string RobloxVersion = "version-2e6461290a3541f5";
     }
 
     public static class Atmosphere
@@ -82,8 +82,8 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7A939A8;
-        public const ulong RealDataModel = 0x1C0;
+        public const ulong Pointer = 0x7B990F8;
+        public const ulong RealDataModel = 0x1D0;
     }
 
     public static class GuiBase2D
@@ -230,8 +230,8 @@ namespace RobloxOffsets
 
     public static class MeshPart
     {
-        public const ulong MeshId = 0x2E8;
-        public const ulong TextureId = 0x318;
+        public const ulong MeshId = 0x2F8;
+        public const ulong TextureId = 0x328;
     }
 
     public static class ModuleScript
@@ -252,7 +252,7 @@ namespace RobloxOffsets
         public const ulong Character = 0x398;
         public const ulong DisplayName = 0x130;
         public const ulong HealthDisplayDistance = 0x348;
-        public const ulong LocaleId = 0x6C8;
+        public const ulong LocaleId = 0x6D0;
         public const ulong NameDisplayDistance = 0x358;
         public const ulong Team = 0x2A0;
         public const ulong TeamColor = 0x364;
@@ -304,7 +304,7 @@ namespace RobloxOffsets
 
     public static class ScriptContext
     {
-        public const ulong RequireBypass = 0x928;
+        public const ulong RequireBypass = 0x824;
     }
 
     public static class Seat
@@ -342,7 +342,7 @@ namespace RobloxOffsets
         public const ulong JobName = 0x18;
         public const ulong JobStart = 0xC8;
         public const ulong MaxFps = 0xB0;
-        public const ulong Pointer = 0x7B68F00;
+        public const ulong Pointer = 0x7C73D70;
     }
 
     public static class Team
@@ -441,7 +441,7 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0xA60;
         public const ulong FakeDataModel = 0xA40;
-        public const ulong Pointer = 0x763D3D0;
+        public const ulong Pointer = 0x7746018;
         public const ulong RenderView = 0xB40;
         public const ulong ViewMatrix = 0x130;
     }
