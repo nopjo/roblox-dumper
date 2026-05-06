@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 2.7
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-acc4b74f79e743b9
- * Time Taken: 3222 ms (3.222000 seconds)
+ * Roblox Version: version-bf6344c9c23446bf
+ * Time Taken: 3547 ms (3.547000 seconds)
  * Total Offsets: 278
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-acc4b74f79e743b9";
+        public const string RobloxVersion = "version-bf6344c9c23446bf";
     }
 
     public static class Atmosphere
@@ -71,18 +71,18 @@ namespace RobloxOffsets
 
     public static class DataModel
     {
-        public const ulong CreatorId = 0x188;
-        public const ulong GameId = 0x190;
-        public const ulong GameLoaded = 0x5F8;
+        public const ulong CreatorId = 0x190;
+        public const ulong GameId = 0x198;
+        public const ulong GameLoaded = 0x620;
         public const ulong JobId = 0x138;
-        public const ulong PlaceId = 0x198;
-        public const ulong ServerIP = 0x5E0;
+        public const ulong PlaceId = 0x1A0;
+        public const ulong ServerIP = 0x608;
         public const ulong Workspace = 0x178;
     }
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7C1A148;
+        public const ulong Pointer = 0x749F4D0;
         public const ulong RealDataModel = 0x1D0;
     }
 
@@ -168,33 +168,33 @@ namespace RobloxOffsets
 
     public static class Lighting
     {
-        public const ulong Ambient = 0xD8;
-        public const ulong Atmosphere = 0x1E8;
-        public const ulong Brightness = 0x120;
-        public const ulong ClockTime = 0x1B8;
-        public const ulong ColorShift_Bottom = 0xE4;
-        public const ulong ColorShift_Top = 0xF0;
-        public const ulong EnvironmentDiffuseScale = 0x124;
-        public const ulong EnvironmentSpecularScale = 0x128;
-        public const ulong ExposureCompensation = 0x12C;
-        public const ulong FogColor = 0xFC;
-        public const ulong FogEnd = 0x134;
-        public const ulong FogStart = 0x138;
-        public const ulong OutdoorAmbient = 0x108;
-        public const ulong ShadowSoftness = 0x140;
-        public const ulong Sky = 0x1D8;
+        public const ulong Ambient = 0xE0;
+        public const ulong Atmosphere = 0x1F0;
+        public const ulong Brightness = 0x128;
+        public const ulong ClockTime = 0x1C0;
+        public const ulong ColorShift_Bottom = 0xEC;
+        public const ulong ColorShift_Top = 0xF8;
+        public const ulong EnvironmentDiffuseScale = 0x12C;
+        public const ulong EnvironmentSpecularScale = 0x130;
+        public const ulong ExposureCompensation = 0x134;
+        public const ulong FogColor = 0x104;
+        public const ulong FogEnd = 0x13C;
+        public const ulong FogStart = 0x140;
+        public const ulong OutdoorAmbient = 0x110;
+        public const ulong ShadowSoftness = 0x148;
+        public const ulong Sky = 0x1E0;
     }
 
     public static class LightingParameters
     {
-        public const ulong GeographicLatitude = 0x190;
-        public const ulong LightColor = 0x15C;
-        public const ulong LightDirection = 0x168;
-        public const ulong SkyAmbient = 0x150;
-        public const ulong SkyAmbient2 = 0x194;
-        public const ulong Source = 0x174;
-        public const ulong TrueMoonPosition = 0x184;
-        public const ulong TrueSunPosition = 0x178;
+        public const ulong GeographicLatitude = 0x198;
+        public const ulong LightColor = 0x164;
+        public const ulong LightDirection = 0x170;
+        public const ulong SkyAmbient = 0x158;
+        public const ulong SkyAmbient2 = 0x19C;
+        public const ulong Source = 0x17C;
+        public const ulong TrueMoonPosition = 0x18C;
+        public const ulong TrueSunPosition = 0x180;
     }
 
     public static class LocalScript
@@ -242,7 +242,7 @@ namespace RobloxOffsets
 
     public static class MouseService
     {
-        public const ulong InputObject = 0x110;
+        public const ulong InputObject = 0x118;
     }
 
     public static class Player
@@ -251,7 +251,7 @@ namespace RobloxOffsets
         public const ulong Character = 0x398;
         public const ulong DisplayName = 0x130;
         public const ulong HealthDisplayDistance = 0x348;
-        public const ulong LocaleId = 0x6D0;
+        public const ulong LocaleId = 0x6F0;
         public const ulong NameDisplayDistance = 0x358;
         public const ulong Team = 0x2A0;
         public const ulong TeamColor = 0x364;
@@ -260,7 +260,7 @@ namespace RobloxOffsets
 
     public static class Players
     {
-        public const ulong LocalPlayer = 0x130;
+        public const ulong LocalPlayer = 0x138;
     }
 
     public static class Primitive
@@ -297,7 +297,7 @@ namespace RobloxOffsets
 
     public static class RenderView
     {
-        public const ulong LightingValid = 0x148;
+        public const ulong LightingValid = 0x150;
         public const ulong SkyboxValid = 0x28D;
     }
 
@@ -336,7 +336,7 @@ namespace RobloxOffsets
         public const ulong JobName = 0x18;
         public const ulong JobStart = 0xC8;
         public const ulong MaxFps = 0xB0;
-        public const ulong Pointer = 0x7CF5400;
+        public const ulong Pointer = 0x7BA3198;
     }
 
     public static class Team
@@ -433,17 +433,17 @@ namespace RobloxOffsets
 
     public static class VisualEngine
     {
-        public const ulong Dimensions = 0xA90;
-        public const ulong FakeDataModel = 0xA70;
-        public const ulong Pointer = 0x77C6670;
-        public const ulong RenderView = 0xB70;
-        public const ulong ViewMatrix = 0x130;
+        public const ulong Dimensions = 0xAA0;
+        public const ulong FakeDataModel = 0xA80;
+        public const ulong Pointer = 0x7B79A08;
+        public const ulong RenderView = 0xB80;
+        public const ulong ViewMatrix = 0x140;
     }
 
     public static class Workspace
     {
         public const ulong CurrentCamera = 0x490;
-        public const ulong ReadOnlyGravity = 0x9B8;
+        public const ulong ReadOnlyGravity = 0x9C0;
         public const ulong World = 0x408;
     }
 
@@ -451,7 +451,7 @@ namespace RobloxOffsets
     {
         public const ulong Gravity = 0x210;
         public const ulong Primitives = 0x280;
-        public const ulong WorldSteps = 0x6B8;
+        public const ulong WorldSteps = 0x678;
     }
 
 } // namespace RobloxOffsets
