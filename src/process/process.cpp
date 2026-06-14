@@ -1,21 +1,32 @@
 #include "process.h"
 #include "process/memory/memory.h"
 #include <regex>
+#include <fstream>
+#include <sstream>
+#include <unistd.h>
+#include <sys/ptrace.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <elf.h>
+#include <link.h>
+#include <dlfcn.h>
+#include <spdlog/spdlog.h>
 
 namespace process {
-    NtDll::NtDll() : m_module(GetModuleHandleA("ntdll.dll")) {}
 
     Process::~Process() {
-        if (m_handle) {
-            CloseHandle(m_handle);
-            m_handle = nullptr;
+        if (m_pid && m_attached) {
+            ptrace(PTRACE_DETACH, m_pid, nullptr, 0);
+            m_pid = 0;
+            m_attached = false;
         }
     }
 
     auto Process::attach(std::string_view process_name) -> bool {
-        if (m_attached && m_handle) {
-            CloseHandle(m_handle);
-            m_handle = nullptr;
+        if (m_attached && m_pid) {
+            ptrace(PTRACE_DETACH, m_pid, nullptr, 0);
+            m_pid = 0;
             m_attached = false;
             m_module_base = 0;
         }
@@ -26,15 +37,14 @@ namespace process {
         }
 
         m_pid = *pid;
-        m_handle = nt_open_process(m_pid);
 
-        if (!m_handle) {
+        if (!attach_ptrace(m_pid)) {
             return false;
         }
 
         if (!cache_module_info()) {
-            CloseHandle(m_handle);
-            m_handle = nullptr;
+            ptrace(PTRACE_DETACH, m_pid, nullptr, 0);
+            m_pid = 0;
             return false;
         }
 
@@ -42,113 +52,98 @@ namespace process {
         return true;
     }
 
-    auto Process::cache_module_info() -> bool {
-        HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, m_pid);
-        if (snapshot == INVALID_HANDLE_VALUE) {
+    auto Process::attach_ptrace(pid_t pid) -> bool {
+        if (ptrace(PTRACE_ATTACH, pid, nullptr, nullptr) == -1) {
+            spdlog::error("Failed to attach with ptrace: {}", strerror(errno));
             return false;
         }
 
-        MODULEENTRY32W me = {sizeof(MODULEENTRY32W)};
-        if (Module32FirstW(snapshot, &me)) {
-            m_module_base = reinterpret_cast<uintptr_t>(me.modBaseAddr);
-            CloseHandle(snapshot);
-            return true;
+        // Wait for the process to stop
+        int status;
+        if (waitpid(pid, &status, 0) == -1) {
+            spdlog::error("Failed to wait for process: {}", strerror(errno));
+            ptrace(PTRACE_DETACH, pid, nullptr, 0);
+            return false;
         }
 
-        CloseHandle(snapshot);
-        return false;
+        if (!WIFSTOPPED(status)) {
+            spdlog::error("Process did not stop properly");
+            ptrace(PTRACE_DETACH, pid, nullptr, 0);
+            return false;
+        }
+
+        spdlog::info("Successfully attached to PID {} via ptrace", pid);
+        return true;
     }
 
-    auto Process::get_section(std::string_view section_name) const
-        -> std::optional<std::pair<uintptr_t, size_t>> {
-        if (!m_module_base) {
-            return std::nullopt;
+    auto Process::read_memory(uintptr_t address, void* buffer, size_t size) const -> bool {
+        if (!m_attached || !m_pid) {
+            return false;
         }
 
-        auto dos_header = Memory::read<IMAGE_DOS_HEADER>(m_module_base);
-        if (!dos_header || dos_header->e_magic != IMAGE_DOS_SIGNATURE) {
-            return std::nullopt;
+        unsigned char* data = reinterpret_cast<unsigned char*>(buffer);
+        size_t bytes_read = 0;
+
+        // ptrace can only read word-sized chunks at a time
+        while (bytes_read < size) {
+            long word = ptrace(PTRACE_PEEKDATA, m_pid, address + bytes_read, nullptr);
+            if (word == -1 && errno != 0) {
+                return bytes_read > 0;  // Return what we could read
+            }
+
+            size_t to_copy = std::min(sizeof(long), size - bytes_read);
+            memcpy(data + bytes_read, &word, to_copy);
+            bytes_read += to_copy;
         }
 
-        auto nt_headers = Memory::read<IMAGE_NT_HEADERS64>(m_module_base + dos_header->e_lfanew);
-        if (!nt_headers || nt_headers->Signature != IMAGE_NT_SIGNATURE) {
-            return std::nullopt;
+        return true;
+    }
+
+    auto Process::cache_module_info() -> bool {
+        // Read /proc/[pid]/maps to find the main module base address
+        std::string maps_path = "/proc/" + std::to_string(m_pid) + "/maps";
+        std::ifstream maps_file(maps_path);
+
+        if (!maps_file.is_open()) {
+            spdlog::error("Failed to open {}", maps_path);
+            return false;
         }
 
-        uintptr_t section_header_addr =
-            m_module_base + dos_header->e_lfanew + sizeof(IMAGE_NT_HEADERS64);
+        std::string line;
+        while (std::getline(maps_file, line)) {
+            // Format: address perms offset dev inode pathname
+            // Example: 56559c7c7000-56559c7d2000 r-xp 00000000 08:05 3669970 /path/to/binary
+            std::istringstream iss(line);
+            std::string addr_range, perms, offset, dev, inode, pathname;
 
-        for (WORD i = 0; i < nt_headers->FileHeader.NumberOfSections; i++) {
-            auto section = Memory::read<IMAGE_SECTION_HEADER>(section_header_addr +
-                                                              (i * sizeof(IMAGE_SECTION_HEADER)));
-            if (!section) {
+            if (!(iss >> addr_range >> perms >> offset >> dev >> inode >> pathname)) {
                 continue;
             }
 
-            std::string name(reinterpret_cast<const char*>(section->Name), 8);
-            name = name.substr(0, name.find('\0'));
-
-            if (name == section_name) {
-                uintptr_t section_start = m_module_base + section->VirtualAddress;
-                size_t section_size = section->Misc.VirtualSize;
-                return std::make_pair(section_start, section_size);
+            // We want the first executable mapping that's not a shared library
+            if (perms[2] == 'x' && pathname[0] == '/' && pathname.find(".so") == std::string::npos) {
+                // Parse the start address
+                size_t dash_pos = addr_range.find('-');
+                if (dash_pos != std::string::npos) {
+                    m_module_base = std::stoull(addr_range.substr(0, dash_pos), nullptr, 16);
+                    spdlog::info("Found module base at 0x{:x}", m_module_base);
+                    return true;
+                }
             }
         }
 
-        return std::nullopt;
+        return false;
     }
 
-    auto Process::get_window_handle() const -> HWND {
-        HWND hwnd = FindWindowA(nullptr, "Roblox");
-        if (hwnd) {
-            DWORD window_pid = 0;
-            GetWindowThreadProcessId(hwnd, &window_pid);
-            if (window_pid == m_pid && IsWindowVisible(hwnd)) {
-                return hwnd;
-            }
-        }
-
-        struct EnumData {
-            DWORD pid;
-            HWND found;
-        };
-
-        EnumData data{m_pid, nullptr};
-        EnumWindows(
-            [](HWND hwnd, LPARAM lParam) -> BOOL {
-                EnumData* pData = reinterpret_cast<EnumData*>(lParam);
-                DWORD window_pid = 0;
-                GetWindowThreadProcessId(hwnd, &window_pid);
-                if (window_pid == pData->pid && IsWindowVisible(hwnd)) {
-                    pData->found = hwnd;
-                    return FALSE;
-                }
-                return TRUE;
-            },
-            reinterpret_cast<LPARAM>(&data));
-
-        return data.found;
+    auto Process::get_window_handle() const -> int {
+        // X11 window detection would go here
+        // For now, we'll return a placeholder
+        return 0;
     }
 
     auto Process::get_window_dimensions() const -> std::optional<glm::vec2> {
-        HWND window = get_window_handle();
-        if (!window) {
-            return std::nullopt;
-        }
-
-        RECT rect;
-        if (!GetClientRect(window, &rect)) {
-            return std::nullopt;
-        }
-
-        float width = static_cast<float>(rect.right - rect.left);
-        float height = static_cast<float>(rect.bottom - rect.top);
-
-        if (width <= 0 || height <= 0) {
-            return std::nullopt;
-        }
-
-        return glm::vec2(width, height);
+        // X11 window dimensions would go here
+        return std::nullopt;
     }
 
     auto Process::get_version() const -> std::optional<std::string> {
@@ -156,69 +151,67 @@ namespace process {
             return std::nullopt;
         }
 
-        HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, m_pid);
-        if (snapshot == INVALID_HANDLE_VALUE) {
+        // Read the command line to extract version info
+        std::string cmdline_path = "/proc/" + std::to_string(m_pid) + "/cmdline";
+        std::ifstream cmdline_file(cmdline_path);
+
+        if (!cmdline_file.is_open()) {
             return std::nullopt;
         }
 
-        MODULEENTRY32W me = {sizeof(MODULEENTRY32W)};
-        if (Module32FirstW(snapshot, &me)) {
-            std::wstring path(me.szExePath);
-            CloseHandle(snapshot);
+        std::string cmdline;
+        std::getline(cmdline_file, cmdline);
 
-            std::string narrow_path(path.begin(), path.end());
+        std::regex version_regex(R"(version-[a-f0-9]{16})");
+        std::smatch match;
 
-            std::regex version_regex(R"(version-[a-f0-9]{16})");
-            std::smatch match;
+        if (std::regex_search(cmdline, match, version_regex)) {
+            return match.str();
+        }
 
-            if (std::regex_search(narrow_path, match, version_regex)) {
-                return match.str();
+        return std::nullopt;
+    }
+
+    auto Process::find_process_by_id(std::string_view process_name) -> std::optional<pid_t> {
+        DIR* dir = opendir("/proc");
+        if (!dir) {
+            spdlog::error("Failed to open /proc");
+            return std::nullopt;
+        }
+
+        std::optional<pid_t> result = std::nullopt;
+        struct dirent* entry;
+
+        while ((entry = readdir(dir)) != nullptr) {
+            // Check if directory name is numeric (PID)
+            if (entry->d_type != DT_DIR || !std::isdigit(entry->d_name[0])) {
+                continue;
             }
-        } else {
-            CloseHandle(snapshot);
+
+            pid_t pid = std::stoi(entry->d_name);
+            std::string cmdline_path = std::string("/proc/") + entry->d_name + "/cmdline";
+            std::ifstream cmdline_file(cmdline_path);
+
+            if (!cmdline_file.is_open()) {
+                continue;
+            }
+
+            std::string cmdline;
+            std::getline(cmdline_file, cmdline);
+
+            // For Flatpak, look for 'sober' or the Roblox process
+            // Flatpak processes have paths like /app/bin/sober or similar
+            if (cmdline.find("sober") != std::string::npos || 
+                cmdline.find(process_name) != std::string::npos ||
+                cmdline.find("RobloxPlayerBeta") != std::string::npos) {
+                spdlog::info("Found process {} with PID {}", process_name, pid);
+                result = pid;
+                break;
+            }
         }
 
-        return std::nullopt;
-    }
-
-    auto Process::nt_open_process(DWORD pid) -> HANDLE {
-        using tNtOpenProcess =
-            NTSTATUS(NTAPI*)(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PCLIENT_ID);
-        auto fn = m_ntdll.get_export<tNtOpenProcess>("NtOpenProcess");
-
-        OBJECT_ATTRIBUTES obj_attrs{};
-        obj_attrs.Length = sizeof(obj_attrs);
-
-        CLIENT_ID client_id{};
-        client_id.UniqueProcess = reinterpret_cast<HANDLE>(static_cast<uintptr_t>(pid));
-        client_id.UniqueThread = nullptr;
-
-        HANDLE handle = nullptr;
-        NTSTATUS status = fn(&handle, PROCESS_ALL_ACCESS, &obj_attrs, &client_id);
-
-        return NT_SUCCESS(status) ? handle : nullptr;
-    }
-
-    auto Process::find_process_by_id(std::string_view process_name) -> std::optional<DWORD> {
-        HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-        if (snapshot == INVALID_HANDLE_VALUE) {
-            return std::nullopt;
-        }
-
-        PROCESSENTRY32W pe = {sizeof(PROCESSENTRY32W)};
-        std::wstring wide_name(process_name.begin(), process_name.end());
-
-        if (Process32FirstW(snapshot, &pe)) {
-            do {
-                if (_wcsicmp(pe.szExeFile, wide_name.c_str()) == 0) {
-                    CloseHandle(snapshot);
-                    return pe.th32ProcessID;
-                }
-            } while (Process32NextW(snapshot, &pe));
-        }
-
-        CloseHandle(snapshot);
-        return std::nullopt;
+        closedir(dir);
+        return result;
     }
 
 } // namespace process

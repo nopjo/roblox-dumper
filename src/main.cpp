@@ -2,7 +2,6 @@
 #include "control/control.h"
 #include "dumper/dumper.h"
 #include "writer/writer.h"
-#include <Windows.h>
 #include <chrono>
 #include <format>
 #include <iostream>
@@ -15,24 +14,21 @@ auto main() -> int {
 
     const auto title = std::format("{} {}", PROJECT_NAME, PROJECT_VERSION);
 
-    spdlog::info("{} created by jonah/nopjo", title);
+    spdlog::info("{} created by jonah/nopjo (Linux port)", title);
     spdlog::info("Github: https://github.com/nopjo/roblox-dumper\n");
 
-    if (!process::g_process.attach("RobloxPlayerBeta.exe")) {
-        MessageBoxA(
-            nullptr,
-            "Failed to attach to Roblox, please rerun the Dumper when Roblox has fully loaded.",
-            title.c_str(), MB_OK | MB_ICONERROR);
+    if (!process::g_process.attach("sober")) {
+        spdlog::error("Failed to attach to Roblox (Sober). Make sure:");
+        spdlog::error("1. Roblox/Sober Flatpak is running");
+        spdlog::error("2. This dumper is running with appropriate permissions");
+        spdlog::error("3. Consider running with elevated privileges if needed");
         return 1;
     }
 
     spdlog::info("Attached to Roblox. PID: {}\n", process::g_process.get_pid());
 
     if (!control::g_control.start(8080)) {
-        MessageBoxA(nullptr,
-                    "Failed to start control server, make sure you have no applications running on "
-                    "port 8080.",
-                    title.c_str(), MB_OK | MB_ICONERROR);
+        spdlog::error("Failed to start control server, make sure you have no applications running on port 8080.");
         return 1;
     }
 

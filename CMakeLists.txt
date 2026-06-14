@@ -6,7 +6,16 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+# Platform-specific settings
+if(WIN32)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+else()
+    # Linux build settings
+    add_compile_options(-fPIC)
+    # Enable ptrace debugging
+    add_compile_definitions(_GNU_SOURCE)
+endif()
 
 configure_file(
     "${PROJECT_SOURCE_DIR}/src/config.h.in"
@@ -20,9 +29,16 @@ set(SPDLOG_ENABLE_PCH ON CACHE BOOL "" FORCE)
 
 set(BUILD_CPR_TESTS OFF CACHE BOOL "" FORCE)
 set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE)
-set(CURL_STATICLIB ON CACHE BOOL "" FORCE)
 set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
-set(CURL_USE_SCHANNEL ON CACHE BOOL "" FORCE)
+
+if(WIN32)
+    set(CURL_STATICLIB ON CACHE BOOL "" FORCE)
+    set(CURL_USE_SCHANNEL ON CACHE BOOL "" FORCE)
+else()
+    # Linux: use OpenSSL
+    set(CURL_USE_OPENSSL ON CACHE BOOL "" FORCE)
+endif()
+
 set(CURL_USE_LIBSSH2 OFF CACHE BOOL "" FORCE)
 set(USE_LIBIDN2 OFF CACHE BOOL "" FORCE)
 set(CURL_DISABLE_LDAP ON CACHE BOOL "" FORCE)
@@ -73,4 +89,10 @@ file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.cxx" "src/*.cc")
 
 add_executable(roblox-dumper ${SOURCES})
 target_link_libraries(roblox-dumper PRIVATE spdlog::spdlog glm::glm cpr::cpr httplib::httplib nlohmann_json::nlohmann_json Zydis)
-set_property(TARGET roblox-dumper PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+if(WIN32)
+    set_property(TARGET roblox-dumper PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+else()
+    # Linux-specific libraries
+    target_link_libraries(roblox-dumper PRIVATE dl)
+endif()
