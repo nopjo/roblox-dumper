@@ -61,7 +61,7 @@ namespace dumper {
         threads.emplace_back([]() { stages::text_button::dump(); });
         threads.emplace_back([]() { stages::script::dump(); });
         threads.emplace_back([]() { stages::task_scheduler::dump(); });
-        threads.emplace_back([]() { stages::script_context::dump(); });
+        // threads.emplace_back([]() { stages::script_context::dump(); });
         threads.emplace_back([]() { stages::vehicle_seat::dump(); });
 
         for (auto& thread : threads) {

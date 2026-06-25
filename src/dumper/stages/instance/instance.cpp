@@ -58,95 +58,116 @@ namespace dumper::stages::instance {
         return std::nullopt;
     }
 
-    static auto find_attribute_offsets(uintptr_t instance, const std::string& first_attr_name,
-                                       const std::string& first_attr_value,
-                                       const std::string& second_attr_name,
-                                       const std::string& second_attr_value)
+    static auto find_attribute_offsets(uintptr_t instance, const std::string& key1,
+                                       const std::string& val1, const std::string& key2)
         -> std::optional<std::tuple<size_t, size_t, size_t, size_t>> {
-        size_t iterations = 0;
-        constexpr size_t MAX_ITERATIONS = 50000;
+        size_t component_map_off = 0;
+        uintptr_t comp_map = 0;
 
-        for (size_t container_off = 0; container_off < 0x200; container_off += 0x8) {
-            auto container = process::Memory::read<uintptr_t>(instance + container_off);
-            if (!container || *container < 0x10000) {
+        for (size_t off = 0; off < 0x200; off += 0x8) {
+            auto comp = process::Memory::read<uintptr_t>(instance + off);
+            if (!comp || *comp < 0x10000)
                 continue;
-            }
 
-            for (size_t list_off = 0; list_off < 0x100; list_off += 0x8) {
-                auto first_attr = process::Memory::read<uintptr_t>(*container + list_off);
-                if (!first_attr || *first_attr < 0x10000) {
+            auto start = process::Memory::read<uintptr_t>(*comp);
+            auto end = process::Memory::read<uintptr_t>(*comp + 0x8);
+            if (!start || !end || *end <= *start || (*end - *start) > 0x1000)
+                continue;
+
+            for (uintptr_t idx = 0; idx < *end - *start; idx += 0x10) {
+                auto entry = process::Memory::read<uintptr_t>(*start + idx);
+                if (!entry || *entry < 0x10000)
                     continue;
-                }
 
-                size_t value_off = 0;
-                bool found_value = false;
-                for (size_t off = 0; off < 0x100; off += 0x8) {
-                    if (++iterations > MAX_ITERATIONS) {
-                        spdlog::error("Attribute scan exceeded max iterations");
-                        return std::nullopt;
-                    }
-
-                    auto str = process::Memory::read_sso_string(*first_attr + off);
-                    if (str && *str == first_attr_value) {
-                        value_off = off;
-                        found_value = true;
-                        break;
-                    }
-                }
-                if (!found_value) {
+                auto listing = process::Memory::read<uintptr_t>(*entry + 0x10);
+                if (!listing || *listing < 0x10000)
                     continue;
-                }
 
-                uintptr_t second_attr = 0;
-                size_t stride = 0;
-                constexpr size_t MAX_STRIDE_SEARCH = 0x200;
-
-                for (size_t offset = 0x8; offset < MAX_STRIDE_SEARCH; offset += 0x8) {
-                    if (++iterations > MAX_ITERATIONS) {
-                        spdlog::error("Attribute scan exceeded max iterations");
-                        return std::nullopt;
-                    }
-
-                    uintptr_t test_addr = *first_attr + offset + value_off;
-                    if (test_addr < 0x10000) {
-                        break;
-                    }
-
-                    auto forward = process::Memory::read_sso_string(test_addr);
-                    if (forward && *forward == second_attr_value) {
-                        second_attr = *first_attr + offset;
-                        stride = offset;
-                        break;
-                    }
-                }
-
-                if (!second_attr) {
+                auto key_ptr = process::Memory::read<uintptr_t>(*listing + 0x0);
+                if (!key_ptr || *key_ptr < 0x10000)
                     continue;
-                }
 
-                for (size_t off = 0; off < 0x100; off += 0x8) {
-                    if (++iterations > MAX_ITERATIONS) {
-                        spdlog::error("Attribute scan exceeded max iterations");
-                        return std::nullopt;
-                    }
+                auto key_str = process::Memory::read_string(*key_ptr);
+                if (!key_str || key_str->empty() || key_str->length() > 128)
+                    continue;
 
-                    if (off == value_off) {
-                        continue;
-                    }
-
-                    auto ptr = process::Memory::read<uintptr_t>(*first_attr + off);
-                    if (!ptr || *ptr <= 0x10000) {
-                        continue;
-                    }
-
-                    auto str = process::Memory::read_sso_string(*ptr);
-                    if (str && *str == first_attr_name) {
-                        return std::make_tuple(container_off, list_off, stride, value_off);
-                    }
-                }
+                component_map_off = off;
+                comp_map = *comp;
+                goto found;
             }
         }
 
+        spdlog::error("Failed to find ComponentMap offset");
+        return std::nullopt;
+
+    found:
+        auto start = process::Memory::read<uintptr_t>(comp_map);
+        auto end = process::Memory::read<uintptr_t>(comp_map + 0x8);
+        if (!start || !end) {
+            spdlog::error("Failed to re-read component map bounds");
+            return std::nullopt;
+        }
+
+        for (uintptr_t idx = 0; idx < *end - *start; idx += 0x10) {
+            auto entry = process::Memory::read<uintptr_t>(*start + idx);
+            if (!entry || *entry < 0x10000)
+                continue;
+
+            auto listing = process::Memory::read<uintptr_t>(*entry + 0x10);
+            if (!listing || *listing < 0x10000)
+                continue;
+
+            size_t key_off = SIZE_MAX;
+            for (size_t off = 0; off < 0x80; off += 0x8) {
+                auto ptr = process::Memory::read<uintptr_t>(*listing + off);
+                if (!ptr || *ptr < 0x10000)
+                    continue;
+                auto str = process::Memory::read_string(*ptr);
+                if (str && *str == key1) {
+                    key_off = off;
+                    break;
+                }
+            }
+            if (key_off == SIZE_MAX)
+                continue;
+
+            size_t val_off = SIZE_MAX;
+            for (size_t off = 0; off < 0x80; off += 0x8) {
+                if (off == key_off)
+                    continue;
+                auto str = process::Memory::read_sso_string(*listing + off);
+                if (str && *str == val1) {
+                    val_off = off;
+                    break;
+                }
+            }
+            if (val_off == SIZE_MAX)
+                continue;
+
+            uintptr_t addr1 = SIZE_MAX, addr2 = SIZE_MAX;
+            for (size_t step = 0; step < 0x400; step += 0x8) {
+                auto ptr = process::Memory::read<uintptr_t>(*listing + step + key_off);
+                if (!ptr || *ptr < 0x10000)
+                    continue;
+                auto str = process::Memory::read_string(*ptr);
+                if (!str)
+                    continue;
+                if (*str == key1 && addr1 == SIZE_MAX)
+                    addr1 = *listing + step;
+                if (*str == key2 && addr2 == SIZE_MAX)
+                    addr2 = *listing + step;
+                if (addr1 != SIZE_MAX && addr2 != SIZE_MAX)
+                    break;
+            }
+            if (addr1 == SIZE_MAX || addr2 == SIZE_MAX)
+                continue;
+
+            size_t stride = addr2 - addr1;
+
+            return std::make_tuple(component_map_off, key_off, val_off, stride);
+        }
+
+        spdlog::error("Failed to find attribute offsets for '{}'", key1);
         return std::nullopt;
     }
 
@@ -240,16 +261,17 @@ namespace dumper::stages::instance {
         }
 
         const auto attr = find_attribute_offsets(attributes->get_address(), "TestString",
-                                                 "HelloWorld", "TestString2", "HelloWorld2");
-        if (!attr) {
+                                                 "HelloWorld", "TestString2");
+        if (attr) {
+            dumper::g_dumper.add_offset("Instance", "ComponentMap", std::get<0>(*attr));
+            dumper::g_dumper.add_offset("Attribute", "Key", std::get<1>(*attr));
+            dumper::g_dumper.add_offset("Attribute", "Value", std::get<2>(*attr));
+            dumper::g_dumper.add_offset("Attribute", "Size", std::get<3>(*attr));
+            return true;
+        } else {
             spdlog::error("Failed to find Attribute offsets");
-            return false;
+            // not fatal if fails
         }
-
-        dumper::g_dumper.add_offset("Instance", "AttributeContainer", std::get<0>(*attr));
-        dumper::g_dumper.add_offset("Instance", "AttributeList", std::get<1>(*attr));
-        dumper::g_dumper.add_offset("Instance", "AttributeToNext", std::get<2>(*attr));
-        dumper::g_dumper.add_offset("Instance", "AttributeToValue", std::get<3>(*attr));
 
         return true;
     }

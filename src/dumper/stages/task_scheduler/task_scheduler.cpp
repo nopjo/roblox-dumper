@@ -11,7 +11,8 @@ namespace dumper::stages::task_scheduler {
 
     static auto get_pointer() -> uintptr_t {
         const auto string_results = process::Memory::scan_string(
-            "Can't initialize the TaskScheduler before flags have been loaded", ".rdata");
+            "Out of arbiter nodes: Increase the FInt::TaskSchedulerMaxNumOfArbiters value",
+            ".rdata");
         if (string_results.empty()) {
             spdlog::error("Error string not found");
             return 0;
@@ -23,26 +24,17 @@ namespace dumper::stages::task_scheduler {
             return 0;
         }
 
-        const uintptr_t base = process::g_process.get_module_base();
-
-        auto func_start = process::helpers::zydis::find_function_start(xrefs.front());
+        const auto func_start = process::helpers::zydis::find_function_start(xrefs.front());
         if (!func_start) {
             spdlog::error("Could not find function start");
             return 0;
         }
 
-        const auto func_xrefs = process::g_xref.scan(*func_start);
-        if (func_xrefs.empty()) {
-            spdlog::error("No xrefs to the function");
-            return 0;
-        }
+        const auto result = process::helpers::zydis::resolve_rip_mov_store(*func_start);
+        if (result)
+            return *result - process::g_process.get_module_base();
 
-        for (const auto& caller : func_xrefs) {
-            auto result = process::helpers::zydis::resolve_rip_mov_store(caller);
-            if (result)
-                return *result - base;
-        }
-
+        spdlog::error("Failed to resolve task scheduler pointer store");
         return 0;
     }
 
