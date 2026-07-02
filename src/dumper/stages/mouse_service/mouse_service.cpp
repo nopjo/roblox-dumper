@@ -32,7 +32,7 @@ namespace dumper::stages::mouse_service {
             return false;
         }
 
-        auto mouse_pos = process::Memory::read<glm::vec2>(*input_object_ptr + 0xEC);
+        auto mouse_pos = process::Memory::read<glm::vec2>(*input_object_ptr + 0xD4);
         if (!mouse_pos) {
             spdlog::error("Failed to read mouse position");
             return false;
@@ -44,7 +44,7 @@ namespace dumper::stages::mouse_service {
         }
 
         dumper::g_dumper.add_offset("MouseService", "InputObject", second_input_object);
-        dumper::g_dumper.add_offset("InputObject", "MousePosition", 0xEC);
+        dumper::g_dumper.add_offset("InputObject", "MousePosition", 0xD4);
 
         return true;
     }
