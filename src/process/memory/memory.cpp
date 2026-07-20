@@ -55,7 +55,7 @@ namespace process {
         }
 
         auto length = read<int32_t>(address + 0x10);
-        if (!length || *length <= 0 || *length > 1024) {
+        if (!length || *length <= 0 || *length > 65536) {
             return std::nullopt;
         }
 

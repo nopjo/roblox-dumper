@@ -1,5 +1,5 @@
 #include "tool.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "process/helpers/helpers.h"
 #include "process/memory/memory.h"
@@ -11,10 +11,10 @@ namespace dumper::stages::tool {
     struct ToolData {
         std::string name;
         uintptr_t address;
-        control::client::ToolProperty props;
+        bridge::ToolProperty props;
     };
 
-    static auto get_tool_data(const control::client::ToolPropertiesInfo& props)
+    static auto get_tool_data(const bridge::ToolPropertiesInfo& props)
         -> std::optional<std::vector<ToolData>> {
         std::vector<ToolData> tool_data;
 
@@ -40,9 +40,9 @@ namespace dumper::stages::tool {
     }
 
     auto dump() -> bool {
-        const auto tool_props = control::client::g_client.get_tool_properties();
+        const auto tool_props = bridge::g_bridge.read_tools_information();
         if (!tool_props) {
-            spdlog::error("Failed to get tool properties from control server");
+            spdlog::error("Failed to get tool properties from bridge");
             return false;
         }
 

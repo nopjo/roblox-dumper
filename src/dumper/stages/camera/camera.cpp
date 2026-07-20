@@ -1,5 +1,5 @@
 #include "camera.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
 #include "process/memory/memory.h"
@@ -14,9 +14,9 @@ auto dumper::stages::camera::dump() -> bool {
         return false;
     }
 
-    auto viewport_info = control::client::g_client.get_viewport_size();
+    auto viewport_info = bridge::g_bridge.read_camera_information();
     if (!viewport_info) {
-        spdlog::error("Failed to get viewport size from client");
+        spdlog::error("Failed to get viewport size from bridge");
         return false;
     }
 

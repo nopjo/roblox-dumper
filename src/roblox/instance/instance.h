@@ -10,7 +10,7 @@ namespace roblox {
     class Instance {
       public:
         Instance() = default;
-        explicit Instance(std::uint64_t address) : m_address(address){};
+        explicit Instance(std::uint64_t address) : m_address(address) {};
 
         auto is_valid() const -> bool;
         auto get_name() const -> std::optional<std::string>;

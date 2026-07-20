@@ -1,5 +1,4 @@
 #include "config.h"
-#include "control/control.h"
 #include "dumper/dumper.h"
 #include "writer/writer.h"
 #include <Windows.h>
@@ -27,16 +26,6 @@ auto main() -> int {
     }
 
     spdlog::info("Attached to Roblox. PID: {}\n", process::g_process.get_pid());
-
-    if (!control::g_control.start(8080)) {
-        MessageBoxA(nullptr,
-                    "Failed to start control server, make sure you have no applications running on "
-                    "port 8080.",
-                    title.c_str(), MB_OK | MB_ICONERROR);
-        return 1;
-    }
-
-    spdlog::info("Control server started on port 8080\n");
 
     const auto start_time = std::chrono::steady_clock::now();
     dumper::g_dumper.start();

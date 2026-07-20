@@ -1,5 +1,5 @@
 #include "text_button.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -12,10 +12,10 @@ namespace dumper::stages::text_button {
     struct TextButtonData {
         std::string name;
         uintptr_t address;
-        control::client::TextButtonProperty props;
+        bridge::TextButtonProperty props;
     };
 
-    static auto get_text_button_data(const control::client::TextButtonPropertiesInfo& props)
+    static auto get_text_button_data(const bridge::TextButtonPropertiesInfo& props)
         -> std::optional<std::vector<TextButtonData>> {
         std::vector<TextButtonData> text_button_data;
 
@@ -44,9 +44,9 @@ namespace dumper::stages::text_button {
     }
 
     auto dump() -> bool {
-        const auto text_button_props = control::client::g_client.get_textbutton_properties();
+        const auto text_button_props = bridge::g_bridge.read_text_buttons_information();
         if (!text_button_props) {
-            spdlog::error("Failed to get text button properties from control server");
+            spdlog::error("Failed to get text button properties from bridge");
             return false;
         }
 

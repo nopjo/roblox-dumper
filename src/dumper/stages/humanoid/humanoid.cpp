@@ -1,5 +1,5 @@
 #include "humanoid.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -13,10 +13,10 @@ namespace dumper::stages::humanoid {
     struct HumanoidData {
         std::string name;
         uintptr_t address;
-        control::client::HumanoidProperty props;
+        bridge::HumanoidProperty props;
     };
 
-    static auto get_humanoid_data(const control::client::HumanoidPropertiesInfo& props)
+    static auto get_humanoid_data(const bridge::HumanoidPropertiesInfo& props)
         -> std::optional<std::vector<HumanoidData>> {
         std::vector<HumanoidData> humanoid_data;
 
@@ -48,9 +48,9 @@ namespace dumper::stages::humanoid {
     }
 
     auto dump() -> bool {
-        const auto humanoid_props = control::client::g_client.get_humanoid_properties();
+        const auto humanoid_props = bridge::g_bridge.read_humanoid_information();
         if (!humanoid_props) {
-            spdlog::error("Failed to get humanoid properties from control server");
+            spdlog::error("Failed to get humanoid properties from bridge");
             return false;
         }
 

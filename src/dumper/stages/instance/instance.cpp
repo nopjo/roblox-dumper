@@ -1,5 +1,4 @@
 #include "instance.h"
-#include "control/client/client.h"
 #include "dumper/dumper.h"
 #include "process/helpers/helpers.h"
 #include "process/memory/memory.h"
@@ -227,15 +226,7 @@ namespace dumper::stages::instance {
 
         dumper::g_dumper.add_offset("Instance", "Parent", *parent);
 
-        const auto workspace_info = control::client::g_client.get_workspace_information();
-
-        if (!workspace_info) {
-            spdlog::error("Failed to receive Workspace information via control server.");
-            return false;
-        }
-
-        const auto children =
-            find_children_offsets(*workspace_addr, workspace_info->children_count, *parent);
+        const auto children = find_children_offsets(*workspace_addr, 45, *parent);
 
         if (!children) {
             spdlog::error("Failed to find Children offsets");

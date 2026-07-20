@@ -1,5 +1,5 @@
 #include "gui_object.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -12,10 +12,10 @@ namespace dumper::stages::gui_object {
     struct FrameData {
         std::string name;
         uintptr_t address;
-        control::client::FrameProperty props;
+        bridge::FrameProperty props;
     };
 
-    static auto get_frame_data(const control::client::FramePropertiesInfo& props)
+    static auto get_frame_data(const bridge::FramePropertiesInfo& props)
         -> std::optional<std::vector<FrameData>> {
         std::vector<FrameData> frame_data;
 
@@ -43,9 +43,9 @@ namespace dumper::stages::gui_object {
     }
 
     auto dump() -> bool {
-        const auto frame_props = control::client::g_client.get_frame_properties();
+        const auto frame_props = bridge::g_bridge.read_frames_information();
         if (!frame_props) {
-            spdlog::error("Failed to get frame properties from control server");
+            spdlog::error("Failed to get frame properties from bridge");
             return false;
         }
 

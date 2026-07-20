@@ -12,4 +12,8 @@ namespace roblox::offsets {
         inline uintptr_t ChildrenEnd = 0;
     } // namespace Instance
 
+    namespace Value {
+        inline uintptr_t Value = 0;
+    } // namespace Value
+
 } // namespace roblox::offsets

@@ -1,5 +1,5 @@
 #include "player.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -37,13 +37,12 @@ namespace dumper::stages::player {
 
         dumper::g_dumper.add_offset("Player", "Character", *character);
 
-        const auto player_info = control::client::g_client.get_player_information();
+        const auto player_info = bridge::g_bridge.read_player_information();
 
         if (!player_info) {
-            spdlog::error("Failed to receive player information via control server.");
+            spdlog::error("Failed to receive player information via bridge.");
             return false;
         }
-
         FIND_AND_ADD_OFFSET(*local_player_addr, Player, uint64_t, UserId, player_info->user_id,
                             0x800, 0x8);
 

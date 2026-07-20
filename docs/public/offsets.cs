@@ -1,9 +1,9 @@
 /*
- * Dumped With: roblox-dumper 2.8
+ * Dumped With: roblox-dumper 3.0
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-ddf02245bdbb428c
- * Time Taken: 4241 ms (4.241000 seconds)
+ * Time Taken: 1591 ms (1.591000 seconds)
  * Total Offsets: 278
  */
 
@@ -395,7 +395,7 @@ namespace RobloxOffsets
         public const ulong Text = 0xB50;
         public const ulong TextColor3 = 0xE50;
         public const ulong TextDirection = 0xCE8;
-        public const ulong TextScaled = 0xB39;
+        public const ulong TextScaled = 0xD3E;
         public const ulong TextSize = 0xE7C;
         public const ulong TextStrokeColor3 = 0xE5C;
         public const ulong TextStrokeTransparency = 0xE80;

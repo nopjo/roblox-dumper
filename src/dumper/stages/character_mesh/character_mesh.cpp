@@ -1,21 +1,20 @@
 #include "character_mesh.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "process/helpers/helpers.h"
 #include "process/memory/memory.h"
 #include <format>
 #include <spdlog/spdlog.h>
 
-
 namespace dumper::stages::character_mesh {
 
     struct MeshData {
         std::string name;
         uintptr_t address;
-        control::client::CharacterMeshProperty props;
+        bridge::CharacterMeshProperty props;
     };
 
-    static auto get_mesh_data(const control::client::CharacterMeshPropertiesInfo& props)
+    static auto get_mesh_data(const bridge::CharacterMeshPropertiesInfo& props)
         -> std::optional<std::vector<MeshData>> {
         std::vector<MeshData> mesh_data;
 
@@ -41,9 +40,9 @@ namespace dumper::stages::character_mesh {
     }
 
     auto dump() -> bool {
-        const auto mesh_props = control::client::g_client.get_character_mesh_properties();
+        const auto mesh_props = bridge::g_bridge.read_character_mesh_information();
         if (!mesh_props) {
-            spdlog::error("Failed to get character mesh properties from control server");
+            spdlog::error("Failed to get character mesh properties from bridge");
             return false;
         }
 

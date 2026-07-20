@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace control::client {
+namespace bridge {
     using json = nlohmann::json;
 
     struct DataModelInfo {
@@ -312,4 +312,4 @@ namespace control::client {
         text_wrapped, text_x_alignment, text_y_alignment, auto_button_color, modal, selected)
     NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TextButtonPropertiesInfo, text_buttons)
 
-} // namespace control::client
+} // namespace bridge

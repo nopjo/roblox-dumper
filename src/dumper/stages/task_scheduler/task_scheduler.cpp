@@ -146,7 +146,8 @@ namespace dumper::stages::task_scheduler {
             process::helpers::find_offset<double>(task_scheduler, 1.0 / 60.0, 0x1000, 0x4);
 
         if (!max_fps) {
-            spdlog::error("Failed to find MaxFps offset for task scheduler");
+            spdlog::error("Failed to find MaxFps offset for task scheduler, make sure your Roblox "
+                          "FPS is set to 60fps");
             return false;
         }
 

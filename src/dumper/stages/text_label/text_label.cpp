@@ -1,5 +1,5 @@
 #include "text_label.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -12,10 +12,10 @@ namespace dumper::stages::text_label {
     struct TextLabelData {
         std::string name;
         uintptr_t address;
-        control::client::TextLabelProperty props;
+        bridge::TextLabelProperty props;
     };
 
-    static auto get_text_label_data(const control::client::TextLabelPropertiesInfo& props)
+    static auto get_text_label_data(const bridge::TextLabelPropertiesInfo& props)
         -> std::optional<std::vector<TextLabelData>> {
         std::vector<TextLabelData> text_label_data;
 
@@ -44,9 +44,9 @@ namespace dumper::stages::text_label {
     }
 
     auto dump() -> bool {
-        const auto text_label_props = control::client::g_client.get_textlabel_properties();
+        const auto text_label_props = bridge::g_bridge.read_text_labels_information();
         if (!text_label_props) {
-            spdlog::error("Failed to get text label properties from control server");
+            spdlog::error("Failed to get text label properties from bridge");
             return false;
         }
 

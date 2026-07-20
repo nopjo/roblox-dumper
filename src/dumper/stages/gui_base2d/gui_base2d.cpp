@@ -1,5 +1,5 @@
 #include "gui_base2d.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "process/helpers/helpers.h"
 #include "process/memory/memory.h"
@@ -8,9 +8,9 @@
 namespace dumper::stages::gui_base2d {
 
     auto dump() -> bool {
-        const auto frame_absolutes = control::client::g_client.get_frame_absolutes();
+        const auto frame_absolutes = bridge::g_bridge.read_frame_absolutes_information();
         if (!frame_absolutes) {
-            spdlog::error("Failed to get frame absolutes from control server");
+            spdlog::error("Failed to get frame absolutes from bridge");
             return false;
         }
 

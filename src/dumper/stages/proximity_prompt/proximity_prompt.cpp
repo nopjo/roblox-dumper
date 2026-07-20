@@ -1,5 +1,5 @@
 #include "proximity_prompt.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "process/helpers/helpers.h"
 #include "process/memory/memory.h"
@@ -11,11 +11,10 @@ namespace dumper::stages::proximity_prompt {
     struct ProximityPromptData {
         std::string name;
         uintptr_t address;
-        control::client::ProximityPromptProperty props;
+        bridge::ProximityPromptProperty props;
     };
 
-    static auto
-    get_proximity_prompt_data(const control::client::ProximityPromptPropertiesInfo& props)
+    static auto get_proximity_prompt_data(const bridge::ProximityPromptPropertiesInfo& props)
         -> std::optional<std::vector<ProximityPromptData>> {
         std::vector<ProximityPromptData> prompt_data;
 
@@ -49,9 +48,9 @@ namespace dumper::stages::proximity_prompt {
     }
 
     auto dump() -> bool {
-        const auto prompt_props = control::client::g_client.get_proximity_prompt_properties();
+        const auto prompt_props = bridge::g_bridge.read_proximity_prompts_information();
         if (!prompt_props) {
-            spdlog::error("Failed to get proximity prompt properties from control server");
+            spdlog::error("Failed to get proximity prompt properties from bridge");
             return false;
         }
 

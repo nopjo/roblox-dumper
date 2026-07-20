@@ -1,4 +1,5 @@
 #include "dumper.h"
+#include "bridge/bridge.h"
 #include "process/memory/memory.h"
 #include "stages/stages.h"
 #include <cstring>
@@ -19,13 +20,30 @@ namespace dumper {
             return false;
         }
 
-        if (!stages::data_model::dump()) {
-            spdlog::error("Failed to dump DataModel");
+        if (!stages::data_model::dump_ptr()) {
+            spdlog::error("Failed to find DataModel pointer");
             return false;
         }
 
         if (!stages::instance::dump()) {
             spdlog::error("Failed to dump Instance");
+            return false;
+        }
+
+        g_data_model = roblox::Instance(g_data_model_addr);
+
+        if (!stages::value::dump()) {
+            spdlog::error("Failed to dump Value offset");
+            return false;
+        }
+
+        if (!bridge::g_bridge.initialize()) {
+            spdlog::error("Failed to initialize bridge");
+            return false;
+        }
+
+        if (!stages::data_model::dump()) {
+            spdlog::error("Failed to dump DataModel");
             return false;
         }
 
@@ -52,7 +70,6 @@ namespace dumper {
         threads.emplace_back([]() { stages::terrain::dump(); });
         threads.emplace_back([]() { stages::gui_object::dump(); });
         threads.emplace_back([]() { stages::gui_base2d::dump(); });
-        threads.emplace_back([]() { stages::value::dump(); });
         threads.emplace_back([]() { stages::mouse_service::dump(); });
         threads.emplace_back([]() { stages::character_mesh::dump(); });
         threads.emplace_back([]() { stages::tool::dump(); });

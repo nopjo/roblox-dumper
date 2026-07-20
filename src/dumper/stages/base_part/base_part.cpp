@@ -1,5 +1,5 @@
 #include "base_part.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -14,11 +14,11 @@ namespace dumper::stages::base_part {
         std::string name;
         uintptr_t address;
         uintptr_t primitive_address;
-        control::client::PartProperty props;
+        bridge::PartProperty props;
     };
 
-    static auto get_part_data(const control::client::PartPropertiesInfo& props,
-                              size_t primitive_offset) -> std::optional<std::vector<PartData>> {
+    static auto get_part_data(const bridge::PartPropertiesInfo& props, size_t primitive_offset)
+        -> std::optional<std::vector<PartData>> {
         std::vector<PartData> part_data;
 
         for (const auto& prop : props.parts) {
@@ -48,9 +48,9 @@ namespace dumper::stages::base_part {
     }
 
     static auto find_primitive_offset() -> std::optional<size_t> {
-        auto initial_props = control::client::g_client.get_part_properties();
+        auto initial_props = bridge::g_bridge.read_parts_information();
         if (!initial_props || initial_props->parts.empty()) {
-            spdlog::error("Failed to get part properties from control server");
+            spdlog::error("Failed to get part properties from bridge");
             return std::nullopt;
         }
 
@@ -127,9 +127,9 @@ namespace dumper::stages::base_part {
         }
         dumper::g_dumper.add_offset("BasePart", "Primitive", *primitive_offset);
 
-        const auto part_props = control::client::g_client.get_part_properties();
+        const auto part_props = bridge::g_bridge.read_parts_information();
         if (!part_props) {
-            spdlog::error("Failed to get part properties from control server");
+            spdlog::error("Failed to get part properties from bridge");
             return false;
         }
 

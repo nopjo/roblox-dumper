@@ -1,9 +1,9 @@
 /*
- * Dumped With: roblox-dumper 2.8
+ * Dumped With: roblox-dumper 3.0
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
  * Roblox Version: version-ddf02245bdbb428c
- * Time Taken: 4241 ms (4.241000 seconds)
+ * Time Taken: 1591 ms (1.591000 seconds)
  * Total Offsets: 278
  */
 
@@ -358,7 +358,7 @@ namespace offsets {
         inline constexpr uintptr_t Text = 0xB50;
         inline constexpr uintptr_t TextColor3 = 0xE50;
         inline constexpr uintptr_t TextDirection = 0xCE8;
-        inline constexpr uintptr_t TextScaled = 0xB39;
+        inline constexpr uintptr_t TextScaled = 0xD3E;
         inline constexpr uintptr_t TextSize = 0xE7C;
         inline constexpr uintptr_t TextStrokeColor3 = 0xE5C;
         inline constexpr uintptr_t TextStrokeTransparency = 0xE80;

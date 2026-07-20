@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "dumper": "roblox-dumper 2.8",
+    "dumper": "roblox-dumper 3.0",
     "author": "Jonah (jonahw on Discord)",
     "github": "https://github.com/nopjo/roblox-dumper",
     "roblox_version": "version-ddf02245bdbb428c",
@@ -317,7 +317,7 @@
       "Text": 2896,
       "TextColor3": 3664,
       "TextDirection": 3304,
-      "TextScaled": 2873,
+      "TextScaled": 3390,
       "TextSize": 3708,
       "TextStrokeColor3": 3676,
       "TextStrokeTransparency": 3712,

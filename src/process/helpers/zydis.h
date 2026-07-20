@@ -2,7 +2,6 @@
 #include "process/memory/memory.h"
 #include <Zydis/Zydis.h>
 
-
 namespace process::helpers::zydis {
 
     inline auto is_cmp_mem_zero(const ZydisDecodedInstruction& inst, const ZydisDecodedOperand* ops,

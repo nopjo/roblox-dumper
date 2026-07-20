@@ -1,5 +1,5 @@
 #include "data_model.h"
-#include "control/client/client.h"
+#include "bridge/bridge.h"
 #include "dumper/dumper.h"
 #include "dumper/macros.h"
 #include "process/helpers/helpers.h"
@@ -12,8 +12,7 @@ namespace dumper::stages::data_model {
 
     static auto dump_real_data_model() -> bool {
         const auto fake_data_model = process::Memory::read<uintptr_t>(
-            g_visual_engine + 
-            *dumper::g_dumper.get_offset("VisualEngine", "FakeDataModel"));
+            g_visual_engine + *dumper::g_dumper.get_offset("VisualEngine", "FakeDataModel"));
 
         if (!fake_data_model) {
             spdlog::error("Failed to read FakeDataModel pointer.");
@@ -42,15 +41,29 @@ namespace dumper::stages::data_model {
         return true;
     }
 
-    auto dump() -> bool {
+    auto dump_ptr() -> bool {
         if (!dump_real_data_model()) {
             return false;
         }
 
-        const auto data = control::client::g_client.get_data_model_information();
+        const auto workspace_offset =
+            process::Rtti::find(dumper::g_data_model_addr, "Workspace@RBX");
+
+        if (!workspace_offset) {
+            spdlog::error("Failed to get Workspace from DataModel");
+            return false;
+        }
+
+        dumper::g_dumper.add_offset("DataModel", "Workspace", *workspace_offset);
+
+        return true;
+    }
+
+    auto dump() -> bool {
+        const auto data = bridge::g_bridge.read_game_information();
 
         if (!data) {
-            spdlog::error("Failed to receive DataModel information via control server.");
+            spdlog::error("Failed to receive DataModel information via bridge.");
             return false;
         }
 
@@ -83,16 +96,6 @@ namespace dumper::stages::data_model {
         }
 
         dumper::g_dumper.add_offset("DataModel", "ServerIP", *ip_address);
-
-        const auto workspace_offset =
-            process::Rtti::find(dumper::g_data_model_addr, "Workspace@RBX");
-
-        if (!workspace_offset) {
-            spdlog::error("Failed to get Workspace from DataModel");
-            return false;
-        }
-
-        dumper::g_dumper.add_offset("DataModel", "Workspace", *workspace_offset);
 
         return true;
     }

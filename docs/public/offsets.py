@@ -1,8 +1,8 @@
-# Dumped With: roblox-dumper 2.8
+# Dumped With: roblox-dumper 3.0
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
 # Roblox Version: version-ddf02245bdbb428c
-# Time Taken: 4241 ms (4.241000 seconds)
+# Time Taken: 1591 ms (1.591000 seconds)
 # Total Offsets: 278
 
 class Offsets:
@@ -318,7 +318,7 @@ class Offsets:
         Text = 2896
         TextColor3 = 3664
         TextDirection = 3304
-        TextScaled = 2873
+        TextScaled = 3390
         TextSize = 3708
         TextStrokeColor3 = 3676
         TextStrokeTransparency = 3712
