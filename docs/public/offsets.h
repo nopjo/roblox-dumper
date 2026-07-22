@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 3.0
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-ddf02245bdbb428c
- * Time Taken: 1591 ms (1.591000 seconds)
+ * Roblox Version: version-9affbe66b2624d20
+ * Time Taken: 1864 ms (1.864000 seconds)
  * Total Offsets: 278
  */
 
@@ -12,7 +12,7 @@
 
 // clang-format off
 namespace offsets {
-    inline constexpr const char* roblox_version = "version-ddf02245bdbb428c";
+    inline constexpr const char* roblox_version = "version-9affbe66b2624d20";
 
     namespace Atmosphere {
         inline constexpr uintptr_t Color = 0xB8;
@@ -78,7 +78,7 @@ namespace offsets {
     }
 
     namespace FakeDataModel {
-        inline constexpr uintptr_t Pointer = 0x7D28508;
+        inline constexpr uintptr_t Pointer = 0x85C8CD0;
         inline constexpr uintptr_t RealDataModel = 0x1D0;
     }
 
@@ -231,7 +231,7 @@ namespace offsets {
         inline constexpr uintptr_t Character = 0x298;
         inline constexpr uintptr_t DisplayName = 0x138;
         inline constexpr uintptr_t HealthDisplayDistance = 0x390;
-        inline constexpr uintptr_t LocaleId = 0x738;
+        inline constexpr uintptr_t LocaleId = 0x740;
         inline constexpr uintptr_t NameDisplayDistance = 0x3A0;
         inline constexpr uintptr_t Team = 0x2D8;
         inline constexpr uintptr_t TeamColor = 0x3AC;
@@ -307,7 +307,7 @@ namespace offsets {
         inline constexpr uintptr_t JobName = 0x18;
         inline constexpr uintptr_t JobStart = 0xC8;
         inline constexpr uintptr_t MaxFps = 0xB0;
-        inline constexpr uintptr_t Pointer = 0x82B9F48;
+        inline constexpr uintptr_t Pointer = 0x815D398;
     }
 
     namespace Team {
@@ -316,7 +316,7 @@ namespace offsets {
 
     namespace Terrain {
         inline constexpr uintptr_t GrassLength = 0x188;
-        inline constexpr uintptr_t MaterialColors = 0x438;
+        inline constexpr uintptr_t MaterialColors = 0x430;
         inline constexpr uintptr_t WaterColor = 0x178;
         inline constexpr uintptr_t WaterReflectance = 0x190;
         inline constexpr uintptr_t WaterTransparency = 0x194;
@@ -358,7 +358,7 @@ namespace offsets {
         inline constexpr uintptr_t Text = 0xB50;
         inline constexpr uintptr_t TextColor3 = 0xE50;
         inline constexpr uintptr_t TextDirection = 0xCE8;
-        inline constexpr uintptr_t TextScaled = 0xD3E;
+        inline constexpr uintptr_t TextScaled = 0xB39;
         inline constexpr uintptr_t TextSize = 0xE7C;
         inline constexpr uintptr_t TextStrokeColor3 = 0xE5C;
         inline constexpr uintptr_t TextStrokeTransparency = 0xE80;
@@ -398,7 +398,7 @@ namespace offsets {
     namespace VisualEngine {
         inline constexpr uintptr_t Dimensions = 0xAB0;
         inline constexpr uintptr_t FakeDataModel = 0xA90;
-        inline constexpr uintptr_t Pointer = 0x8447C68;
+        inline constexpr uintptr_t Pointer = 0x82F16A8;
         inline constexpr uintptr_t RenderView = 0xBB8;
         inline constexpr uintptr_t ViewMatrix = 0x150;
     }

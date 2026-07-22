@@ -3,7 +3,7 @@
     "dumper": "roblox-dumper 3.0",
     "author": "Jonah (jonahw on Discord)",
     "github": "https://github.com/nopjo/roblox-dumper",
-    "roblox_version": "version-ddf02245bdbb428c",
+    "roblox_version": "version-9affbe66b2624d20",
     "total_offsets": 278
   },
   "offsets": {
@@ -63,7 +63,7 @@
       "Workspace": 352
     },
     "FakeDataModel": {
-      "Pointer": 131237128,
+      "Pointer": 140283088,
       "RealDataModel": 464
     },
     "GuiBase2D": {
@@ -203,7 +203,7 @@
       "Character": 664,
       "DisplayName": 312,
       "HealthDisplayDistance": 912,
-      "LocaleId": 1848,
+      "LocaleId": 1856,
       "NameDisplayDistance": 928,
       "Team": 728,
       "TeamColor": 940,
@@ -270,14 +270,14 @@
       "JobName": 24,
       "JobStart": 200,
       "MaxFps": 176,
-      "Pointer": 137076552
+      "Pointer": 135648152
     },
     "Team": {
       "TeamColor": 184
     },
     "Terrain": {
       "GrassLength": 392,
-      "MaterialColors": 1080,
+      "MaterialColors": 1072,
       "WaterColor": 376,
       "WaterReflectance": 400,
       "WaterTransparency": 404,
@@ -317,7 +317,7 @@
       "Text": 2896,
       "TextColor3": 3664,
       "TextDirection": 3304,
-      "TextScaled": 3390,
+      "TextScaled": 2873,
       "TextSize": 3708,
       "TextStrokeColor3": 3676,
       "TextStrokeTransparency": 3712,
@@ -353,7 +353,7 @@
     "VisualEngine": {
       "Dimensions": 2736,
       "FakeDataModel": 2704,
-      "Pointer": 138706024,
+      "Pointer": 137303720,
       "RenderView": 3000,
       "ViewMatrix": 336
     },

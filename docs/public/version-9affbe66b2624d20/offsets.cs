@@ -2,8 +2,8 @@
  * Dumped With: roblox-dumper 3.0
  * Created by: Jonah (jonahw on Discord)
  * Github: https://github.com/nopjo/roblox-dumper
- * Roblox Version: version-ddf02245bdbb428c
- * Time Taken: 1591 ms (1.591000 seconds)
+ * Roblox Version: version-9affbe66b2624d20
+ * Time Taken: 1864 ms (1.864000 seconds)
  * Total Offsets: 278
  */
 
@@ -13,7 +13,7 @@ namespace RobloxOffsets
 {
     public static class Metadata
     {
-        public const string RobloxVersion = "version-ddf02245bdbb428c";
+        public const string RobloxVersion = "version-9affbe66b2624d20";
     }
 
     public static class Atmosphere
@@ -89,7 +89,7 @@ namespace RobloxOffsets
 
     public static class FakeDataModel
     {
-        public const ulong Pointer = 0x7D28508;
+        public const ulong Pointer = 0x85C8CD0;
         public const ulong RealDataModel = 0x1D0;
     }
 
@@ -255,7 +255,7 @@ namespace RobloxOffsets
         public const ulong Character = 0x298;
         public const ulong DisplayName = 0x138;
         public const ulong HealthDisplayDistance = 0x390;
-        public const ulong LocaleId = 0x738;
+        public const ulong LocaleId = 0x740;
         public const ulong NameDisplayDistance = 0x3A0;
         public const ulong Team = 0x2D8;
         public const ulong TeamColor = 0x3AC;
@@ -340,7 +340,7 @@ namespace RobloxOffsets
         public const ulong JobName = 0x18;
         public const ulong JobStart = 0xC8;
         public const ulong MaxFps = 0xB0;
-        public const ulong Pointer = 0x82B9F48;
+        public const ulong Pointer = 0x815D398;
     }
 
     public static class Team
@@ -351,7 +351,7 @@ namespace RobloxOffsets
     public static class Terrain
     {
         public const ulong GrassLength = 0x188;
-        public const ulong MaterialColors = 0x438;
+        public const ulong MaterialColors = 0x430;
         public const ulong WaterColor = 0x178;
         public const ulong WaterReflectance = 0x190;
         public const ulong WaterTransparency = 0x194;
@@ -395,7 +395,7 @@ namespace RobloxOffsets
         public const ulong Text = 0xB50;
         public const ulong TextColor3 = 0xE50;
         public const ulong TextDirection = 0xCE8;
-        public const ulong TextScaled = 0xD3E;
+        public const ulong TextScaled = 0xB39;
         public const ulong TextSize = 0xE7C;
         public const ulong TextStrokeColor3 = 0xE5C;
         public const ulong TextStrokeTransparency = 0xE80;
@@ -439,7 +439,7 @@ namespace RobloxOffsets
     {
         public const ulong Dimensions = 0xAB0;
         public const ulong FakeDataModel = 0xA90;
-        public const ulong Pointer = 0x8447C68;
+        public const ulong Pointer = 0x82F16A8;
         public const ulong RenderView = 0xBB8;
         public const ulong ViewMatrix = 0x150;
     }

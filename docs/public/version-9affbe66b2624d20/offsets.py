@@ -1,12 +1,12 @@
 # Dumped With: roblox-dumper 3.0
 # Created by: Jonah (jonahw on Discord)
 # Github: https://github.com/nopjo/roblox-dumper
-# Roblox Version: version-ddf02245bdbb428c
-# Time Taken: 1591 ms (1.591000 seconds)
+# Roblox Version: version-9affbe66b2624d20
+# Time Taken: 1864 ms (1.864000 seconds)
 # Total Offsets: 278
 
 class Offsets:
-    ROBLOX_VERSION = "version-ddf02245bdbb428c"
+    ROBLOX_VERSION = "version-9affbe66b2624d20"
 
     class Atmosphere:
         Color = 184
@@ -64,7 +64,7 @@ class Offsets:
         Workspace = 352
 
     class FakeDataModel:
-        Pointer = 131237128
+        Pointer = 140283088
         RealDataModel = 464
 
     class GuiBase2D:
@@ -204,7 +204,7 @@ class Offsets:
         Character = 664
         DisplayName = 312
         HealthDisplayDistance = 912
-        LocaleId = 1848
+        LocaleId = 1856
         NameDisplayDistance = 928
         Team = 728
         TeamColor = 940
@@ -271,14 +271,14 @@ class Offsets:
         JobName = 24
         JobStart = 200
         MaxFps = 176
-        Pointer = 137076552
+        Pointer = 135648152
 
     class Team:
         TeamColor = 184
 
     class Terrain:
         GrassLength = 392
-        MaterialColors = 1080
+        MaterialColors = 1072
         WaterColor = 376
         WaterReflectance = 400
         WaterTransparency = 404
@@ -318,7 +318,7 @@ class Offsets:
         Text = 2896
         TextColor3 = 3664
         TextDirection = 3304
-        TextScaled = 3390
+        TextScaled = 2873
         TextSize = 3708
         TextStrokeColor3 = 3676
         TextStrokeTransparency = 3712
@@ -354,7 +354,7 @@ class Offsets:
     class VisualEngine:
         Dimensions = 2736
         FakeDataModel = 2704
-        Pointer = 138706024
+        Pointer = 137303720
         RenderView = 3000
         ViewMatrix = 336
 
